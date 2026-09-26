@@ -1,45 +1,63 @@
 export interface Profile {
   name: string
-  title: string
+  role: string
+  headline: string
+  bio: string
   location: string
-  email: string
-  phone: string
-  summary: string
   availability: string
+  direction: string[]
 }
 
-export interface SocialLink {
-  label: string
-  href: string
-  icon: string
+export interface SocialLinks {
+  github: string
+  email: string
+  linkedin: string
 }
 
-export interface Skill {
-  name: string
-  category: string
-  level?: 'Fundamental' | 'Intermediário' | 'Avançado'
-}
-
-export interface Project {
-  name: string
-  summary: string
-  description: string
-  tags: string[]
-  featured?: boolean
-  link?: string
-  repository?: string
-}
-
-export interface Education {
+export interface EducationItem {
+  id: string
   institution: string
   degree: string
-  period: string
+  level: 'Graduação' | 'Técnico'
+  status: string
+  expectedGraduation: string
+  focusAreas: string[]
   description: string
 }
 
-export interface Certification {
-  name: string
-  issuer: string
+export interface PillarArticulation {
+  area: string
+  course: string
+  role: string
+}
+
+export interface ProjectItem {
+  id: string
+  title: string
+  badge?: string
+  shortDescription: string
+  problem: string
+  solution: string
+  role: string
+  techStack: string[]
+  architectureDecisions: string[]
+  features: string[]
+  learnings: string[]
+  liveUrl: string | null
+  repoUrl: string | null
+}
+
+export interface TrajectoryHighlight {
+  id: string
   year: string
-  credential?: string
+  title: string
+  category: string
+  organization: string
+  description: string
+}
+
+export interface SkillCategory {
+  category: string
+  description: string
+  items: string[]
 }

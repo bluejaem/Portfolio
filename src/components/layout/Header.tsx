@@ -5,8 +5,8 @@ import { Container } from './Container'
 
 const navigation = [
   { label: 'Sobre', href: '#sobre' },
-  { label: 'Projetos', href: '#projetos' },
   { label: 'Formação', href: '#formacao' },
+  { label: 'Projetos', href: '#projetos' },
   { label: 'Habilidades', href: '#habilidades' },
   { label: 'Contato', href: '#contato' },
 ]
@@ -15,14 +15,11 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/75 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-xl">
       <Container className="relative flex items-center justify-between py-4">
-        <a
-          href="#top"
-          className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.2em] text-zinc-200"
-        >
-          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-xs text-zinc-100">
-            SN
+        <a href="#top" className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.2em] text-zinc-200">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-[10px] text-zinc-100">
+            JM
           </span>
           João
         </a>
@@ -32,10 +29,9 @@ export function Header() {
             <a
               key={item.label}
               href={item.href}
-              className="relative rounded-full px-3 py-2 text-sm text-zinc-300 transition-all duration-200 hover:text-zinc-100"
+              className="rounded-full px-3 py-2 text-sm text-zinc-300 transition-colors hover:text-zinc-100"
             >
-              <span className="relative z-10">{item.label}</span>
-              <span className="absolute inset-0 rounded-full bg-zinc-900/80 opacity-0 transition-opacity duration-200 hover:opacity-100" />
+              {item.label}
             </a>
           ))}
         </nav>
@@ -43,7 +39,7 @@ export function Header() {
         <div className="hidden md:block">
           <a
             href="#contato"
-            className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors duration-200 hover:border-zinc-500 hover:bg-zinc-800"
+            className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
           >
             Vamos conversar
             <ArrowUpRight className="h-4 w-4" />

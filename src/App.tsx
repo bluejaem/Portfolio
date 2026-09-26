@@ -13,11 +13,11 @@ function App() {
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <Header />
 
-      <main id="top" className="space-y-24">
+      <main id="top" className="space-y-28">
         <HeroSection />
 
         <Container>
-          <div className="space-y-24">
+          <div className="space-y-28">
             <EducationSection />
             <ProjectsSection />
             <SkillsSection />
