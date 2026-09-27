@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, Briefcase, BriefcaseBusiness, GitBranch, GraduationCap, Mail, MapPin, Sparkles } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Briefcase, BriefcaseBusiness, GitBranch, GraduationCap, Mail, MapPin } from 'lucide-react'
 
 import {
   allGeneralCertificates,
@@ -74,8 +74,7 @@ function App() {
       <main className="mx-auto max-w-6xl px-4 pb-24 pt-10 sm:px-6 lg:px-8">
         <section id="inicio" className="grid items-center gap-8 py-8 md:grid-cols-[1.2fr_0.8fr] md:py-14">
           <div>
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-950/40 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-purple-200 shadow-[0_0_24px_rgba(168,85,247,0.12)]">
-              <Sparkles className="h-3.5 w-3.5 text-purple-300" />
+            <div className="mb-5 inline-flex items-center rounded-full border border-purple-500/30 bg-purple-950/40 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-purple-200 shadow-[0_0_24px_rgba(168,85,247,0.12)]">
               Ciência de Dados
             </div>
 
