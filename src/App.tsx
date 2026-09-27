@@ -136,8 +136,8 @@ function App() {
           <div className="grid gap-5 md:grid-cols-2">
             {dimensionsData.map((dimension) => {
               const imageMap: Record<string, string> = {
-                dados: '/education/ciencia-de-dados.jpg',
-                'gestao-ia': '/education/gestao-ti.png',
+                dados: '/education/data-science.jpeg',
+                'gestao-ia': '/education/tecnologia-da-informacao-800x533.jpeg',
                 computacao: '/education/engenharia-computacao.png',
                 matematica: '/education/matematica-aplicada.jpg',
               }
