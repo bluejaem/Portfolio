@@ -29,9 +29,9 @@ function App() {
   const imageMap: Record<string, string> = {
     dados: '/education/data-science.jpeg',
     'gestao-ia': '/education/tecnologia-da-informacao-800x533.jpeg',
-    computacao: '/education/engenharia-computacao.png',
+    computacao: '/education/ec.jpg',
     matematica: '/education/matematica-aplicada.jpg',
-    tecnico: '/education/tecnologia-da-informacao-800x533.jpeg',
+    tecnico: '/education/ti.jpg',
   }
 
   const projectImageMap: Record<string, string> = {
