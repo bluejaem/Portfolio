@@ -1,4 +1,6 @@
-import { ArrowRight, ArrowUpRight, Briefcase, BriefcaseBusiness, GitBranch, GraduationCap, Mail, MapPin } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowLeft, ArrowRight, ArrowUpRight, Briefcase, BriefcaseBusiness, GitBranch, GraduationCap, Mail, MapPin } from 'lucide-react'
+import { useState } from 'react'
 
 import {
   allGeneralCertificates,
@@ -35,6 +37,29 @@ function ProjectPreview({ projectId }: { projectId: string }) {
 }
 
 function App() {
+  const [currentFormation, setCurrentFormation] = useState(0)
+
+  const formation = dimensionsData[currentFormation]
+  const isLastFormation = currentFormation === dimensionsData.length - 1
+  const isFirstFormation = currentFormation === 0
+
+  const imageMap: Record<string, string> = {
+    dados: '/education/data-science.jpeg',
+    'gestao-ia': '/education/tecnologia-da-informacao-800x533.jpeg',
+    computacao: '/education/engenharia-computacao.png',
+    matematica: '/education/matematica-aplicada.jpg',
+  }
+
+  const formacaoCountLabel = `${String(currentFormation + 1).padStart(2, '0')} / ${String(dimensionsData.length).padStart(2, '0')}`
+
+  const showPreviousFormation = () => {
+    setCurrentFormation((previous) => (previous === 0 ? dimensionsData.length - 1 : previous - 1))
+  }
+
+  const showNextFormation = () => {
+    setCurrentFormation((previous) => (previous === dimensionsData.length - 1 ? 0 : previous + 1))
+  }
+
   return (
     <div className="min-h-screen bg-[#090611] text-zinc-100">
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
@@ -133,75 +158,87 @@ function App() {
             <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Formações Acadêmicas Interdisciplinares</h2>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            {dimensionsData.map((dimension) => {
-              const imageMap: Record<string, string> = {
-                dados: '/education/data-science.jpeg',
-                'gestao-ia': '/education/tecnologia-da-informacao-800x533.jpeg',
-                computacao: '/education/engenharia-computacao.png',
-                matematica: '/education/matematica-aplicada.jpg',
-              }
+          <div className="w-full max-w-4xl mx-auto min-h-[380px] rounded-3xl border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 p-6 shadow-[0_10px_40px_rgba(76,29,149,0.2)] backdrop-blur-xl sm:p-8">
+            <div className="mb-5 flex items-center justify-between gap-3">
+              <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.24em] text-purple-200">
+                {formation.pillar}
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{formacaoCountLabel}</span>
+            </div>
 
-              const cardImage = imageMap[dimension.id]
-              const visual = {
-                dados: { emoji: '📊', glow: 'from-violet-500/35 via-purple-500/25 to-slate-900/80' },
-                matematica: { emoji: '📐', glow: 'from-cyan-500/30 via-indigo-500/25 to-slate-900/80' },
-                computacao: { emoji: '💻', glow: 'from-fuchsia-500/30 via-violet-500/25 to-slate-900/80' },
-                'gestao-ia': { emoji: '🤖', glow: 'from-amber-400/30 via-purple-500/25 to-slate-900/80' },
-              }[dimension.id] ?? { emoji: '✨', glow: 'from-violet-500/30 via-purple-500/20 to-slate-900/80' }
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={formation.id}
+                initial={{ opacity: 0, x: 20, y: 8 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                exit={{ opacity: 0, x: -20, y: -8 }}
+                transition={{ duration: 0.28, ease: 'easeOut' }}
+                className="flex flex-col justify-between gap-6"
+              >
+                <div className="relative overflow-hidden rounded-2xl border border-purple-500/20 bg-slate-950/60">
+                  <img
+                    src={imageMap[formation.id]}
+                    alt={formation.title}
+                    className="h-40 w-full object-cover opacity-90 sm:h-48"
+                    style={{ objectPosition: formation.id === 'dados' ? '50% 6%' : formation.id === 'matematica' ? '50% 24%' : formation.id === 'computacao' ? '50% 12%' : '50% 8%' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                </div>
 
-              const imagePosition: Record<string, string> = {
-                dados: '50% 2%',
-                matematica: '50% 25%',
-                computacao: '50% 12%',
-                'gestao-ia': '50% 8%',
-              }
-
-              return (
-                <article
-                  key={dimension.id}
-                  className="overflow-hidden rounded-2xl border border-white/8 bg-zinc-900/40 shadow-[0_8px_32px_0_rgba(76,29,149,0.15)] backdrop-blur-xl transition-all duration-300 hover:shadow-[0_12px_40px_0_rgba(147,51,234,0.2)]"
-                >
-                  {cardImage ? (
-                    <div className="relative h-32 overflow-hidden bg-slate-950">
-                      <img
-                        src={cardImage}
-                        alt={dimension.title}
-                        className="h-full w-full object-cover opacity-90"
-                        style={{ objectPosition: imagePosition[dimension.id] ?? '50% 50%' }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-
-                      <div className="absolute bottom-3 right-3">
-                        <span className="rounded-full border border-white/15 bg-slate-950/40 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
-                          {dimension.pillar}
-                        </span>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className={`flex h-32 items-end justify-between bg-gradient-to-br ${visual.glow} p-4`}>
-                      <span className="text-4xl drop-shadow-[0_8px_18px_rgba(0,0,0,0.35)]">{visual.emoji}</span>
-                      <span className="rounded-full border border-white/15 bg-slate-950/40 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
-                        {dimension.pillar}
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="p-5">
-                    <h3 className="text-xl font-semibold text-zinc-100">{dimension.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-zinc-300/80">{dimension.role}</p>
-
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {dimension.highlights.map((item) => (
-                        <span key={`${dimension.id}-${item}`} className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-purple-100">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
+                <div className="flex flex-col gap-5">
+                  <div>
+                    <h3 className="mb-1 text-2xl font-bold text-zinc-100 sm:text-3xl">{formation.title}</h3>
+                    <p className="text-sm font-medium text-purple-300 sm:text-base">{formation.institution}</p>
                   </div>
-                </article>
-              )
-            })}
+
+                  <p className="max-w-3xl text-sm leading-7 text-zinc-300/80 sm:text-base">{formation.role}</p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {formation.highlights.map((item) => (
+                      <span key={`${formation.id}-${item}`} className="rounded-full border border-purple-500/30 bg-purple-900/30 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-purple-200 sm:text-xs">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="mt-6 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                {dimensionsData.map((item, index) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    aria-label={`Selecionar formação ${item.title}`}
+                    onClick={() => setCurrentFormation(index)}
+                    className={`h-2.5 w-2.5 rounded-full transition-all ${index === currentFormation ? 'w-7 bg-purple-300' : 'bg-purple-500/40 hover:bg-purple-300/70'}`}
+                  />
+                ))}
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={showPreviousFormation}
+                  disabled={isFirstFormation}
+                  className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <ArrowLeft className="h-3.5 w-3.5" />
+                  Anterior
+                </button>
+
+                <button
+                  type="button"
+                  onClick={showNextFormation}
+                  disabled={isLastFormation}
+                  className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Próxima Formação
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 

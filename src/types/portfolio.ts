@@ -16,6 +16,7 @@ export interface DimensionItem {
   id: string
   title: string
   pillar: string
+  institution: string
   role: string
   course: string
   highlights: string[]
