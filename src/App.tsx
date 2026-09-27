@@ -46,8 +46,8 @@ function App() {
       <header className="sticky top-0 z-50 h-16 border-b border-purple-500/20 bg-zinc-950/60 backdrop-blur-xl">
         <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full border border-purple-500/30 bg-gradient-to-br from-purple-500/30 to-violet-500/10 text-[10px] font-semibold tracking-[0.22em] text-purple-100 shadow-[0_0_18px_rgba(168,85,247,0.2)]">
-              JM
+            <div className="h-9 w-9 overflow-hidden rounded-full border border-purple-500/30 bg-gradient-to-br from-purple-500/30 to-violet-500/10 shadow-[0_0_18px_rgba(168,85,247,0.2)]">
+              <img src={profileInfo.photoUrl} alt={profileInfo.name} className="h-full w-full object-cover" />
             </div>
             <div>
               <p className="text-sm font-medium text-zinc-100">João Guilherme</p>

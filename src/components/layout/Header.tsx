@@ -18,9 +18,11 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-xl">
       <Container className="relative flex items-center justify-between py-4">
         <a href="#top" className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.2em] text-zinc-200">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-[10px] text-zinc-100">
-            JM
-          </span>
+          <img
+            src="/profile.jpg"
+            alt="João Guilherme Machado de Melo"
+            className="h-8 w-8 rounded-full border border-zinc-700 bg-zinc-900 object-cover"
+          />
           João
         </a>
 
