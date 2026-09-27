@@ -151,15 +151,28 @@ function App() {
                 'gestao-ia': { emoji: '🤖', glow: 'from-amber-400/30 via-purple-500/25 to-slate-900/80' },
               }[dimension.id] ?? { emoji: '✨', glow: 'from-violet-500/30 via-purple-500/20 to-slate-900/80' }
 
+              const imagePosition: Record<string, string> = {
+                dados: '50% 8%',
+                matematica: '50% 50%',
+                computacao: '50% 24%',
+                'gestao-ia': '50% 15%',
+              }
+
               return (
                 <article
                   key={dimension.id}
-                  className="overflow-hidden rounded-2xl border border-purple-500/20 bg-zinc-900/40 shadow-[0_8px_32px_0_rgba(76,29,149,0.15)] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/40 hover:shadow-[0_12px_40px_0_rgba(147,51,234,0.2)]"
+                  className="overflow-hidden rounded-2xl border border-white/8 bg-zinc-900/40 shadow-[0_8px_32px_0_rgba(76,29,149,0.15)] backdrop-blur-xl transition-all duration-300 hover:shadow-[0_12px_40px_0_rgba(147,51,234,0.2)]"
                 >
                   {cardImage ? (
-                    <div className="relative h-32 overflow-hidden border-b border-purple-500/20 bg-slate-950">
-                      <img src={cardImage} alt={dimension.title} className="h-full w-full object-contain object-center bg-slate-950 opacity-90" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+                    <div className="relative h-32 overflow-hidden bg-slate-950">
+                      <img
+                        src={cardImage}
+                        alt={dimension.title}
+                        className="h-full w-full object-cover opacity-90"
+                        style={{ objectPosition: imagePosition[dimension.id] ?? '50% 50%' }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+
                       <div className="absolute bottom-3 right-3">
                         <span className="rounded-full border border-white/15 bg-slate-950/40 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
                           {dimension.pillar}
