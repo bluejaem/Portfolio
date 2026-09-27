@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, type Variants } from 'framer-motion'
 import {
   ArrowLeft,
   ArrowRight,
@@ -24,8 +24,8 @@ function normalizeLink(value: string | null) {
   return match ? match[2] : value
 }
 
-// Variantes de transição cinematográfica direcional (Vercel/Apple Standard)
-const slideVariants = {
+// Tipagem estrita de Variants para eliminar 100% dos erros do TypeScript
+const slideVariants: Variants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 40 : -40,
     opacity: 0,
@@ -39,7 +39,7 @@ const slideVariants = {
     filter: 'blur(0px)',
     transition: {
       duration: 0.45,
-      ease: [0.16, 1, 0.3, 1],
+      ease: [0.16, 1, 0.3, 1] as const,
     },
   },
   exit: (direction: number) => ({
@@ -49,7 +49,7 @@ const slideVariants = {
     filter: 'blur(6px)',
     transition: {
       duration: 0.35,
-      ease: [0.16, 1, 0.3, 1],
+      ease: [0.16, 1, 0.3, 1] as const,
     },
   }),
 }
@@ -511,7 +511,6 @@ function App() {
                   exit="exit"
                   className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start my-auto w-full"
                 >
-                  {/* Coluna Esquerda: Imagem Expandida (Sem o card redundante de Grau/Instituição) */}
                   <div className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between h-[420px]">
                     <div className="relative w-full h-[320px] overflow-hidden rounded-2xl border border-purple-500/30 bg-purple-950/40 shadow-md">
                       <img
@@ -543,7 +542,6 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Coluna Direita: Cabeçalho Limpo e Grade Exata de 4 Cards (2x2) */}
                   <div className="lg:col-span-8 xl:col-span-8 flex flex-col justify-between h-[420px]">
                     <div>
                       <div className="flex items-center justify-between border-b border-purple-500/20 pb-2.5 mb-2.5">
@@ -558,7 +556,6 @@ function App() {
                       <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80 line-clamp-2 mb-2">{formation.role}</p>
                     </div>
 
-                    {/* Exatamente 4 Cards Simétricos em 2x2 com Altura Perfeita */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-auto">
                       {formation.detailGroups?.slice(0, 4).map((group) => (
                         <div key={`${formation.id}-${group.title}`} className="p-3.5 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[120px]">
@@ -571,7 +568,6 @@ function App() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Barra de Navegação Inferior Integrada */}
               <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between mt-auto">
                 <div className="flex items-center gap-2">
                   {dimensionsData.map((item, index) => (
