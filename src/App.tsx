@@ -19,6 +19,7 @@ function App() {
   const [currentFormation, setCurrentFormation] = useState(0)
   const [currentProject, setCurrentProject] = useState(0)
   const [certStage, setCertStage] = useState(0)
+  const [stage5Page, setStage5Page] = useState(0)
 
   const formation = dimensionsData[currentFormation]
   const project = projectsList[currentProject]
@@ -122,6 +123,8 @@ function App() {
   ]
 
   const currentCertStage = certificationStages[certStage]
+  const stage5Certs = certificationStages[4]?.cards ?? []
+  const stage5Pages = Math.ceil(stage5Certs.length / 6)
 
   const showPreviousCertStage = () => {
     setCertStage((previous) => (previous === 0 ? certificationStages.length - 1 : previous - 1))
@@ -532,28 +535,77 @@ function App() {
                   </div>
                 </div>
 
-                <div className={certStage === 0 ? 'grid gap-3 md:grid-cols-2' : 'grid gap-3 md:grid-cols-2 xl:grid-cols-3'}>
-                  {currentCertStage.cards.map((item) => (
-                    <div
-                      key={`${currentCertStage.title}-${item.title}`}
-                      className="rounded-[1.5rem] border border-purple-500/20 bg-zinc-950/55 p-4 shadow-[0_10px_25px_rgba(15,23,42,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/30"
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-purple-100">
-                          {item.badge}
-                        </span>
-                        <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">{item.hours}</span>
-                      </div>
+                {certStage === 4 ? (
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 flex-1 items-stretch">
+                      {stage5Certs.slice(stage5Page * 6, (stage5Page + 1) * 6).map((item) => (
+                        <div
+                          key={`${currentCertStage.title}-${item.title}`}
+                          className="rounded-[1.5rem] border border-purple-500/20 bg-zinc-950/55 p-4 shadow-[0_10px_25px_rgba(15,23,42,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/30"
+                        >
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-purple-100">
+                              {item.badge}
+                            </span>
+                            <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">{item.hours}</span>
+                          </div>
 
-                      <h4 className="mt-3 text-sm font-medium text-zinc-100 sm:text-base">{item.title}</h4>
-                      <p className="mt-2 text-[11px] text-zinc-300/80">{item.description}</p>
+                          <h4 className="mt-3 text-sm font-medium text-zinc-100 sm:text-base">{item.title}</h4>
+                          <p className="mt-2 text-[11px] text-zinc-300/80">{item.description}</p>
 
-                      <div className="mt-3 flex items-center justify-between gap-3">
-                        <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-500">{item.year}</span>
-                      </div>
+                          <div className="mt-3 flex items-center justify-between gap-3">
+                            <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-500">{item.year}</span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+
+                    <div className="flex items-center justify-center gap-2 pt-2">
+                      <button
+                        type="button"
+                        onClick={() => setStage5Page((page) => Math.max(0, page - 1))}
+                        disabled={stage5Page === 0}
+                        className="px-2.5 py-1 text-xs rounded bg-purple-950/40 border border-purple-500/20 text-purple-300 disabled:opacity-30"
+                      >
+                        Pág. Anterior
+                      </button>
+                      <span className="text-xs text-zinc-400">
+                        Página {stage5Page + 1} de {stage5Pages}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setStage5Page((page) => Math.min(stage5Pages - 1, page + 1))}
+                        disabled={stage5Page >= stage5Pages - 1}
+                        className="px-2.5 py-1 text-xs rounded bg-purple-950/40 border border-purple-500/20 text-purple-300 disabled:opacity-30"
+                      >
+                        Próxima Pág.
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className={certStage === 0 ? 'grid gap-3 md:grid-cols-2' : 'grid gap-3 md:grid-cols-2 xl:grid-cols-3'}>
+                    {currentCertStage.cards.map((item) => (
+                      <div
+                        key={`${currentCertStage.title}-${item.title}`}
+                        className="rounded-[1.5rem] border border-purple-500/20 bg-zinc-950/55 p-4 shadow-[0_10px_25px_rgba(15,23,42,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/30"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-purple-100">
+                            {item.badge}
+                          </span>
+                          <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">{item.hours}</span>
+                        </div>
+
+                        <h4 className="mt-3 text-sm font-medium text-zinc-100 sm:text-base">{item.title}</h4>
+                        <p className="mt-2 text-[11px] text-zinc-300/80">{item.description}</p>
+
+                        <div className="mt-3 flex items-center justify-between gap-3">
+                          <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-500">{item.year}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </motion.div>
             </AnimatePresence>
 
@@ -593,7 +645,7 @@ function App() {
           </div>
         </section>
 
-        <section id="contato" className="relative flex h-screen w-full snap-start snap-always flex-col items-center justify-center px-4 py-8 sm:px-8">
+        <section id="contato" className="relative z-10 min-h-screen w-full snap-start flex flex-col items-center justify-center px-4 py-16 sm:px-8">
           <div className="w-full max-w-5xl rounded-[2rem] border border-purple-500/20 bg-[radial-gradient(circle_at_top_left,_rgba(168,85,247,0.18),_transparent_35%),_rgba(17,24,39,0.8)] p-6 shadow-[0_20px_60px_rgba(76,29,149,0.18)] backdrop-blur-xl md:p-8">
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
