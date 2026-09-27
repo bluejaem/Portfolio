@@ -1,11 +1,9 @@
-import { ArrowRight, ArrowUpRight, Briefcase, Globe, GraduationCap, Mail, MapPin, Sparkles } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Briefcase, BriefcaseBusiness, GitBranch, GraduationCap, Mail, MapPin, Sparkles } from 'lucide-react'
 
 import {
   allGeneralCertificates,
   contactsData,
   dimensionsData,
-  educationList,
-  highlightCertificates,
   profileInfo,
   projectsList,
 } from './data/portfolioData'
@@ -60,13 +58,13 @@ function App() {
             <span className="rounded-full border border-purple-500/30 bg-purple-950/40 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-purple-200">
               Ciência de Dados & Tecnologia
             </span>
-            <a href={normalizeLink(contactsData.github)} target="_blank" rel="noreferrer" className="rounded-full border border-purple-500/20 bg-zinc-900/50 p-2 text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-200">
-              <Globe className="h-4 w-4" />
+            <a href={normalizeLink(contactsData.github)} target="_blank" rel="noreferrer" aria-label="GitHub" className="rounded-full border border-purple-500/20 bg-zinc-900/50 p-2 text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-200">
+              <GitBranch className="h-4 w-4" />
             </a>
-            <a href={normalizeLink(contactsData.linkedin)} target="_blank" rel="noreferrer" className="rounded-full border border-purple-500/20 bg-zinc-900/50 p-2 text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-200">
-              <Globe className="h-4 w-4" />
+            <a href={normalizeLink(contactsData.linkedin)} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="rounded-full border border-purple-500/20 bg-zinc-900/50 p-2 text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-200">
+              <BriefcaseBusiness className="h-4 w-4" />
             </a>
-            <a href={`mailto:${contactsData.email}`} className="rounded-full border border-purple-500/20 bg-zinc-900/50 p-2 text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-200">
+            <a href={`mailto:${contactsData.email}`} aria-label="E-mail" className="rounded-full border border-purple-500/20 bg-zinc-900/50 p-2 text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-200">
               <Mail className="h-4 w-4" />
             </a>
           </div>
@@ -132,35 +130,67 @@ function App() {
 
         <section id="dimensoes" className="py-8 md:py-12">
           <div className="mb-6 max-w-2xl">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">As 4 dimensões</p>
-            <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Base sólida para atuação em tecnologia e dados.</h2>
+            <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Formações acadêmicas</p>
+            <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Formações Acadêmicas Interdisciplinares</h2>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
-            {dimensionsData.map((dimension) => (
-              <article
-                key={dimension.id}
-                className="rounded-2xl border border-purple-500/20 bg-zinc-900/40 p-5 shadow-[0_8px_32px_0_rgba(76,29,149,0.15)] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/40 hover:shadow-[0_12px_40px_0_rgba(147,51,234,0.2)]"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="rounded-full border border-purple-500/30 bg-purple-950/40 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-200">
-                    {dimension.pillar}
-                  </span>
-                </div>
+            {dimensionsData.map((dimension) => {
+              const imageMap: Record<string, string> = {
+                dados: '/education/ciencia-de-dados.jpg',
+                'gestao-ia': '/education/gestao-ti.png',
+                computacao: '/education/engenharia-computacao.png',
+                matematica: '/education/matematica-aplicada.jpg',
+              }
 
-                <h3 className="mt-4 text-xl font-semibold text-zinc-100">{dimension.title}</h3>
-                <p className="mt-2 text-sm text-zinc-300/80">{dimension.course}</p>
-                <p className="mt-3 text-sm leading-7 text-zinc-300/80">{dimension.role}</p>
+              const cardImage = imageMap[dimension.id]
+              const visual = {
+                dados: { emoji: '📊', glow: 'from-violet-500/35 via-purple-500/25 to-slate-900/80' },
+                matematica: { emoji: '📐', glow: 'from-cyan-500/30 via-indigo-500/25 to-slate-900/80' },
+                computacao: { emoji: '💻', glow: 'from-fuchsia-500/30 via-violet-500/25 to-slate-900/80' },
+                'gestao-ia': { emoji: '🤖', glow: 'from-amber-400/30 via-purple-500/25 to-slate-900/80' },
+              }[dimension.id] ?? { emoji: '✨', glow: 'from-violet-500/30 via-purple-500/20 to-slate-900/80' }
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {dimension.highlights.map((item) => (
-                    <span key={`${dimension.id}-${item}`} className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-purple-100">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
+              return (
+                <article
+                  key={dimension.id}
+                  className="overflow-hidden rounded-2xl border border-purple-500/20 bg-zinc-900/40 shadow-[0_8px_32px_0_rgba(76,29,149,0.15)] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/40 hover:shadow-[0_12px_40px_0_rgba(147,51,234,0.2)]"
+                >
+                  {cardImage ? (
+                    <div className="relative h-32 overflow-hidden border-b border-purple-500/20 bg-slate-950">
+                      <img src={cardImage} alt={dimension.title} className="h-full w-full object-contain object-center bg-slate-950 opacity-90" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+                      <div className="absolute bottom-3 right-3">
+                        <span className="rounded-full border border-white/15 bg-slate-950/40 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
+                          {dimension.pillar}
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={`flex h-32 items-end justify-between bg-gradient-to-br ${visual.glow} p-4`}>
+                      <span className="text-4xl drop-shadow-[0_8px_18px_rgba(0,0,0,0.35)]">{visual.emoji}</span>
+                      <span className="rounded-full border border-white/15 bg-slate-950/40 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
+                        {dimension.pillar}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="p-5">
+                    <h3 className="text-xl font-semibold text-zinc-100">{dimension.title}</h3>
+                    <p className="mt-2 text-sm text-zinc-300/80">{dimension.course}</p>
+                    <p className="mt-3 text-sm leading-7 text-zinc-300/80">{dimension.role}</p>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {dimension.highlights.map((item) => (
+                        <span key={`${dimension.id}-${item}`} className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-purple-100">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </section>
 
@@ -231,77 +261,33 @@ function App() {
         </section>
 
         <section id="formacao" className="py-8 md:py-12">
-          <div className="mb-6 max-w-2xl">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Formação integrada</p>
-            <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Interseção entre formação acadêmica e base técnica aplicada.</h2>
+          <div className="mb-6 max-w-3xl">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Certificações e formações complementares</p>
+            <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Aprendizado contínuo em análise, tecnologia e aplicação prática</h2>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-            <div className="grid gap-4">
-              {educationList.map((item) => (
-                <article key={item.id} className="rounded-2xl border border-purple-500/20 bg-zinc-900/40 p-4 backdrop-blur-xl">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-200">
-                      {item.level}
-                    </span>
-                    <span className="rounded-full border border-purple-500/20 bg-zinc-950/60 px-2 py-1 text-[9px] uppercase tracking-[0.18em] text-zinc-300">
-                      {item.status}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-4 text-lg font-semibold text-zinc-100">{item.degree}</h3>
-                  <p className="mt-1 text-sm text-zinc-300/80">{item.institution}</p>
-                  <p className="mt-2 text-sm text-zinc-300/80">Previsão: {item.expectedGraduation}</p>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {item.topics.map((topic) => (
-                      <span key={`${item.id}-${topic}`} className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-purple-100">
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
+          <div className="space-y-5">
+            <div className="rounded-[28px] border border-purple-500/20 bg-zinc-900/40 p-5 backdrop-blur-xl">
+              <p className="text-base leading-8 text-zinc-300/80">
+                Essas formações complementares me deram uma bagagem sólida para conectar lógica, tecnologia e comunicação. Aprendi a estruturar problemas de forma mais clara, desenvolver raciocínio analítico em contextos reais, interpretar dados com criticidade e transformar conhecimento técnico em soluções úteis, acessíveis e bem fundamentadas.
+              </p>
             </div>
 
-            <div className="space-y-5">
-              <div className="rounded-[28px] border border-purple-500/20 bg-zinc-900/40 p-5 backdrop-blur-xl">
-                <p className="text-[10px] uppercase tracking-[0.24em] text-zinc-300/70">Destaques acadêmicos</p>
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
-                  {highlightCertificates.map((item) => (
-                    <article key={item.id} className="rounded-2xl border border-purple-500/20 bg-zinc-950/40 p-4">
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="rounded-full border border-purple-500/20 bg-purple-950/40 px-2 py-1 text-[9px] uppercase tracking-[0.12em] text-purple-200">
-                          {item.hours}
-                        </span>
-                        <span className="text-[9px] uppercase tracking-[0.18em] text-zinc-400">{item.year}</span>
-                      </div>
-                      <h3 className="mt-3 text-base font-medium text-zinc-100">{item.title}</h3>
-                      <p className="mt-1 text-xs text-zinc-300/80">{item.issuer}</p>
-                      <p className="mt-2 text-[10px] uppercase tracking-[0.14em] text-purple-200">{item.badge}</p>
-                      <p className="mt-2 text-xs leading-6 text-zinc-300/80">{item.description}</p>
-                    </article>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-[28px] border border-purple-500/20 bg-zinc-900/40 p-5 backdrop-blur-xl">
-                <p className="text-[10px] uppercase tracking-[0.24em] text-zinc-300/70">Certificações Técnicas & Extensões Complementares</p>
-                <div className="mt-4 grid gap-3 md:grid-cols-2">
-                  {allGeneralCertificates.map((item) => (
-                    <div key={item.id} className="rounded-2xl border border-purple-500/20 bg-zinc-950/40 p-3">
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-purple-100">
-                          {item.category}
-                        </span>
-                        <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">{item.hours}</span>
-                      </div>
-                      <h4 className="mt-3 text-sm font-medium text-zinc-100">{item.title}</h4>
-                      <p className="mt-1 text-[11px] text-zinc-300/80">{item.issuer}</p>
-                      <p className="mt-1 text-[9px] uppercase tracking-[0.16em] text-zinc-500">{item.year}</p>
+            <div className="rounded-[28px] border border-purple-500/20 bg-zinc-900/40 p-5 backdrop-blur-xl">
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
+                {allGeneralCertificates.map((item) => (
+                  <div key={item.id} className="rounded-2xl border border-purple-500/20 bg-zinc-950/40 p-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-purple-100">
+                        {item.category}
+                      </span>
+                      <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">{item.hours}</span>
                     </div>
-                  ))}
-                </div>
+                    <h4 className="mt-3 text-sm font-medium text-zinc-100">{item.title}</h4>
+                    <p className="mt-1 text-[11px] text-zinc-300/80">{item.issuer}</p>
+                    <p className="mt-1 text-[9px] uppercase tracking-[0.16em] text-zinc-500">{item.year}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -312,7 +298,7 @@ function App() {
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Contato</p>
-                <h2 className="mt-3 max-w-xl text-3xl font-semibold text-zinc-100 md:text-5xl">Disponível para estágios e posições em Dados e Tecnologia.</h2>
+                <h2 className="mt-3 max-w-xl text-3xl font-semibold text-zinc-100 md:text-5xl">Conecte-se para projetos em Dados e Tecnologia.</h2>
                 <p className="mt-5 max-w-xl text-base leading-8 text-zinc-300/80">
                   Posso contribuir com raciocínio analítico, desenvolvimento prático, organização de dados e base técnica para projetos reais.
                 </p>
@@ -323,11 +309,11 @@ function App() {
                     E-mail
                   </a>
                   <a href={normalizeLink(contactsData.linkedin)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-zinc-950/60 px-4 py-2.5 text-sm text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-100">
-                    <Globe className="h-4 w-4" />
+                    <BriefcaseBusiness className="h-4 w-4" />
                     LinkedIn
                   </a>
                   <a href={normalizeLink(contactsData.github)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-zinc-950/60 px-4 py-2.5 text-sm text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-100">
-                    <Globe className="h-4 w-4" />
+                    <GitBranch className="h-4 w-4" />
                     GitHub
                   </a>
                 </div>
@@ -339,7 +325,7 @@ function App() {
                   <span className="text-[10px] uppercase tracking-[0.22em] text-purple-200">Disponibilidade</span>
                 </div>
 
-                <p className="mt-5 text-xl font-medium text-zinc-100">{profileInfo.availability}</p>
+                <p className="mt-5 text-xl font-medium text-zinc-100">Disponível para estágios e posições iniciais em Dados e Tecnologia</p>
                 <div className="mt-7 space-y-3">
                   <div className="rounded-2xl border border-purple-500/20 bg-zinc-900/50 p-3">
                     <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-400">E-mail</p>
