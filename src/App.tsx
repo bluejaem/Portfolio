@@ -1,5 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight, ArrowUpRight, BriefcaseBusiness, GitBranch, GraduationCap, Mail, MapPin } from 'lucide-react'
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  BriefcaseBusiness,
+  GitBranch,
+  GraduationCap,
+  Mail,
+  MapPin,
+} from 'lucide-react'
 import { useState } from 'react'
 
 import {
@@ -15,10 +24,45 @@ function normalizeLink(value: string | null) {
   return match ? match[2] : value
 }
 
+// Variantes de transição cinematográfica direcional (Vercel/Apple Standard)
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 40 : -40,
+    opacity: 0,
+    scale: 0.98,
+    filter: 'blur(6px)',
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -40 : 40,
+    opacity: 0,
+    scale: 0.98,
+    filter: 'blur(6px)',
+    transition: {
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  }),
+}
+
 function App() {
   const [currentFormation, setCurrentFormation] = useState(0)
+  const [formationDir, setFormationDir] = useState(1)
+
   const [currentProject, setCurrentProject] = useState(0)
+  const [projectDir, setProjectDir] = useState(1)
+
   const [certStage, setCertStage] = useState(0)
+  const [certDir, setCertDir] = useState(1)
 
   const formation = dimensionsData[currentFormation]
   const project = projectsList[currentProject]
@@ -35,30 +79,30 @@ function App() {
           hours: '70h',
           title: 'CS50: Introduction to Computer Science',
           desc: 'Imersão em algoritmos, complexidade assintótica, estruturas de dados e gerenciamento de memória em C e desenvolvimento de software.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'Desenvolve Já',
           hours: '112h',
           title: 'Qualificação Profissional para Call Center',
           desc: 'Capacitação intensiva em comunicação assertiva, resolução ágil de incidentes, escuta ativa e relacionamento sob métricas de atendimento.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'UNICAMP',
           hours: '48h',
           title: 'Semifinalista da 16ª ONHB',
           desc: 'Avanço até a Fase 6 (semifinal nacional) com análise crítica e metodológica de fontes históricas primárias e produção textual.',
-          year: '2024'
+          year: '2024',
         },
         {
           institution: 'UNINTER',
           hours: '42h',
           title: 'Língua Inglesa NEW UBEST Intermediate (Nível 2)',
           desc: 'Consolidação de competências de comunicação oral, leitura técnica avançada e redação em língua inglesa para tecnologia.',
-          year: '2026'
-        }
-      ]
+          year: '2026',
+        },
+      ],
     },
     {
       badge: 'Dados, BI & Inteligência Artificial',
@@ -69,37 +113,37 @@ function App() {
           hours: '30h',
           title: 'Análise de Dados e Inteligência de Negócios',
           desc: 'Análise exploratória multivariada, estruturação de métricas analíticas e suporte estratégico a decisões orientadas a dados.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'Gran Faculdade',
           hours: '30h',
           title: 'Engenharia de Prompt',
           desc: 'Arquitetura e refinamento avançado de comandos para LLMs, automação de tarefas e contextualização de modelos de linguagem.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'Gran Faculdade',
           hours: '30h',
           title: 'Inteligência Artificial na Prática: Domine as Ferramentas',
           desc: 'Integração de ferramentas generativas aplicadas à rotina de dados, produtividade e resolução de problemas práticos.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Transformers em Ação: Agentes com LLMs',
           desc: 'Mecanismos de auto-atenção, arquiteturas de modelos Transformers e o ecossistema contemporâneo de agentes inteligentes.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'Gran Faculdade',
           hours: '1h',
           title: 'Fundamentos de IA para Gestão e Estratégia',
           desc: 'Alinhamento estratégico entre modelos preditivos, governança tecnológica e ganhos de escala empresarial.',
-          year: '2026'
-        }
-      ]
+          year: '2026',
+        },
+      ],
     },
     {
       badge: 'Infraestrutura, Redes & Hardware',
@@ -110,37 +154,37 @@ function App() {
           hours: 'Certificação',
           title: 'Conceitos Básicos de Redes (Networking Basics)',
           desc: 'Modelos OSI e TCP/IP, endereçamento IPv4/IPv6, comutação, roteamento e diagnósticos de conectividade local e remota.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'Centro Universitário ETEP',
           hours: '30h',
           title: 'Introdução à Tecnologia da Informação',
           desc: 'Fundamentação estruturada de arquitetura de TI, alinhamento de infraestrutura a processos computacionais e governança.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'Fundação Bradesco',
           hours: '7h',
           title: 'Fundamentos de TI: Hardware e Software',
           desc: 'Arquitetura funcional de computadores, barramentos, memória, dispositivos de E/S e rotinas de manutenção e diagnóstico.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'O Funcionamento dos Circuitos Elétricos',
           desc: 'Fundamentos de eletricidade e grandezas físicas (tensão, corrente, resistência) aplicadas ao funcionamento de circuitos.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Choque de Conhecimento: Eletricidade no Dia a Dia',
           desc: 'Conceitos fundamentais de circuitos elétricos práticos, potência, segurança operacional e conversão de energia.',
-          year: '2024'
-        }
-      ]
+          year: '2024',
+        },
+      ],
     },
     {
       badge: 'Desenvolvimento, Lógica & Idiomas',
@@ -151,37 +195,37 @@ function App() {
           hours: '18h',
           title: 'Linguagem de Programação Python Básico',
           desc: 'Sintaxe essencial, controle de fluxo, estruturas de dados integradas (listas, tuplas e dicionários) e automação de rotinas.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'Fundação Bradesco',
           hours: '4h',
           title: 'Crie um Site Simples usando HTML, CSS e JavaScript',
           desc: 'Desenvolvimento web com marcação semântica em HTML5, estilização moderna em CSS3 e manipulação de eventos do DOM.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'UNINTER',
           hours: '10h',
           title: 'II Semana de Línguas UNINTER',
           desc: 'Linguística aplicada, comunicação multilíngue e metodologias de internacionalização acadêmica e técnica.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'Instituto Dom Fernando Gomes',
           hours: '35h',
           title: 'Espanhol Básico',
           desc: 'Domínio gramatical fundamental, vocabulário funcional e leitura técnica intermediária na língua espanhola.',
-          year: '2018'
+          year: '2018',
         },
         {
           institution: 'Instituto Dom Fernando Gomes',
           hours: '2º Lugar',
           title: 'Mostra Científica: Transformando o Mundo',
           desc: 'Premiação científica em projeto sobre biotecnologia, impactos socioambientais e metodologia de pesquisa.',
-          year: '2022'
-        }
-      ]
+          year: '2022',
+        },
+      ],
     },
     {
       badge: 'Gestão, Processos & Governança',
@@ -192,44 +236,44 @@ function App() {
           hours: '1h',
           title: 'Gestão do Tempo e Produtividade',
           desc: 'Técnicas de priorização de tarefas, eliminação de gargalos e métodos de planejamento de rotinas de alta eficiência.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Metas Pessoais e Profissionais',
           desc: 'Alinhamento de objetivos individuais, métricas de crescimento e construção estruturada de planos de carreira.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Postura Profissional: O que o Mercado Espera',
           desc: 'Comportamento corporativo assertivo, ética em ambientes dinâmicos de tecnologia e exigências do mercado.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Como se Expressar Bem em Entrevistas',
           desc: 'Domínio de comunicação verbal e não-verbal, estruturação de raciocínio sob pressão e assertividade técnica.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Diferenciando Relação de Emprego x Trabalho',
           desc: 'Compreensão de vínculos regulatórios, obrigações contratuais e dinâmica legal do ambiente de trabalho corporativo.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Desvendando a Folha de Pagamento: Holerite',
           desc: 'Compreensão de remuneração, encargos trabalhistas, benefícios e estrutura contábil de pagamentos.',
-          year: '2024'
-        }
-      ]
+          year: '2024',
+        },
+      ],
     },
     {
       badge: 'Comunicação, Saúde & Sociedade',
@@ -240,45 +284,45 @@ function App() {
           hours: '1h',
           title: 'Comunicação Eficaz: Habilidades Essenciais',
           desc: 'Técnicas de escuta ativa, persuasão ética, transmissão clara de mensagens e mediação de conflitos.',
-          year: '2024'
+          year: '2024',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Humanização do Atendimento e Relações Interpessoais',
           desc: 'Princípios de empatia, resolução humanizada de incidentes e construção de relações de confiança com usuários.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Respira, Organiza e Segue: Gestão de Estresse',
           desc: 'Estratégias de regulação emocional, resiliência psicológica e mitigação de sobrecarga cognitiva em ambientes analíticos.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'O Bem-Estar Animal e a Saúde Única',
           desc: 'Abordagem interdisciplinar integrando saúde animal, preservação ambiental e impactos na saúde coletiva humana.',
-          year: '2025'
+          year: '2025',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Uso Racional de Medicamentos',
           desc: 'Análise de prescrição consciente, prevenção a substâncias desnecessárias e conscientização sobre saúde pública.',
-          year: '2026'
+          year: '2026',
         },
         {
           institution: 'UNINTER',
           hours: '1h',
           title: 'Primeiros Socorros para Leigos',
           desc: 'Protocolos básicos de resposta inicial a emergências e socorro pré-hospitalar para preservação da integridade física.',
-          year: '2024'
-        }
-      ]
-    }
+          year: '2024',
+        },
+      ],
+    },
   ]
 
   const activeSlide = certificationSlides[certStage] || certificationSlides[0]
@@ -304,19 +348,33 @@ function App() {
   const projectCountLabel = `${String(currentProject + 1).padStart(2, '0')} / ${String(projectsList.length).padStart(2, '0')}`
 
   const showPreviousFormation = () => {
-    setCurrentFormation((previous) => (previous === 0 ? dimensionsData.length - 1 : previous - 1))
+    setFormationDir(-1)
+    setCurrentFormation((prev) => (prev === 0 ? dimensionsData.length - 1 : prev - 1))
   }
 
   const showNextFormation = () => {
-    setCurrentFormation((previous) => (previous === dimensionsData.length - 1 ? 0 : previous + 1))
+    setFormationDir(1)
+    setCurrentFormation((prev) => (prev === dimensionsData.length - 1 ? 0 : prev + 1))
   }
 
   const showPreviousProject = () => {
-    setCurrentProject((previous) => (previous === 0 ? projectsList.length - 1 : previous - 1))
+    setProjectDir(-1)
+    setCurrentProject((prev) => (prev === 0 ? projectsList.length - 1 : prev - 1))
   }
 
   const showNextProject = () => {
-    setCurrentProject((previous) => (previous === projectsList.length - 1 ? 0 : previous + 1))
+    setProjectDir(1)
+    setCurrentProject((prev) => (prev === projectsList.length - 1 ? 0 : prev + 1))
+  }
+
+  const showPreviousCertStage = () => {
+    setCertDir(-1)
+    setCertStage((prev) => (prev === 0 ? certificationSlides.length - 1 : prev - 1))
+  }
+
+  const showNextCertStage = () => {
+    setCertDir(1)
+    setCertStage((prev) => (prev === certificationSlides.length - 1 ? 0 : prev + 1))
   }
 
   return (
@@ -360,7 +418,13 @@ function App() {
         {/* SEÇÃO 1: HERO / APRESENTAÇÃO                                      */}
         {/* ================================================================= */}
         <section id="inicio" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center px-4 py-8 sm:px-8 overflow-hidden">
-          <div className="grid w-full max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_0.8fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="grid w-full max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_0.8fr]"
+          >
             <div>
               <div className="mb-5 inline-flex items-center rounded-full border border-purple-500/35 bg-purple-900/30 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.22em] text-purple-200 shadow-[0_0_24px_rgba(168,85,247,0.2)]">
                 Ciência de Dados
@@ -417,28 +481,35 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS (IMAGEM AMPLA & SEM CARD DUPLICADO) */}
+        {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS (TRANSIÇÃO SUAVE & 4 CARDS)          */}
         {/* ================================================================= */}
         <section id="formacoes" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
-          <div className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]"
+          >
             <div className="mb-3 w-full px-2">
               <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-0.5">Formações acadêmicas</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Formações Acadêmicas Interdisciplinares</h2>
             </div>
 
-            <div className="w-full h-[580px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
-              <AnimatePresence mode="wait">
+            <div className="w-full h-[580px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between overflow-hidden">
+              <AnimatePresence mode="wait" custom={formationDir}>
                 <motion.div
                   key={formation.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start my-auto"
+                  custom={formationDir}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start my-auto w-full"
                 >
                   {/* Coluna Esquerda: Imagem Expandida (Sem o card redundante de Grau/Instituição) */}
                   <div className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between h-[420px]">
@@ -447,7 +518,18 @@ function App() {
                         src={imageMap[formation.id] ?? imageMap.dados}
                         alt={formation.title}
                         className="w-full h-full object-cover transition duration-500 hover:scale-[1.02]"
-                        style={{ objectPosition: formation.id === 'dados' ? '50% 6%' : formation.id === 'matematica' ? '50% 28%' : formation.id === 'computacao' ? '50% 12%' : formation.id === 'tecnico' ? '50% 14%' : '50% 8%' }}
+                        style={{
+                          objectPosition:
+                            formation.id === 'dados'
+                              ? '50% 6%'
+                              : formation.id === 'matematica'
+                              ? '50% 28%'
+                              : formation.id === 'computacao'
+                              ? '50% 12%'
+                              : formation.id === 'tecnico'
+                              ? '50% 14%'
+                              : '50% 8%',
+                        }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-purple-950/40 via-transparent to-transparent pointer-events-none" />
                     </div>
@@ -461,10 +543,9 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Coluna Direita: Conteúdo Curricular e Eixos */}
+                  {/* Coluna Direita: Cabeçalho Limpo e Grade Exata de 4 Cards (2x2) */}
                   <div className="lg:col-span-8 xl:col-span-8 flex flex-col justify-between h-[420px]">
                     <div>
-                      {/* Topo Limpo: Badge e Contador */}
                       <div className="flex items-center justify-between border-b border-purple-500/20 pb-2.5 mb-2.5">
                         <span className="rounded-full border border-purple-500/30 bg-purple-900/40 px-3.5 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-purple-200">
                           {formation.pillar}
@@ -477,10 +558,10 @@ function App() {
                       <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80 line-clamp-2 mb-2">{formation.role}</p>
                     </div>
 
-                    {/* Eixos Curriculares: 4 Blocos em Grade 2x2 com Altura Padronizada */}
+                    {/* Exatamente 4 Cards Simétricos em 2x2 com Altura Perfeita */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-auto">
-                      {formation.detailGroups?.map((group) => (
-                        <div key={`${formation.id}-${group.title}`} className="p-3.5 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[115px]">
+                      {formation.detailGroups?.slice(0, 4).map((group) => (
+                        <div key={`${formation.id}-${group.title}`} className="p-3.5 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[120px]">
                           <h5 className="text-[10.5px] font-bold uppercase tracking-wider text-purple-300 mb-1 line-clamp-1">{group.title}</h5>
                           <p className="text-xs text-zinc-300/90 leading-relaxed line-clamp-3">{group.items.join(' ')}</p>
                         </div>
@@ -498,8 +579,11 @@ function App() {
                       key={item.id}
                       type="button"
                       aria-label={`Selecionar formação ${item.title}`}
-                      onClick={() => setCurrentFormation(index)}
-                      className={`h-2 rounded-full transition-all duration-300 ${index === currentFormation ? 'w-8 bg-purple-400' : 'w-2 bg-purple-900/50 hover:bg-purple-600'}`}
+                      onClick={() => {
+                        setFormationDir(index > currentFormation ? 1 : -1)
+                        setCurrentFormation(index)
+                      }}
+                      className={`h-2 rounded-full transition-all duration-500 ${index === currentFormation ? 'w-8 bg-purple-400' : 'w-2 bg-purple-900/50 hover:bg-purple-600'}`}
                     />
                   ))}
                 </div>
@@ -509,7 +593,7 @@ function App() {
                     type="button"
                     onClick={showPreviousFormation}
                     disabled={isFirstFormation}
-                    className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-950/40 px-3.5 py-1.5 text-xs font-medium text-purple-200 transition hover:bg-purple-900/50 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-950/40 px-3.5 py-1.5 text-xs font-medium text-purple-200 transition duration-300 hover:bg-purple-900/50 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     <ArrowLeft className="h-3.5 w-3.5" />
                     Anterior
@@ -519,7 +603,7 @@ function App() {
                     type="button"
                     onClick={showNextFormation}
                     disabled={isLastFormation}
-                    className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-600 px-3.5 py-1.5 text-xs font-medium text-white transition hover:bg-purple-500 shadow-lg shadow-purple-950/50 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-600 px-3.5 py-1.5 text-xs font-medium text-white transition duration-300 hover:bg-purple-500 shadow-lg shadow-purple-950/50 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     Próxima Formação
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -527,28 +611,35 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 3: PROJETOS (ROXO VÍVIDO PADRONIZADO)                       */}
+        {/* SEÇÃO 3: PROJETOS (TRANSIÇÃO DIRECIONAL E CARDS FLUIDOS)           */}
         {/* ================================================================= */}
         <section id="projetos" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
-          <div className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]"
+          >
             <div className="mb-3 w-full px-2">
               <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-0.5">Projetos</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Soluções orientadas à clareza de dados e uso real.</h2>
             </div>
 
-            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-6 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
-              <AnimatePresence mode="wait">
+            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-6 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between overflow-hidden">
+              <AnimatePresence mode="wait" custom={projectDir}>
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-start"
+                  custom={projectDir}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-start w-full"
                 >
                   <div className="lg:col-span-5 flex flex-col justify-between gap-3">
                     <div className="group relative overflow-hidden rounded-[20px] border border-purple-500/30 bg-purple-950/40 shadow-md">
@@ -618,7 +709,10 @@ function App() {
                       key={item.id}
                       type="button"
                       aria-label={`Selecionar projeto ${item.title}`}
-                      onClick={() => setCurrentProject(index)}
+                      onClick={() => {
+                        setProjectDir(index > currentProject ? 1 : -1)
+                        setCurrentProject(index)
+                      }}
                       className={`h-2 rounded-full transition-all duration-300 ${index === currentProject ? 'w-8 bg-purple-400' : 'w-2 bg-purple-900/50 hover:bg-purple-600'}`}
                     />
                   ))}
@@ -645,22 +739,26 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 4: CERTIFICAÇÕES (CARROSSEL EM 6 SLIDES, ALTURA RIGIDAMENTE TRAVADA) */}
+        {/* SEÇÃO 4: CERTIFICAÇÕES (CARROSSEL COM TRANSIÇÃO DIRECIONAL)       */}
         {/* ================================================================= */}
         <section id="certificacoes" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
-          <div className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]"
+          >
             <div className="mb-3 w-full px-2">
               <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-0.5">Certificações e conquistas</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Aprendizado Contínuo em Análise de Tecnologia e Aplicação Prática</h2>
             </div>
 
-            <div className="w-full h-[570px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
-              
-              {/* Topo Limpo: Badge e Contador */}
+            <div className="w-full h-[570px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between overflow-hidden">
               <div className="flex items-center justify-between border-b border-purple-500/20 pb-2.5">
                 <span className="bg-purple-900/40 text-purple-300 border border-purple-500/30 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">
                   {activeSlide.badge}
@@ -670,42 +768,53 @@ function App() {
                 </span>
               </div>
 
-              {/* Grade de 3 Colunas x 2 Linhas: sem scroll interno */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 my-auto overflow-hidden">
-                {activeSlide.items.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3.5 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[155px]"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between text-[11px] font-medium text-purple-400 mb-1.5">
-                        <span className="truncate max-w-[75%]">{item.institution}</span>
-                        <span className="bg-purple-950/60 px-2 py-0.5 rounded border border-purple-500/30 text-purple-200">
-                          {item.hours}
-                        </span>
+              <AnimatePresence mode="wait" custom={certDir}>
+                <motion.div
+                  key={activeSlide.badge}
+                  custom={certDir}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 my-auto overflow-hidden w-full"
+                >
+                  {activeSlide.items.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[155px]"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between text-[11px] font-medium text-purple-400 mb-1.5">
+                          <span className="truncate max-w-[75%]">{item.institution}</span>
+                          <span className="bg-purple-950/60 px-2 py-0.5 rounded border border-purple-500/30 text-purple-200">
+                            {item.hours}
+                          </span>
+                        </div>
+                        <h4 className="text-sm font-bold text-zinc-100 line-clamp-1 mb-1">
+                          {item.title}
+                        </h4>
+                        <p className="text-xs text-zinc-300/80 line-clamp-2 leading-relaxed">
+                          {item.desc}
+                        </p>
                       </div>
-                      <h4 className="text-sm font-bold text-zinc-100 line-clamp-1 mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-xs text-zinc-300/80 line-clamp-2 leading-relaxed">
-                        {item.desc}
-                      </p>
+                      <div className="text-[10px] text-zinc-400 text-right">
+                        {item.year}
+                      </div>
                     </div>
-                    <div className="text-[10px] text-zinc-400 text-right">
-                      {item.year}
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
 
-              {/* Barra de Navegação Única na Base */}
               <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {certificationSlides.map((_, idx) => (
                     <button
                       key={idx}
                       type="button"
-                      onClick={() => setCertStage(idx)}
+                      onClick={() => {
+                        setCertDir(idx > certStage ? 1 : -1)
+                        setCertStage(idx)
+                      }}
                       className={`h-2 rounded-full transition-all duration-300 ${
                         certStage === idx ? 'w-8 bg-purple-400' : 'w-2 bg-purple-900/50 hover:bg-purple-600'
                       }`}
@@ -717,14 +826,14 @@ function App() {
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
-                    onClick={() => setCertStage((prev) => (prev === 0 ? certificationSlides.length - 1 : prev - 1))}
+                    onClick={showPreviousCertStage}
                     className="px-3.5 py-1.5 text-xs font-medium rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-200 hover:bg-purple-900/50 transition-colors"
                   >
                     ← Anterior
                   </button>
                   <button
                     type="button"
-                    onClick={() => setCertStage((prev) => (prev === certificationSlides.length - 1 ? 0 : prev + 1))}
+                    onClick={showNextCertStage}
                     className="px-3.5 py-1.5 text-xs font-medium rounded-xl bg-purple-600 text-white hover:bg-purple-500 transition-colors shadow-lg shadow-purple-950/50"
                   >
                     Próxima Categoria →
@@ -732,17 +841,20 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 5: CONTATO (ROXO VÍVIDO PADRONIZADO)                        */}
-        {/* ================================================================= */}
-        {/* ================================================================= */}
-        {/* SEÇÃO 5: CONTATO COM SELO DE COPYRIGHT INTEGRADO                 */}
+        {/* SEÇÃO 5: CONTATO (REVELAÇÃO SUAVE COM COPYRIGHT INTEGRADO)        */}
         {/* ================================================================= */}
         <section id="contato" className="relative z-20 h-screen w-full snap-center scroll-mt-16 flex flex-col justify-between items-center py-8 px-2 sm:px-4 lg:px-6 overflow-hidden">
-          <div className="my-auto w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto rounded-3xl border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 backdrop-blur-2xl p-6 md:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)]">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="my-auto w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto rounded-3xl border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 backdrop-blur-2xl p-6 md:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)]"
+          >
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-1">Contato</p>
@@ -790,9 +902,8 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Selo de Copyright Discreto e Elegante na Base */}
           <footer className="w-full text-center py-2">
             <p className="text-xs text-zinc-400 font-medium tracking-wide">
               © {new Date().getFullYear()} <span className="text-purple-300 font-semibold">João Guilherme Machado de Melo</span>. Todos os direitos reservados.
