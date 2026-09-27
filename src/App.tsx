@@ -16,30 +16,12 @@ function normalizeLink(value: string | null) {
   return match ? match[2] : value
 }
 
-function ProjectPreview({ projectId }: { projectId: string }) {
-  const projectMap: Record<string, string> = {
-    'meu-life-os': '/projects/meu-life-os.png',
-    'life-os': '/projects/meu-life-os.png',
-    'govlocal-app': '/projects/govlocal-app.png',
-    'govlocal': '/projects/govlocal-app.png',
-    'consulta-salarios': '/projects/consulta-salarios.png',
-    'salarios-tech': '/projects/consulta-salarios.png',
-    'calculadora-imc': '/projects/calculadora-imc.png',
-  }
-
-  const src = projectMap[projectId] ?? '/projects/meu-life-os.svg'
-
-  return (
-    <div className="relative h-56 overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[#0b1220]">
-      <img src={src} alt={projectId} className="h-full w-full object-cover" />
-    </div>
-  )
-}
-
 function App() {
   const [currentFormation, setCurrentFormation] = useState(0)
+  const [currentProject, setCurrentProject] = useState(0)
 
   const formation = dimensionsData[currentFormation]
+  const project = projectsList[currentProject]
   const isLastFormation = currentFormation === dimensionsData.length - 1
   const isFirstFormation = currentFormation === 0
 
@@ -50,7 +32,15 @@ function App() {
     matematica: '/education/matematica-aplicada.jpg',
   }
 
+  const projectImageMap: Record<string, string> = {
+    'meu-life-os': '/projects/meu-life-os.png',
+    'govlocal-app': '/projects/govlocal-app.png',
+    'consulta-salarios': '/projects/consulta-salarios.png',
+    'calculadora-imc': '/projects/calculadora-imc.png',
+  }
+
   const formacaoCountLabel = `${String(currentFormation + 1).padStart(2, '0')} / ${String(dimensionsData.length).padStart(2, '0')}`
+  const projectCountLabel = `${String(currentProject + 1).padStart(2, '0')} / ${String(projectsList.length).padStart(2, '0')}`
 
   const showPreviousFormation = () => {
     setCurrentFormation((previous) => (previous === 0 ? dimensionsData.length - 1 : previous - 1))
@@ -58,6 +48,14 @@ function App() {
 
   const showNextFormation = () => {
     setCurrentFormation((previous) => (previous === dimensionsData.length - 1 ? 0 : previous + 1))
+  }
+
+  const showPreviousProject = () => {
+    setCurrentProject((previous) => (previous === 0 ? projectsList.length - 1 : previous - 1))
+  }
+
+  const showNextProject = () => {
+    setCurrentProject((previous) => (previous === projectsList.length - 1 ? 0 : previous + 1))
   }
 
   return (
@@ -254,57 +252,107 @@ function App() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {projectsList.map((project) => (
-              <article
+          <div className="mx-auto w-full max-w-4xl rounded-3xl border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 p-6 shadow-[0_12px_45px_rgba(76,29,149,0.22)] backdrop-blur-xl sm:p-8">
+            <AnimatePresence mode="wait">
+              <motion.div
                 key={project.id}
-                className="group overflow-hidden rounded-[28px] border border-purple-500/20 bg-purple-950/20 shadow-[0_0_30px_rgba(168,85,247,0.12)] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]"
+                initial={{ opacity: 0, x: 30, y: 8 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                exit={{ opacity: 0, x: -30, y: -8 }}
+                transition={{ duration: 0.28, ease: 'easeOut' }}
+                className="flex flex-col gap-6"
               >
-                <div className="relative overflow-hidden">
-                  <ProjectPreview projectId={project.id} />
-                  {project.badge ? (
-                    <span className="absolute left-4 top-4 rounded-full border border-purple-500/30 bg-purple-950/50 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
-                      {project.badge}
-                    </span>
-                  ) : null}
-                </div>
-
-                <div className="p-5">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="rounded-full border border-purple-500/20 bg-purple-950/40 px-2.5 py-1 text-[9px] uppercase tracking-[0.14em] text-purple-200">
-                      {project.category}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-4 text-2xl font-semibold text-zinc-100">{project.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-zinc-300/80">{project.shortDescription}</p>
-                  <p className="mt-3 text-sm leading-7 text-zinc-300/80">{project.solution}</p>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.techStack.map((item) => (
-                      <span key={`${project.id}-${item}`} className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] text-purple-100">
-                        {item}
+                <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2">
+                  <div className="relative overflow-hidden rounded-[26px] border border-purple-500/20 bg-[#0b1220] shadow-[0_0_26px_rgba(168,85,247,0.14)]">
+                    <img
+                      src={selectedProjectImage}
+                      alt={project.title}
+                      className="h-64 w-full object-cover sm:h-72 md:h-80"
+                    />
+                    {project.badge ? (
+                      <span className="absolute left-4 top-4 rounded-full border border-purple-500/30 bg-purple-950/70 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
+                        {project.badge}
                       </span>
-                    ))}
+                    ) : null}
                   </div>
 
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    {project.liveUrl ? (
-                      <a href={normalizeLink(project.liveUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-gradient-to-r from-purple-500/20 to-violet-500/10 px-4 py-2 text-sm text-zinc-100 transition hover:border-purple-400/40 hover:text-purple-100">
-                        Live Demo
-                        <ArrowUpRight className="h-4 w-4" />
-                      </a>
-                    ) : null}
-                    {project.repoUrl ? (
-                      <a href={normalizeLink(project.repoUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-zinc-950/60 px-4 py-2 text-sm text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-100">
-                        Repositório
-                        <ArrowUpRight className="h-4 w-4" />
-                      </a>
-                    ) : null}
+                  <div className="flex flex-col justify-between gap-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-purple-200">
+                        {project.category}
+                      </span>
+                      <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{projectCountLabel}</span>
+                    </div>
+
+                    <div>
+                      <h3 className="mb-2 text-2xl font-bold text-zinc-100 sm:text-3xl">{project.title}</h3>
+                      <p className="text-sm leading-7 text-zinc-300/80">{project.problem}</p>
+                    </div>
+
+                    <div>
+                      <p className="mb-3 text-sm leading-7 text-zinc-300/80">{project.solution}</p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {project.techStack.map((item) => (
+                          <span key={`${project.id}-${item}`} className="rounded-md border border-purple-500/30 bg-purple-950/40 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-purple-200">
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3">
+                      {project.liveUrl ? (
+                        <a href={normalizeLink(project.liveUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-gradient-to-r from-purple-500/20 to-violet-500/10 px-4 py-2 text-sm text-zinc-100 transition hover:border-purple-400/40 hover:text-purple-100">
+                          Live Demo
+                          <ArrowUpRight className="h-4 w-4" />
+                        </a>
+                      ) : null}
+                      {project.repoUrl ? (
+                        <a href={normalizeLink(project.repoUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-zinc-950/60 px-4 py-2 text-sm text-zinc-300 transition hover:border-purple-400/40 hover:text-purple-100">
+                          Repositório
+                          <ArrowUpRight className="h-4 w-4" />
+                        </a>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
-              </article>
-            ))}
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="mt-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
+              <div className="flex items-center gap-2">
+                {projectsList.map((item, index) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    aria-label={`Selecionar projeto ${item.title}`}
+                    onClick={() => setCurrentProject(index)}
+                    className={`h-2.5 rounded-full transition-all ${index === currentProject ? 'w-8 bg-purple-300' : 'w-2.5 bg-purple-500/40 hover:bg-purple-300/70'}`}
+                  />
+                ))}
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={showPreviousProject}
+                  className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30"
+                >
+                  <ArrowLeft className="h-3.5 w-3.5" />
+                  Anterior
+                </button>
+
+                <button
+                  type="button"
+                  onClick={showNextProject}
+                  className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30"
+                >
+                  Próximo Projeto
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 
