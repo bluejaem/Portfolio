@@ -268,134 +268,142 @@ function App() {
           </div>
         </section>
 
-        <section id="formacoes" className="relative flex h-screen w-full snap-start snap-always flex-col items-center justify-center px-4 py-8 sm:px-8">
-          <div className="mb-6 w-full max-w-6xl">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Formações acadêmicas</p>
-            <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Formações Acadêmicas Interdisciplinares</h2>
-          </div>
-
-          <div className="mx-auto w-full max-w-6xl rounded-[2rem] border border-purple-500/25 bg-[radial-gradient(circle_at_top_left,_rgba(168,85,247,0.18),_transparent_35%),_rgba(17,24,39,0.78)] p-8 shadow-[0_20px_60px_rgba(76,29,149,0.18)] backdrop-blur-xl sm:p-10">
-            <div className="mb-5 flex items-center justify-between gap-3">
-              <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.24em] text-purple-200 shadow-[0_0_18px_rgba(168,85,247,0.12)]">
-                {formation.pillar}
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{formacaoCountLabel}</span>
+        <section id="formacoes" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
+          <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto">
+            <div className="mb-6 w-full">
+              <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Formações acadêmicas</p>
+              <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Formações Acadêmicas Interdisciplinares</h2>
             </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={formation.id}
-                initial={{ opacity: 0, x: 20, y: 8 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                exit={{ opacity: 0, x: -20, y: -8 }}
-                transition={{ duration: 0.28, ease: 'easeOut' }}
-                className="grid gap-8 xl:grid-cols-[1.05fr_1.95fr]"
-              >
-                <div className="group relative overflow-hidden rounded-[26px] border border-purple-500/20 bg-slate-950/60">
-                  <img
-                    src={imageMap[formation.id] ?? imageMap.dados}
-                    alt={formation.title}
-                    className="h-64 w-full object-cover opacity-90 transition duration-500 group-hover:scale-[1.03] sm:h-72 xl:h-full"
-                    style={{ objectPosition: formation.id === 'dados' ? '50% 6%' : formation.id === 'matematica' ? '50% 28%' : formation.id === 'computacao' ? '50% 12%' : formation.id === 'tecnico' ? '50% 14%' : '50% 8%' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                </div>
-
-                <div className="flex flex-col justify-center gap-5">
-                  <div>
-                    <h3 className="mb-1 text-2xl font-bold text-zinc-100 sm:text-3xl">{formation.title}</h3>
-                    <p className="text-base font-medium text-purple-300">{formation.institution}</p>
-                  </div>
-
-                  <div className="rounded-2xl border border-purple-500/20 bg-zinc-950/40 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-                    <p className="text-[10px] uppercase tracking-[0.18em] text-purple-200">Foco</p>
-                    <p className="mt-2 text-base leading-7 text-zinc-200">{formation.pillar}</p>
-                  </div>
-
-                  <div className="max-h-[500px] overflow-y-auto pr-2">
-                    <p className="max-w-3xl text-sm leading-7 text-zinc-300/80 sm:text-base">{formation.role}</p>
-
-                    {formation.detailGroups?.map((group) => (
-                      <div key={`${formation.id}-${group.title}`} className="mt-5">
-                        <h4 className="text-[10px] font-medium uppercase tracking-[0.18em] text-purple-200">{group.title}</h4>
-                        <ul className="mt-2 space-y-2 pl-4 text-sm leading-7 text-zinc-300/80">
-                          {group.items.map((item) => (
-                            <li key={`${formation.id}-${group.title}-${item}`} className="list-disc marker:text-purple-300/70">
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {formation.highlights.map((item) => (
-                      <span key={`${formation.id}-${item}`} className="rounded-full border border-purple-500/30 bg-purple-900/30 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-purple-200 sm:text-xs">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="mt-6 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2">
-                {dimensionsData.map((item, index) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    aria-label={`Selecionar formação ${item.title}`}
-                    onClick={() => setCurrentFormation(index)}
-                    className={`h-2.5 rounded-full transition-all ${index === currentFormation ? 'w-8 bg-purple-300' : 'w-2.5 bg-purple-500/40 hover:bg-purple-300/70'}`}
-                  />
-                ))}
+            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-6 lg:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
+              <div className="mb-5 flex items-center justify-between gap-3">
+                <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.24em] text-purple-200 shadow-[0_0_18px_rgba(168,85,247,0.12)]">
+                  {formation.pillar}
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{formacaoCountLabel}</span>
               </div>
 
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={showPreviousFormation}
-                  disabled={isFirstFormation}
-                  className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30 disabled:cursor-not-allowed disabled:opacity-40"
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={formation.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start"
                 >
-                  <ArrowLeft className="h-3.5 w-3.5" />
-                  Anterior
-                </button>
+                  <div className="lg:col-span-4 flex flex-col gap-4">
+                    <div className="group relative overflow-hidden rounded-[24px] border border-purple-500/20 bg-slate-950/60 shadow-md">
+                      <img
+                        src={imageMap[formation.id] ?? imageMap.dados}
+                        alt={formation.title}
+                        className="w-full aspect-[4/3] rounded-2xl object-cover border border-purple-500/20"
+                        style={{ objectPosition: formation.id === 'dados' ? '50% 6%' : formation.id === 'matematica' ? '50% 28%' : formation.id === 'computacao' ? '50% 12%' : formation.id === 'tecnico' ? '50% 14%' : '50% 8%' }}
+                      />
+                    </div>
 
-                <button
-                  type="button"
-                  onClick={showNextFormation}
-                  disabled={isLastFormation}
-                  className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30 disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  Próxima Formação
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </button>
+                    <div className="rounded-2xl border border-purple-500/20 bg-zinc-950/40 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                      <p className="text-[10px] uppercase tracking-[0.18em] text-purple-200">Foco</p>
+                      <p className="mt-2 text-sm leading-6 text-zinc-200">{formation.pillar}</p>
+                    </div>
+
+                    <div className="rounded-2xl border border-purple-500/20 bg-zinc-950/40 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                      <p className="text-[10px] uppercase tracking-[0.18em] text-purple-200">Grau</p>
+                      <p className="mt-2 text-sm leading-6 text-zinc-200">{formation.institution}</p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 mt-1">
+                      {formation.highlights.map((item) => (
+                        <span key={`${formation.id}-${item}`} className="rounded-full border border-purple-500/25 bg-purple-900/25 px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] text-purple-200">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-8 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-purple-200">
+                          {formation.pillar}
+                        </span>
+                        <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{formacaoCountLabel}</span>
+                      </div>
+
+                      <h3 className="mt-2 text-2xl sm:text-3xl font-bold text-zinc-100">{formation.title}</h3>
+                      <p className="text-sm sm:text-base font-semibold text-purple-300 mb-2">{formation.institution}</p>
+                      <p className="text-sm leading-7 text-zinc-300/80">{formation.role}</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-3">
+                      {formation.detailGroups?.map((group) => (
+                        <div key={`${formation.id}-${group.title}`} className="p-3 rounded-xl bg-purple-900/20 border border-purple-500/20">
+                          <h5 className="text-[10px] font-bold uppercase tracking-wider text-purple-200 mb-1">{group.title}</h5>
+                          <p className="text-xs text-zinc-300/90 leading-relaxed">{group.items.join(' ')}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="pt-4 border-t border-purple-500/20 flex items-center justify-between mt-4">
+                <div className="flex items-center gap-2">
+                  {dimensionsData.map((item, index) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      aria-label={`Selecionar formação ${item.title}`}
+                      onClick={() => setCurrentFormation(index)}
+                      className={`h-2.5 rounded-full transition-all ${index === currentFormation ? 'w-8 bg-purple-300' : 'w-2.5 bg-purple-500/40 hover:bg-purple-300/70'}`}
+                    />
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={showPreviousFormation}
+                    disabled={isFirstFormation}
+                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    <ArrowLeft className="h-3.5 w-3.5" />
+                    Anterior
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={showNextFormation}
+                    disabled={isLastFormation}
+                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    Próxima Formação
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="projetos" className="relative flex h-screen w-full snap-start snap-always flex-col items-center justify-center pt-16 pb-8 sm:pt-20 px-4 sm:px-8">
-          <div className="mb-6 w-full max-w-6xl">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Projetos</p>
-            <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Soluções orientadas à clareza de dados e uso real.</h2>
-          </div>
+        <section id="projetos" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
+          <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto">
+            <div className="mb-6 w-full">
+              <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Projetos</p>
+              <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Soluções orientadas à clareza de dados e uso real.</h2>
+            </div>
 
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="w-full bg-purple-950/20 backdrop-blur-xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-6 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.22)] flex flex-col justify-between max-h-[82vh]">
+            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-6 lg:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, x: 30, y: 8 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  exit={{ opacity: 0, x: -30, y: -8 }}
-                  transition={{ duration: 0.28, ease: 'easeOut' }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start flex-1 overflow-hidden"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start"
                 >
-                  <div className="lg:col-span-5 flex flex-col gap-3.5">
+                  <div className="lg:col-span-5 flex flex-col justify-between gap-4">
                     <div className="group relative overflow-hidden rounded-[22px] border border-purple-500/20 bg-[#0b1220] shadow-md">
                       <img
                         src={selectedProjectImage}
@@ -411,7 +419,7 @@ function App() {
 
                     <div className="flex flex-wrap gap-1.5">
                       {project.techStack.map((item) => (
-                        <span key={`${project.id}-${item}`} className="rounded-md border border-purple-500/30 bg-purple-950/40 px-2 py-1 text-[9px] uppercase tracking-[0.12em] text-purple-200">
+                        <span key={`${project.id}-${item}`} className="rounded-md border border-purple-500/30 bg-purple-950/40 px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] text-purple-200">
                           {item}
                         </span>
                       ))}
@@ -431,26 +439,24 @@ function App() {
                     </div>
                   </div>
 
-                  <div className="lg:col-span-7 flex flex-col h-full justify-between">
-                    <div className="space-y-3.5">
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-purple-200">
-                          {project.category}
-                        </span>
-                        <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{projectCountLabel}</span>
-                      </div>
-
-                      <div>
-                        <h3 className="mb-1 text-2xl font-bold text-zinc-100 lg:text-3xl">{project.title}</h3>
-                        <p className="text-sm leading-7 text-zinc-300/80">{project.problemSolved}</p>
-                      </div>
+                  <div className="lg:col-span-7 flex flex-col justify-between h-full">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-purple-200">
+                        {project.category}
+                      </span>
+                      <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{projectCountLabel}</span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 my-auto overflow-y-auto max-h-[280px] pr-1">
+                    <div className="mt-3">
+                      <h3 className="mb-1 text-2xl sm:text-3xl font-bold text-zinc-100">{project.title}</h3>
+                      <p className="text-sm leading-7 text-zinc-300/80">{`${project.overview} ${project.problemSolved}`}</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 my-3">
                       {project.architectureHighlights.map((highlight) => (
-                        <div key={`${project.id}-${highlight.title}`} className="p-2.5 rounded-xl bg-purple-950/30 border border-purple-500/20">
-                          <h4 className="text-xs font-bold text-purple-300 mb-0.5">{highlight.title}</h4>
-                          <p className="text-[11px] text-zinc-300/90 leading-relaxed">{highlight.detail}</p>
+                        <div key={`${project.id}-${highlight.title}`} className="p-3 rounded-xl bg-purple-900/20 border border-purple-500/20">
+                          <h5 className="text-xs font-bold text-purple-300 mb-0.5">{highlight.title}</h5>
+                          <p className="text-[11.5px] text-zinc-300/90 leading-relaxed">{highlight.detail}</p>
                         </div>
                       ))}
                     </div>
@@ -458,7 +464,7 @@ function App() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between mt-auto">
+              <div className="pt-4 border-t border-purple-500/20 flex items-center justify-between mt-4">
                 <div className="flex items-center gap-2">
                   {projectsList.map((item, index) => (
                     <button
@@ -495,13 +501,14 @@ function App() {
           </div>
         </section>
 
-        <section id="aprendizado" className="relative flex h-screen w-full snap-start snap-always flex-col items-center justify-center px-4 py-8 sm:px-8">
-          <div className="mb-6 w-full max-w-6xl">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Certificações e conquistas</p>
-            <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Aprendizado Contínuo em Análise de Tecnologia e Aplicação Prática</h2>
-          </div>
+        <section id="aprendizado" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
+          <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto">
+            <div className="mb-6 w-full">
+              <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Certificações e conquistas</p>
+              <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Aprendizado Contínuo em Análise de Tecnologia e Aplicação Prática</h2>
+            </div>
 
-          <div className="mx-auto flex w-full max-w-6xl min-h-[520px] flex-col justify-between rounded-[2rem] border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 p-6 shadow-[0_12px_45px_rgba(76,29,149,0.22)] backdrop-blur-xl sm:p-8">
+            <div className="mx-auto flex w-full min-h-[520px] flex-col justify-between rounded-[2rem] border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 p-6 shadow-[0_12px_45px_rgba(76,29,149,0.22)] backdrop-blur-xl sm:p-8">
             <div className="mb-5 flex items-center justify-between gap-3">
               <span className="rounded-full border border-purple-500/25 bg-purple-900/30 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.22em] text-purple-200 shadow-[0_0_18px_rgba(168,85,247,0.12)]">
                 {currentCertStage.name}
@@ -514,10 +521,10 @@ function App() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentCertStage.title}
-                initial={{ opacity: 0, x: 24, y: 10 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                exit={{ opacity: 0, x: -24, y: -10 }}
-                transition={{ duration: 0.28, ease: 'easeOut' }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="flex-1"
               >
                 <div className="mb-6 flex items-center justify-between gap-3">
@@ -635,10 +642,11 @@ function App() {
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="contato" className="relative z-10 min-h-screen w-full snap-start flex flex-col items-center justify-center px-4 py-16 sm:px-8">
-          <div className="w-full max-w-5xl rounded-[2rem] border border-purple-500/20 bg-[radial-gradient(circle_at_top_left,_rgba(168,85,247,0.18),_transparent_35%),_rgba(17,24,39,0.8)] p-6 shadow-[0_20px_60px_rgba(76,29,149,0.18)] backdrop-blur-xl md:p-8">
+        <section id="contato" className="relative z-20 min-h-screen w-full flex flex-col justify-center items-center py-20 px-4 sm:px-6 lg:px-8 snap-start">
+          <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto rounded-[2rem] border border-purple-500/20 bg-[radial-gradient(circle_at_top_left,_rgba(168,85,247,0.18),_transparent_35%),_rgba(17,24,39,0.8)] p-6 shadow-[0_20px_60px_rgba(76,29,149,0.18)] backdrop-blur-xl md:p-8">
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Contato</p>
