@@ -76,7 +76,7 @@ export function ProjectsSection() {
               <div className="mt-6">
                 <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Funcionalidades</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {project.features.map((feature) => (
+                  {(project.features ?? []).map((feature) => (
                     <Badge key={`${project.id}-${feature}`} className="border-zinc-700 bg-zinc-950 text-zinc-200">
                       {feature}
                     </Badge>

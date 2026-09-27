@@ -1,10 +1,14 @@
 export interface ProfileData {
   name: string
+  photoUrl: string
   role: string
   headline: string
   bio: string
   location: string
   availability: string
+  github: string
+  email: string
+  linkedin: string
   direction?: string[]
 }
 
@@ -35,18 +39,20 @@ export interface EducationItem {
 export interface ProjectItem {
   id: string
   title: string
-  badge: string
+  category: string
+  badge?: string
   shortDescription: string
-  problem: string
+  problem?: string
+  role?: string
   solution: string
   techStack: string[]
-  architecture: string[]
-  features: string[]
+  architecture?: string[]
+  architectureDecisions?: string[]
+  features?: string[]
+  learnings?: string[]
   liveUrl: string | null
   repoUrl: string | null
-  role?: string
-  architectureDecisions?: string[]
-  learnings?: string[]
+  imageUrl: string
 }
 
 export interface CertificationItem {
