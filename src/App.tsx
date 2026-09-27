@@ -18,13 +18,13 @@ function normalizeLink(value: string | null) {
 
 function ProjectPreview({ projectId }: { projectId: string }) {
   const projectMap: Record<string, string> = {
-    'meu-life-os': '/projects/meu-life-os.svg',
-    'life-os': '/projects/meu-life-os.svg',
-    'govlocal-app': '/projects/govlocal-app.svg',
-    'govlocal': '/projects/govlocal-app.svg',
-    'consulta-salarios': '/projects/consulta-salarios.svg',
-    'salarios-tech': '/projects/consulta-salarios.svg',
-    'calculadora-imc': '/projects/calculadora-imc.svg',
+    'meu-life-os': '/projects/meu-life-os.png',
+    'life-os': '/projects/meu-life-os.png',
+    'govlocal-app': '/projects/govlocal-app.png',
+    'govlocal': '/projects/govlocal-app.png',
+    'consulta-salarios': '/projects/consulta-salarios.png',
+    'salarios-tech': '/projects/consulta-salarios.png',
+    'calculadora-imc': '/projects/calculadora-imc.png',
   }
 
   const src = projectMap[projectId] ?? '/projects/meu-life-os.svg'
