@@ -151,10 +151,10 @@ function App() {
               }[dimension.id] ?? { emoji: '✨', glow: 'from-violet-500/30 via-purple-500/20 to-slate-900/80' }
 
               const imagePosition: Record<string, string> = {
-                dados: '50% 8%',
-                matematica: '50% 50%',
-                computacao: '50% 24%',
-                'gestao-ia': '50% 15%',
+                dados: '50% 2%',
+                matematica: '50% 25%',
+                computacao: '50% 12%',
+                'gestao-ia': '50% 8%',
               }
 
               return (
