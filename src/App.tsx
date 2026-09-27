@@ -17,211 +17,23 @@ function normalizeLink(value: string | null) {
 }
 
 function ProjectPreview({ projectId }: { projectId: string }) {
-  switch (projectId) {
-    case 'life-os':
-    case 'meu-life-os':
-      return (
-        <div className="relative h-56 overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[#050d1a] p-4 text-zinc-100">
-          <div className="mb-3 flex items-center justify-between">
-            <div className="text-sm font-semibold tracking-tight text-zinc-100">Meu LIFE OS</div>
-            <div className="rounded-full border border-zinc-700 bg-zinc-900/60 px-2 py-1 text-[9px] uppercase tracking-[0.18em] text-zinc-300">João</div>
-          </div>
-
-          <div className="mb-3 flex items-center justify-between text-[9px] uppercase tracking-[0.16em] text-zinc-400">
-            <span>Domingo, 27 de Setembro</span>
-            <span>00:14:15</span>
-          </div>
-
-          <div className="grid grid-cols-4 gap-2">
-            <div className="rounded-xl border border-zinc-700/80 bg-zinc-800/50 p-2">
-              <div className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">Tarefas</div>
-              <div className="mt-1 text-xl font-semibold text-zinc-100">0</div>
-            </div>
-            <div className="rounded-xl border border-zinc-700/80 bg-zinc-800/50 p-2">
-              <div className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">Projetos</div>
-              <div className="mt-1 text-xl font-semibold text-zinc-100">1 / 2</div>
-            </div>
-            <div className="rounded-xl border border-zinc-700/80 bg-zinc-800/50 p-2">
-              <div className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">Estudo</div>
-              <div className="mt-1 text-xl font-semibold text-zinc-100">4h</div>
-            </div>
-            <div className="rounded-xl border border-zinc-700/80 bg-zinc-800/50 p-2">
-              <div className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">Sequência</div>
-              <div className="mt-1 text-xl font-semibold text-zinc-100">1</div>
-            </div>
-          </div>
-
-          <div className="mt-3 rounded-xl border border-zinc-700/80 bg-zinc-800/50 p-3">
-            <div className="mb-2 text-[9px] uppercase tracking-[0.16em] text-zinc-400">Produtividade semanal</div>
-            <div className="relative h-16">
-              <div className="absolute inset-x-0 bottom-0 top-0">
-                <svg viewBox="0 0 300 120" className="h-full w-full" preserveAspectRatio="none">
-                  <path
-                    d="M0,100 C40,88 50,78 88,62 C120,60 138,68 170,48 C205,30 230,42 270,36 C290,32 300,20 300,20 L300,120 L0,120 Z"
-                    fill="rgba(16,185,129,0.18)"
-                  />
-                  <path
-                    d="M0,100 C50,70 70,60 110,58 C150,54 170,65 210,50 C250,34 280,40 300,34"
-                    fill="none"
-                    stroke="#34d399"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M0,98 C50,85 75,83 120,74 C160,74 175,70 200,72 C225,75 260,68 300,60"
-                    fill="none"
-                    stroke="#60a5fa"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    opacity="0.9"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-
-    case 'govlocal':
-      return (
-        <div className="relative flex h-56 items-center justify-center overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.24),_rgba(17,24,39,0)_45%)] p-4">
-          <div className="w-40 rounded-[30px] border border-purple-500/20 bg-zinc-950/80 p-3 shadow-[0_0_30px_rgba(168,85,247,0.12)]">
-            <div className="mb-3 flex items-center justify-center">
-              <div className="h-1.5 w-16 rounded-full bg-zinc-700" />
-            </div>
-
-            <div className="space-y-2">
-              <div className="rounded-xl border border-purple-500/20 bg-purple-500/10 p-2 text-center">
-                <div className="text-[9px] uppercase tracking-[0.18em] text-purple-200">Urgência</div>
-                <div className="mt-1 text-sm font-semibold text-zinc-100">SAMU</div>
-              </div>
-              <div className="rounded-xl border border-purple-500/20 bg-zinc-900/70 p-2">
-                <div className="text-[9px] uppercase tracking-[0.16em] text-zinc-400">Serviços</div>
-                <div className="mt-2 space-y-1.5">
-                  <div className="h-2 rounded-full bg-zinc-700" />
-                  <div className="h-2 w-4/5 rounded-full bg-zinc-700" />
-                  <div className="h-2 w-2/3 rounded-full bg-zinc-700" />
-                </div>
-              </div>
-              <button className="w-full rounded-xl bg-gradient-to-r from-violet-500 to-purple-500 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.16em] text-white">
-                Emergência
-              </button>
-            </div>
-          </div>
-        </div>
-      )
-
-    case 'salarios-tech':
-    case 'consulta-salarios':
-      return (
-        <div className="relative h-56 overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[#020b1a] p-4 text-zinc-100">
-          <div className="mb-4 text-center">
-            <h3 className="text-lg font-semibold tracking-tight text-blue-400">Salários Tech Brasil</h3>
-            <p className="text-[10px] text-zinc-400">Descubra a média salarial e as vantagens da sua stack.</p>
-          </div>
-
-          <div className="rounded-xl border border-zinc-700/70 bg-zinc-800/40 p-3">
-            <div className="grid grid-cols-[1fr_1fr_auto] gap-2">
-              <div className="rounded-lg border border-zinc-700 bg-zinc-900/60 px-2 py-2 text-[10px] text-zinc-300">
-                <div className="mb-1 text-[9px] uppercase tracking-[0.16em] text-zinc-500">1. Escolha a Linguagem</div>
-                <div className="flex items-center justify-between">
-                  <span>JavaScript</span>
-                  <span className="text-zinc-500">▼</span>
-                </div>
-              </div>
-
-              <div className="rounded-lg border border-zinc-700 bg-zinc-900/60 px-2 py-2 text-[10px] text-zinc-300">
-                <div className="mb-1 text-[9px] uppercase tracking-[0.16em] text-zinc-500">2. Escolha a Região</div>
-                <div className="flex items-center justify-between">
-                  <span>Centro-Oeste</span>
-                  <span className="text-zinc-500">▼</span>
-                </div>
-              </div>
-
-              <button className="rounded-lg bg-blue-500 px-3 text-[10px] font-semibold text-white shadow-[0_0_22px_rgba(59,130,246,0.4)]">
-                Consultar Salários
-              </button>
-            </div>
-          </div>
-
-          <div className="mt-4 grid grid-cols-2 gap-3">
-            <div className="rounded-xl border border-zinc-700/80 bg-zinc-800/60 p-3">
-              <div className="mb-2 flex items-center gap-2 text-yellow-300">
-                <span className="text-sm">⚡</span>
-                <span className="text-sm font-semibold text-zinc-100">Vantagens</span>
-              </div>
-              <p className="text-[10px] leading-5 text-zinc-300">
-                Linguagem essencial da Web, roda no navegador e no servidor (Node.js), economista gigante.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-zinc-700/80 bg-zinc-800/60 p-3">
-              <div className="mb-2 flex items-center gap-2 text-blue-300">
-                <span className="text-sm">💰</span>
-                <span className="text-sm font-semibold text-zinc-100">Estimativa Salarial</span>
-              </div>
-              <div className="space-y-2 text-[10px] text-zinc-300">
-                <div className="border-b border-zinc-700 pb-1">Linguagem: JavaScript</div>
-                <div className="border-b border-zinc-700 pb-1">Região: Centro-Oeste</div>
-                <div>Júnior: R$ 3.500 — R$ 4.500</div>
-                <div>Pleno: R$ 7.000 — R$ 9.000</div>
-                <div>Sênior: R$ 11.000 — R$ 15.000</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-
-    case 'calculadora-imc':
-      return (
-        <div className="relative h-56 overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center">
-          <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]" />
-
-          <div className="absolute inset-x-0 top-1/2 mx-auto w-[82%] -translate-y-1/2 rounded-2xl border border-white/30 bg-white/20 p-4 shadow-[0_0_25px_rgba(0,0,0,0.15)] backdrop-blur-md">
-            <div className="text-center text-2xl font-semibold tracking-tight text-zinc-800">Calculadora de IMC</div>
-
-            <div className="mt-4 space-y-3 text-[11px] text-zinc-700">
-              <label className="block">
-                <span className="mb-1 block font-medium">Peso (kg):</span>
-                <input
-                  value="45"
-                  readOnly
-                  className="w-full rounded-md border border-zinc-300/70 bg-white/80 px-3 py-2 text-sm text-zinc-800 outline-none"
-                />
-              </label>
-
-              <label className="block">
-                <span className="mb-1 block font-medium">Altura (m):</span>
-                <input
-                  value="1.61"
-                  readOnly
-                  className="w-full rounded-md border border-zinc-300/70 bg-white/80 px-3 py-2 text-sm text-zinc-800 outline-none"
-                />
-              </label>
-
-              <button className="w-full rounded-md bg-gradient-to-r from-emerald-400 to-emerald-500 px-3 py-2 text-sm font-semibold text-white shadow-[0_8px_22px_rgba(16,185,129,0.3)]">
-                Calcular IMC
-              </button>
-            </div>
-
-            <div className="mt-4 rounded-xl bg-white/80 p-2 text-center text-zinc-800 shadow-inner">
-              <div className="text-[11px] font-semibold">Seu Resultado:</div>
-              <div className="mt-1 text-xl font-bold text-zinc-900">IMC: 17.36</div>
-              <div className="text-[10px] text-zinc-600">Classificação: Abaixo do peso</div>
-            </div>
-          </div>
-        </div>
-      )
-
-    default:
-      return (
-        <div className="flex h-56 items-center justify-center rounded-t-[28px] border-b border-purple-500/20 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.25),_rgba(17,24,39,0)_45%)] p-4 text-zinc-200">
-          <div className="rounded-2xl border border-purple-500/20 bg-zinc-900/70 px-4 py-3 text-sm uppercase tracking-[0.2em] text-purple-200">
-            Preview
-          </div>
-        </div>
-      )
+  const projectMap: Record<string, string> = {
+    'meu-life-os': '/projects/meu-life-os.svg',
+    'life-os': '/projects/meu-life-os.svg',
+    'govlocal-app': '/projects/govlocal-app.svg',
+    'govlocal': '/projects/govlocal-app.svg',
+    'consulta-salarios': '/projects/consulta-salarios.svg',
+    'salarios-tech': '/projects/consulta-salarios.svg',
+    'calculadora-imc': '/projects/calculadora-imc.svg',
   }
+
+  const src = projectMap[projectId] ?? '/projects/meu-life-os.svg'
+
+  return (
+    <div className="relative h-56 overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[#0b1220]">
+      <img src={src} alt={projectId} className="h-full w-full object-cover" />
+    </div>
+  )
 }
 
 function App() {
