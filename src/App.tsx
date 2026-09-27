@@ -130,7 +130,10 @@ function App() {
         <section id="dimensoes" className="py-8 md:py-12">
           <div className="mb-6 max-w-2xl">
             <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Formações acadêmicas</p>
-            <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Formações Acadêmicas Interdisciplinares</h2>
+            <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">
+              <span>Formações Acadêmicas</span>
+              <span className="ml-2">Interdisciplinares</span>
+            </h2>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
