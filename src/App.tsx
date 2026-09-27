@@ -123,23 +123,23 @@ function App() {
 
       case 'dimensoes':
         return (
-          <div className="space-y-6">
-            <div className="max-w-3xl">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-400">As 4 dimensões</p>
-              <h2 className="mt-3 text-3xl font-semibold text-zinc-50 md:text-4xl">Base sólida para atuação em tecnologia e dados.</h2>
+          <div className="space-y-3 sm:space-y-4">
+            <div className="mb-4 max-w-3xl">
+              <p className="text-[10px] uppercase tracking-[0.26em] text-zinc-400 sm:text-[11px]">As 4 dimensões</p>
+              <h2 className="mt-2 text-2xl font-semibold text-zinc-50 sm:text-3xl">Base sólida para atuação em tecnologia e dados.</h2>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
               {dimensionsData.map((dimension) => (
-                <div key={dimension.id} className="rounded-[28px] border border-zinc-800 bg-zinc-900/60 p-5">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-400">{dimension.pillar}</p>
-                  <h3 className="mt-3 text-xl font-medium text-zinc-100">{dimension.title}</h3>
-                  <p className="mt-2 text-sm text-zinc-300">{dimension.course}</p>
-                  <p className="mt-4 text-sm leading-7 text-zinc-400">{dimension.role}</p>
+                <div key={dimension.id} className="rounded-[22px] border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5">
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-zinc-400 sm:text-[10px]">{dimension.pillar}</p>
+                  <h3 className="mt-2 text-lg font-medium text-zinc-100 sm:text-xl">{dimension.title}</h3>
+                  <p className="mt-1.5 text-xs text-zinc-300 sm:text-sm">{dimension.course}</p>
+                  <p className="mt-3 text-xs leading-6 text-zinc-400 sm:text-sm sm:leading-7">{dimension.role}</p>
 
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="mt-3 flex flex-wrap gap-1.5 sm:gap-2">
                     {dimension.highlights.map((item) => (
-                      <span key={`${dimension.id}-${item}`} className="rounded-full border border-zinc-700 bg-zinc-950 px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-zinc-300">
+                      <span key={`${dimension.id}-${item}`} className="rounded-full border border-zinc-700 bg-zinc-950 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-zinc-300 sm:text-[10px]">
                         {item}
                       </span>
                     ))}
@@ -152,29 +152,29 @@ function App() {
 
       case 'formacao':
         return (
-          <div className="space-y-6">
-            <div className="max-w-3xl">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-400">Formação integrada</p>
-              <h2 className="mt-3 text-3xl font-semibold text-zinc-50 md:text-4xl">Interseção entre formação acadêmica e base técnica aplicada.</h2>
+          <div className="space-y-3 sm:space-y-4">
+            <div className="mb-4 max-w-3xl">
+              <p className="text-[10px] uppercase tracking-[0.26em] text-zinc-400 sm:text-[11px]">Formação integrada</p>
+              <h2 className="mt-2 text-2xl font-semibold text-zinc-50 sm:text-3xl">Interseção entre formação acadêmica e base técnica aplicada.</h2>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
               {educationList.map((item) => (
-                <div key={item.id} className="rounded-[28px] border border-zinc-800 bg-zinc-900/60 p-5">
+                <div key={item.id} className="rounded-[22px] border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-400">{item.level}</p>
-                    <span className="rounded-full border border-zinc-700 bg-zinc-950 px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] text-zinc-300">
+                    <p className="text-[9px] uppercase tracking-[0.18em] text-zinc-400 sm:text-[10px]">{item.level}</p>
+                    <span className="rounded-full border border-zinc-700 bg-zinc-950 px-2 py-1 text-[8px] uppercase tracking-[0.16em] text-zinc-300 sm:text-[9px]">
                       {item.status}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-lg font-medium text-zinc-100">{item.degree}</h3>
-                  <p className="mt-2 text-sm text-zinc-300">{item.institution}</p>
-                  <p className="mt-2 text-sm text-zinc-400">Previsão: {item.expectedGraduation}</p>
+                  <h3 className="mt-3 text-base font-medium text-zinc-100 sm:text-lg">{item.degree}</h3>
+                  <p className="mt-1.5 text-xs text-zinc-300 sm:text-sm">{item.institution}</p>
+                  <p className="mt-1.5 text-xs text-zinc-400 sm:text-sm">Previsão: {item.expectedGraduation}</p>
 
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="mt-3 flex flex-wrap gap-1.5 sm:gap-2">
                     {(item.topics ?? []).map((topic) => (
-                      <span key={`${item.id}-${topic}`} className="rounded-full border border-zinc-700 bg-zinc-950 px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] text-zinc-300">
+                      <span key={`${item.id}-${topic}`} className="rounded-full border border-zinc-700 bg-zinc-950 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-zinc-300 sm:text-[9px]">
                         {topic}
                       </span>
                     ))}
@@ -345,9 +345,9 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-between overflow-x-hidden bg-zinc-950 text-zinc-100">
-      <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+    <div className="relative min-h-screen overflow-hidden bg-zinc-950 text-zinc-100">
+      <header className="sticky top-0 z-50 h-16 border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-xl">
+        <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
           <div className="flex items-center gap-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-100">
               JM
@@ -380,8 +380,8 @@ function App() {
         </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-5xl flex-1 items-center justify-center px-6 py-6">
-        <div className="w-full">
+      <main className="pt-20 pb-20 min-h-screen flex items-center justify-center overflow-y-auto">
+        <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={slideMeta[activeSlide].id}
@@ -389,7 +389,7 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.28, ease: 'easeInOut' }}
-              className="w-full rounded-[32px] border border-zinc-800 bg-zinc-950/60 p-5 md:p-8"
+              className="w-full rounded-[28px] border border-zinc-800 bg-zinc-950/60 p-4 sm:p-5 md:p-7"
             >
               {renderSlide()}
             </motion.div>
@@ -397,9 +397,9 @@ function App() {
         </div>
       </main>
 
-      <footer className="mx-auto w-full max-w-5xl px-6 pb-6">
-        <div className="flex items-center justify-between gap-4 rounded-full border border-zinc-800 bg-zinc-950/80 px-4 py-3">
-          <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-400">
+      <footer className="fixed bottom-0 left-0 right-0 z-50 h-16 border-t border-zinc-800 bg-zinc-950/85 backdrop-blur-md">
+        <div className="mx-auto flex h-full max-w-5xl items-center justify-between gap-3 px-4 sm:px-6">
+          <div className="min-w-0 flex-1 truncate text-[9px] uppercase tracking-[0.18em] text-zinc-400 sm:text-[10px]">
             Etapa {activeSlide + 1} de {slideMeta.length} — {slideMeta[activeSlide].label}
           </div>
 
@@ -408,7 +408,7 @@ function App() {
               type="button"
               onClick={() => goToSlide(activeSlide - 1)}
               disabled={activeSlide === 0}
-              className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-200 disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-3 py-2 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-500 hover:text-zinc-100 disabled:cursor-not-allowed disabled:border-zinc-800 disabled:bg-zinc-950 disabled:text-zinc-600 disabled:opacity-60 sm:text-sm"
             >
               <ArrowLeft className="h-4 w-4" />
               Anterior
@@ -418,7 +418,7 @@ function App() {
               type="button"
               onClick={() => goToSlide(activeSlide + 1)}
               disabled={activeSlide === slideMeta.length - 1}
-              className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-100 px-3 py-2 text-xs font-medium text-zinc-950 transition-colors hover:bg-zinc-200 disabled:cursor-not-allowed disabled:border-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-600 disabled:opacity-60 sm:text-sm"
             >
               Próximo
               <ArrowRight className="h-4 w-4" />
