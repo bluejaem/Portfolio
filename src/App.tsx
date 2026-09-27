@@ -738,8 +738,11 @@ function App() {
         {/* ================================================================= */}
         {/* SEÇÃO 5: CONTATO (ROXO VÍVIDO PADRONIZADO)                        */}
         {/* ================================================================= */}
-        <section id="contato" className="relative z-20 h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
-          <div className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto rounded-3xl border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 backdrop-blur-2xl p-6 md:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)]">
+        {/* ================================================================= */}
+        {/* SEÇÃO 5: CONTATO COM SELO DE COPYRIGHT INTEGRADO                 */}
+        {/* ================================================================= */}
+        <section id="contato" className="relative z-20 h-screen w-full snap-center scroll-mt-16 flex flex-col justify-between items-center py-8 px-2 sm:px-4 lg:px-6 overflow-hidden">
+          <div className="my-auto w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto rounded-3xl border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 backdrop-blur-2xl p-6 md:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)]">
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-1">Contato</p>
@@ -788,6 +791,13 @@ function App() {
               </div>
             </div>
           </div>
+
+          {/* Selo de Copyright Discreto e Elegante na Base */}
+          <footer className="w-full text-center py-2">
+            <p className="text-xs text-zinc-400 font-medium tracking-wide">
+              © {new Date().getFullYear()} <span className="text-purple-300 font-semibold">João Guilherme Machado de Melo</span>. Todos os direitos reservados.
+            </p>
+          </footer>
         </section>
       </main>
     </div>
