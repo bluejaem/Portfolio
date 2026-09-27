@@ -162,7 +162,7 @@ export const highlightCertificates: HighlightCertificate[] = [
     year: '2025',
     hours: '70h',
     badge: 'Fundação Computacional Rigorosa',
-    description: 'Imersão em algoritmos, complexidade assintótica, alocação de memória em C, estruturas de dados fundamentais e introdução à engenharia de software.',
+    description: 'Imersão em algoritmos, complexidade assintótica, alocação dinâmica de memória em C, estruturas de dados e desenvolvimento de software.',
   },
   {
     id: 'onhb-unicamp',
@@ -176,7 +176,7 @@ export const highlightCertificates: HighlightCertificate[] = [
   {
     id: 'english-ubest',
     title: 'Língua Inglesa NEW UBEST - Intermediate (Nível 2)',
-    issuer: 'UNINTER (Extensão Universitária)',
+    issuer: 'UNINTER',
     year: '2026',
     hours: '42h',
     badge: 'Proficiência em Idiomas',
@@ -189,7 +189,7 @@ export const highlightCertificates: HighlightCertificate[] = [
     year: '2025',
     hours: '112h',
     badge: 'Comunicação & Resolução Técnica',
-    description: 'Capacitação prática em comunicação assertiva, resolução rápida de incidentes, relacionamento interpessoal e operação sob metas de atendimento.',
+    description: 'Capacitação prática em comunicação assertiva, resolução ágil de incidentes, relacionamento interpessoal e operação sob métricas de atendimento.',
   },
 ]
 
@@ -197,7 +197,7 @@ export const allGeneralCertificates: GeneralCertificate[] = [
   {
     id: 'cert-dados-bi',
     title: 'Análise de Dados e Inteligência de Negócios',
-    issuer: 'Faculdade Unyleya / Cursos Livres',
+    issuer: 'Gran Faculdade',
     year: '2026',
     hours: '30h',
     category: 'Dados & IA',
@@ -205,7 +205,7 @@ export const allGeneralCertificates: GeneralCertificate[] = [
   {
     id: 'cert-prompt-eng',
     title: 'Engenharia de Prompt',
-    issuer: 'Faculdade Unyleya / Cursos Livres',
+    issuer: 'Gran Faculdade',
     year: '2026',
     hours: '30h',
     category: 'Dados & IA',
@@ -213,7 +213,7 @@ export const allGeneralCertificates: GeneralCertificate[] = [
   {
     id: 'cert-ia-pratica',
     title: 'Inteligência Artificial na Prática: Domine as Ferramentas e Saia na Frente',
-    issuer: 'Faculdade Unyleya / Cursos Livres',
+    issuer: 'Gran Faculdade',
     year: '2026',
     hours: '30h',
     category: 'Dados & IA',
@@ -221,7 +221,7 @@ export const allGeneralCertificates: GeneralCertificate[] = [
   {
     id: 'cert-transformers-llm',
     title: 'Transformers em Ação - A Nova Era dos Agentes Conversacionais com LLMs',
-    issuer: 'UNINTER (Extensão Universitária)',
+    issuer: 'UNINTER',
     year: '2026',
     hours: '1h',
     category: 'Dados & IA',
@@ -229,7 +229,7 @@ export const allGeneralCertificates: GeneralCertificate[] = [
   {
     id: 'cert-ia-gestao',
     title: 'Fundamentos de IA para Gestão, Liderança e Estratégia',
-    issuer: 'Faculdade Unyleya / Cursos Livres',
+    issuer: 'Gran Faculdade',
     year: '2026',
     hours: '1h',
     category: 'Dados & IA',
@@ -253,7 +253,7 @@ export const allGeneralCertificates: GeneralCertificate[] = [
   {
     id: 'cert-circuitos-eletricos',
     title: 'O Funcionamento dos Circuitos Elétricos - Entendendo a Eletricidade',
-    issuer: 'UNINTER (Extensão Universitária)',
+    issuer: 'UNINTER',
     year: '2026',
     hours: '1h',
     category: 'Computação, Redes & Hardware',
@@ -277,7 +277,7 @@ export const allGeneralCertificates: GeneralCertificate[] = [
   {
     id: 'cert-semana-linguas',
     title: 'II Semana de Línguas UNINTER',
-    issuer: 'UNINTER (Extensão Universitária)',
+    issuer: 'UNINTER',
     year: '2026',
     hours: '10h',
     category: 'Idiomas & Comunicação',
@@ -291,7 +291,6 @@ export const allGeneralCertificates: GeneralCertificate[] = [
     category: 'Idiomas & Comunicação',
   },
 ]
-
 export const certificationsList: CertificationItem[] = allGeneralCertificates as unknown as CertificationItem[]
 
 export const trajectoryMilestones: TrajectoryMilestone[] = [
