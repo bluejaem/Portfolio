@@ -5,11 +5,28 @@ import type {
   GeneralCertificate,
   HighlightCertificate,
   ProfileData,
-  ProjectItem,
   SkillCategory,
   TrajectoryItem,
   TrajectoryMilestone,
 } from '../types/portfolio'
+
+export interface ProjectFeature {
+  title: string
+  detail: string
+}
+
+export interface DetailedProjectItem {
+  id: string
+  title: string
+  category: string
+  badge: string
+  overview: string
+  problemSolved: string
+  architectureHighlights: ProjectFeature[]
+  techStack: string[]
+  liveUrl: string | null
+  repoUrl: string
+}
 
 export const profileInfo: ProfileData = {
   name: 'João Guilherme Machado de Melo',
@@ -282,78 +299,146 @@ export const educationList: EducationItem[] = [
   },
 ]
 
-export const projectsList: ProjectItem[] = [
+export const projectsList: DetailedProjectItem[] = [
   {
     id: 'meu-life-os',
     title: 'Meu LIFE OS',
     category: 'Produtividade & Gestão Acadêmica',
-    badge: 'Projeto Principal',
-    shortDescription: 'Sistema pessoal de produtividade e gestão acadêmica multidisciplinar com métricas de tempo e foco.',
-    problem: 'Controlar a rotina de múltiplos cursos simultâneos sem perder o foco em prazos, metas e presença de atenção.',
-    role: 'Desenvolvimento do produto, estrutura do fluxo e análise contínua de produtividade.',
-    solution: 'Single Page Application local-first de alta responsividade construída com persistência de dados no cliente e análise de métricas visuais.',
-    techStack: ['React 18', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Recharts', 'Framer Motion'],
-    architecture: ['Persistência local em cliente para manter o ambiente funcional sem dependência de rede', 'Visualização analítica de foco e produtividade em gráficos interativos', 'Arquitetura modular para evolução contínua do sistema'],
-    architectureDecisions: ['Priorizar fluidez e baixa latência no uso pessoal diário.', 'Estruturar dados de rotina para visualização imediata e análise prática.'],
-    features: ['Painel de atividades acadêmicas por disciplina', 'Timer de foco e organização de rotina', 'Métricas de produtividade e acompanhamento de tempo'],
-    learnings: ['A clareza operacional impacta diretamente a execução de múltiplas demandas.', 'Sistemas pessoais ganham muito com persistência local e métricas acessíveis.'],
+    badge: 'Projeto Principal / Arquitetura Local-First',
+    overview:
+      'Single Page Application abrangente construída para atuar como ecossistema unificado de gestão pessoal, acadêmica e profissional, erradicando a fragmentação entre cronômetros, gerenciadores de tarefas, calendários e painéis de notas.',
+    problemSolved:
+      'Resolve o atrito de alternar entre múltiplos aplicativos desconexos, centralizando todo o ciclo de vida da produtividade diretamente no cliente (client-side), com carregamento instantâneo e zero dependência de backends externos lentos.',
+    architectureHighlights: [
+      {
+        title: 'Estado Distribuído e Reatividade com Zustand',
+        detail:
+          'Acesso atômico a fatias de estado sem os re-renders custosos da Context API, sincronizando em tempo real o cronômetro Pomodoro, o Kanban de tarefas e as métricas do dashboard.',
+      },
+      {
+        title: 'Arquitetura Local-First Autônoma',
+        detail:
+          'Persistência assíncrona imediata via middleware do Zustand conectado ao localStorage do navegador, assegurando integridade e privacidade de dados com funcionamento 100% offline.',
+      },
+      {
+        title: 'Dashboard Analítico com Gráficos SVG (Recharts)',
+        detail:
+          'Visualização quantitativa através de gráficos de área interativos que correlacionam o volume de tarefas concluídas com as horas líquidas de estudo acumuladas na semana.',
+      },
+      {
+        title: 'Parser Inteligente de Rotinas & Gestão Acadêmica',
+        detail:
+          'Analisador de texto nativo que converte blocos de texto colados em cronogramas categorizados, além de módulo dedicado para rastreio de múltiplos cursos, notas e semestres.',
+      },
+    ],
+    techStack: ['React 18', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Recharts', 'Framer Motion', 'Radix UI', 'Vite'],
     liveUrl: '[https://meu-life-os.vercel.app/](https://meu-life-os.vercel.app/)',
     repoUrl: '[https://github.com/bluejaem/Meu-LIFE-OS](https://github.com/bluejaem/Meu-LIFE-OS)',
-    imageUrl: '',
   },
   {
     id: 'govlocal-app',
     title: 'GovLocal App',
-    category: 'Cívico & Serviços Públicos',
-    badge: 'Extensão Universitária',
-    shortDescription: 'Aplicação web mobile-first voltada ao acesso ágil e desburocratizado a serviços públicos essenciais e contatos de emergência locais.',
-    problem: 'A dificuldade de localizar rapidamente serviços públicos relevantes em momentos de urgência ou necessidade prática.',
-    role: 'Estruturação da interface e organização de informações para consulta simples.',
-    solution: 'Catálogo cívico indexado para consulta pública imediata e sem barreiras de autenticação.',
-    techStack: ['TypeScript', 'React', 'Tailwind CSS'],
-    architecture: ['Interface mobile-first com foco em velocidade de leitura', 'Organização por categorias de utilidade pública', 'Consulta direta, sem necessidade de cadastro'],
-    architectureDecisions: ['Reduzir ruído visual e priorizar acessibilidade informacional.', 'Estruturar a navegação para resposta rápida em contexto real.'],
-    features: ['Catálogo de serviços e contatos', 'Consulta de emergência e suporte local', 'Acesso simples e direto sem cadastro'],
-    learnings: ['A informação pública melhorada exige clareza e priorização funcional.', 'Interfaces cívicas precisam ser enxutas e confiáveis.'],
+    category: 'Cidadania Digital & Segurança Pública',
+    badge: 'Extensão Universitária / Mobile-First',
+    overview:
+      'Aplicação web progressiva orientada ao acesso ágil e desburocratizado a serviços públicos e assistência emergencial, integrando catálogo cívico municipal e estadual com georreferenciamento.',
+    problemSolved:
+      'Elimina a dificuldade de localização de utilidades públicas municipais e simplifica o acionamento de forças de segurança e resgate, automatizando o repasse de localização exata do cidadão em situações críticas.',
+    architectureHighlights: [
+      {
+        title: 'Geolocalização Automática via Nominatim API',
+        detail:
+          'Reverse Geocoding em tempo real utilizando OpenStreetMap para detectar e filtrar dinamicamente estado e município sem requerer preenchimento manual de formulários.',
+      },
+      {
+        title: 'Central de Emergência com Disca-Fácil e Cópia de Coordenadas',
+        detail:
+          'Painel com discagem telefônica direta para órgãos de socorro (190, 192, 193, 180, 199) com funcionalidade de cópia instantânea das coordenadas de GPS para envio ao atendente.',
+      },
+      {
+        title: 'Arquitetura Modular em Vanilla JS (ES Modules)',
+        detail:
+          'Frontend leve estruturado em ES Modules, CSS Variables para design system desacoplado e build ultrarrápido otimizado via Vite.',
+      },
+      {
+        title: 'Persistência de Sessão e Favoritos',
+        detail:
+          'Armazenamento local via Web Storage API para salvar portais cívicos frequentes (.gov.br, Detran, SUS, Receita) com modo simulador de moldura mobile para testes no desktop.',
+      },
+    ],
+    techStack: ['JavaScript (ES Modules)', 'HTML5 Semântico', 'CSS3 Moderno', 'Nominatim API', 'OpenStreetMap', 'LocalStorage', 'Vite'],
     liveUrl: null,
     repoUrl: '[https://github.com/bluejaem/GovLocalApp](https://github.com/bluejaem/GovLocalApp)',
-    imageUrl: '',
   },
   {
     id: 'consulta-salarios',
     title: 'Consulta de Salários Tech Brasil',
-    category: 'CLI & Dados',
-    badge: 'Ferramenta CLI / Python',
-    shortDescription: 'Ferramenta em linha de comando (CLI) em Python para exploração e análise de parâmetros salariais no mercado tecnológico brasileiro.',
-    problem: 'Comparar rapidamente remuneração por linguagem e senioridade sem depender de ferramentas pesadas ou serviços externos.',
-    role: 'Construção da camada lógica de análise e filtragem dos dados.',
-    solution: 'Processamento e agregação modular de dados via terminal com saídas tabulares estruturadas por linguagem e senioridade.',
-    techStack: ['Python', 'Parsing de Dados'],
-    architecture: ['Leitura e processamento modular de dados em Python', 'Saída tabular final para comparação direta', 'Filtros por tecnologia e faixa de experiência'],
-    architectureDecisions: ['Priorizar clareza terminal e legibilidade dos resultados.', 'Manter a ferramenta leve e de execução direta no ambiente local.'],
-    features: ['Consulta por tecnologia', 'Comparação por senioridade', 'Saída tabular para análise rápida'],
-    learnings: ['Dados bem organizados geram análise mais confiável e útil.', 'Simplicidade de interface pode aumentar muito a adoção.'],
+    category: 'Engenharia de Dados & CLI',
+    badge: 'Ferramenta CLI & SPA Web Estática',
+    overview:
+      'Solução dupla (utilitário de linha de comando em terminal e Single Page Application web desacoplada) que atua como consultoria automatizada de parâmetros e estimativas salariais no mercado tecnológico brasileiro.',
+    problemSolved:
+      'Fornece transparência salarial precisa ao cruzar remunerações não apenas por linguagem, mas por senioridade e macrorregião geográfica, destacando as particularidades econômicas de cada polo do Brasil.',
+    architectureHighlights: [
+      {
+        title: 'Estruturação de Dados com Dicionários Aninhados (Nested Dictionaries)',
+        detail:
+          'Mapeamento multidimensional em Python que cruza 11 tecnologias de mercado com as 5 macrorregiões do país e 3 níveis de senioridade (Júnior, Pleno e Sênior).',
+      },
+      {
+        title: 'Contextualização Econômica Regional Automatizada',
+        detail:
+          'Emissão de insights econômicos customizados, diferenciando mercados como o agrotech/governamental no Centro-Oeste do polo industrial e de semicondutores do Norte.',
+      },
+      {
+        title: 'Tratamento de Exceções e Higienização de Input',
+        detail:
+          'Rotinas defensivas no CLI que tratam variações de maiúsculas/minúsculas e bloqueiam entradas espúrias para prevenir interrupções de execução no terminal.',
+      },
+      {
+        title: 'Distribuição Híbrida (CLI + SPA Web Serverless)',
+        detail:
+          'Além do script Python puro (`programa.py`), conta com interface web estática (`web/`) que consome dados serializados em JSON sem dependência de servidores de backend.',
+      },
+    ],
+    techStack: ['Python 3', 'Data Structures (Nested Dicts)', 'JSON Parsing', 'JavaScript ES6+', 'HTML5/CSS3', 'CLI Architecture'],
     liveUrl: null,
     repoUrl: '[https://github.com/bluejaem/Projeto-Salarios-Tech-Brasil](https://github.com/bluejaem/Projeto-Salarios-Tech-Brasil)',
-    imageUrl: '',
   },
   {
     id: 'calculadora-imc',
     title: 'Calculadora de IMC Interativa',
-    category: 'Aplicação Web',
-    badge: 'Web Interativa',
-    shortDescription: 'Aplicação web interactiva para cálculo instantâneo e classificação de faixas de índice de massa corporal.',
-    problem: 'Oferecer uma avaliação simples e visual de saúde corporal com retorno rápido e fácil de interpretar.',
-    role: 'Interface interativa e lógica de cálculo do índice de massa corporal.',
-    solution: 'Interface limpa com validação dinâmica de entradas numéricas, manipulação direta de DOM e feedback visual imediato.',
-    techStack: ['HTML5', 'CSS3', 'JavaScript'],
-    architecture: ['Formulário dinâmico com validação de entrada', 'Cálculo em tempo real com resposta visual', 'Feedback imediato por faixa de classificação'],
-    architectureDecisions: ['Simplificar a experiência para evitar fricção de uso.', 'Dar retorno visual claro para facilitar a interpretação do resultado.'],
-    features: ['Input de peso e altura', 'Cálculo em tempo real', 'Classificação visual por faixa de IMC'],
-    learnings: ['A clareza de feedback visual é tão importante quanto o cálculo em si.', 'Interfaces simples e acessíveis ajudam na compreensão de indicadores de saúde.'],
+    category: 'Aplicação Web Interativa',
+    badge: 'Manipulação de DOM & Validação de Entrada',
+    overview:
+      'Aplicação web interativa para cálculo e classificação instantânea de índice de massa corporal com base nas diretrizes oficiais da Organização Mundial da Saúde (OMS).',
+    problemSolved:
+      'Oferece triagem biométrica rápida e confiável sem fricção de recarregamento de página, garantindo validação matemática estrita contra valores inválidos ou negativos.',
+    architectureHighlights: [
+      {
+        title: 'Manipulação Reativa de DOM e Prevenção de Reload',
+        detail:
+          'Interceptação do evento de submit via `event.preventDefault()`, viabilizando uma experiência de Single Page Application sem reconstrução de árvore de renderização.',
+      },
+      {
+        title: 'Lógica Condicional e Mapeamento de Faixas da OMS',
+        detail:
+          'Cadeia de decisão lógica para classificação precisa em faixas: abaixo do peso, peso normal, sobrepeso e os três graus de obesidade com retorno visual instantâneo.',
+      },
+      {
+        title: 'Validação Defensiva de Entradas Numéricas',
+        detail:
+          'Barreira contra entradas nulas, caracteres não numéricos ou valores menores que zero, sinalizando alertas dinâmicos de erro sem quebrar o estado da tela.',
+      },
+      {
+        title: 'Estruturação Semântica e Layout Sticky Footer',
+        detail:
+          'Construção em HTML5 semântico com Flexbox vertical (`min-height: 100vh`), mantendo o container de vidro centralizado e o rodapé ancorado na base em qualquer resolução.',
+      },
+    ],
+    techStack: ['HTML5 Semântico', 'CSS3 (Flexbox & Transparência)', 'JavaScript ES6+', 'DOM Manipulation'],
     liveUrl: '[https://bluejaem.github.io/Calculadora-IMC/](https://bluejaem.github.io/Calculadora-IMC/)',
     repoUrl: '[https://github.com/bluejaem/Calculadora-IMC](https://github.com/bluejaem/Calculadora-IMC)',
-    imageUrl: '',
   },
 ]
 

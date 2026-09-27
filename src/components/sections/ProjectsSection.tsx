@@ -31,7 +31,7 @@ export function ProjectsSection() {
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  {project.techStack.slice(0, 3).map((item) => (
+                  {project.techStack.slice(0, 4).map((item) => (
                     <Badge key={`${project.id}-${item}`} className="border-zinc-700 bg-zinc-950 text-zinc-200">
                       {item}
                     </Badge>
@@ -39,48 +39,32 @@ export function ProjectsSection() {
                 </div>
               </div>
 
-              <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">{project.shortDescription}</p>
+              <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">{project.overview}</p>
 
               <div className="mt-6 grid gap-6 lg:grid-cols-2">
                 <div className="space-y-4">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Problema</p>
-                    <p className="mt-2 text-sm leading-7 text-zinc-400">{project.problem}</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Problema resolvido</p>
+                    <p className="mt-2 text-sm leading-7 text-zinc-400">{project.problemSolved}</p>
                   </div>
 
                   <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Solução</p>
-                    <p className="mt-2 text-sm leading-7 text-zinc-400">{project.solution}</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Visão geral</p>
+                    <p className="mt-2 text-sm leading-7 text-zinc-400">{project.overview}</p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Papel</p>
-                    <p className="mt-2 text-sm leading-7 text-zinc-400">{project.role}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Arquitetura</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Destaques de arquitetura</p>
                     <ul className="mt-2 space-y-2 text-sm leading-7 text-zinc-400">
-                      {(project.architectureDecisions ?? []).map((decision) => (
-                        <li key={decision} className="list-disc pl-5">
-                          {decision}
+                      {project.architectureHighlights.map((highlight) => (
+                        <li key={`${project.id}-${highlight.title}`} className="list-disc pl-5">
+                          <span className="font-medium text-zinc-200">{highlight.title}</span>: {highlight.detail}
                         </li>
                       ))}
                     </ul>
                   </div>
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Funcionalidades</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {(project.features ?? []).map((feature) => (
-                    <Badge key={`${project.id}-${feature}`} className="border-zinc-700 bg-zinc-950 text-zinc-200">
-                      {feature}
-                    </Badge>
-                  ))}
                 </div>
               </div>
 
@@ -107,17 +91,6 @@ export function ProjectsSection() {
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
                 ) : null}
-              </div>
-
-              <div className="mt-8 border-t border-zinc-800 pt-6">
-                <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Aprendizados</p>
-                <ul className="mt-3 space-y-2 text-sm leading-7 text-zinc-400">
-                  {(project.learnings ?? []).map((learning) => (
-                    <li key={learning} className="list-disc pl-5">
-                      {learning}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </Card>
           ))}
