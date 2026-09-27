@@ -31,26 +31,123 @@ export const dimensionsData: DimensionItem[] = [
     pillar: 'Eixo Central de Atuação',
     institution: 'Gran Faculdade',
     course: '',
-    role: 'Imersão em estatística aplicada, análise quantitativa, modelagem preditiva, pipelines de manipulação e exploração de dados para geração de inteligência de produto e suporte a decisões de negócio.',
-    highlights: ['Estatística Aplicada', 'Visualização de Dados', 'Machine Learning', 'Data Wrangling', 'Pipelines de Dados'],
+    role: 'Formação técnica e analítica focada no ciclo de vida completo dos dados — desde a ingestão, higienização e modelagem até o desenvolvimento de sistemas preditivos e a comunicação de insights estratégicos.',
+    highlights: ['Python & SQL', 'Machine Learning', 'Estatística Inferencial', 'Pipelines ETL/ELT', 'EDA & Visualização', 'Modelagem Preditiva'],
+    detailGroups: [
+      {
+        title: 'Fundamentos de Programação e Dados',
+        items: [
+          'Estruturas de dados em Python, manipulação com Pandas e NumPy e escrita de lógica analítica para processamento de dados em escala e complexidade variável.',
+          'Uso de SQL para consulta, agregação, junção e transformação de bancos relacionais, além de introdução a ambientes NoSQL e acesso a grandes volumes de informação.',
+        ],
+      },
+      {
+        title: 'Estatística e Inferência',
+        items: [
+          'Estatística descritiva e inferencial para leitura crítica de distribuições, correlações, variabilidade e padrões amostrais.',
+          'Análise exploratória multivariada, testes de hipóteses, probabilidade, validação estatística e interpretação de resultados para suporte à tomada de decisão.',
+        ],
+      },
+      {
+        title: 'Machine Learning e Modelagem',
+        items: [
+          'Aprendizado supervisionado e não supervisionado com regressão, classificação e clustering em bibliotecas como Scikit-Learn.',
+          'Métricas de validação, cross-validation, seleção de modelos, redução de dimensionalidade e comparação de desempenho para soluções preditivas confiáveis.',
+        ],
+      },
+      {
+        title: 'Engenharia de Dados e BI',
+        items: [
+          'Construção de pipelines ETL/ELT, tratamento de dados faltantes e outliers, organização de fluxo analítico e preparação de bases para uso operacional.',
+          'Visualização de indicadores com dashboards e comunicação analítica para transformar resultados em conhecimento acionável para negócios.',
+        ],
+      },
+      {
+        title: 'Ética e IA Responsável',
+        items: [
+          'Governança de dados, conformidade com LGPD, responsabilidade na análise de dados sensíveis e explicabilidade de modelos preditivos.',
+          'Arquitetura de soluções analíticas com foco em qualidade, rastreabilidade, ética e capacidade de interpretação dos resultados.',
+        ],
+      },
+    ],
   },
   {
     id: 'matematica',
     title: 'Matemática Aplicada e Computacional',
     pillar: 'Base Analítica, Rigor Quantitativo e Modelagem Formal',
-    institution: 'Universidade Federal de Sergipe',
+    institution: 'Universidade Federal de Sergipe (UFS)',
     course: '',
-    role: 'Formação em cálculo diferencial e integral, álgebra linear computacional, otimização e métodos numéricos, fornecendo o rigor matemático para abstração algorítmica e análise quantitativa complexa.',
-    highlights: ['Cálculo Numérico', 'Álgebra Linear', 'Otimização', 'Modelagem Matemática', 'Computação Científica'],
+    role: 'Formação sólida no rigor matemático formal combinado com métodos computacionais para a resolução de sistemas físicos, financeiros e algorítmicos complexos.',
+    highlights: ['Cálculo Multivariável', 'Álgebra Linear Computacional', 'Cálculo Numérico', 'Equações Diferenciais', 'Otimização Matemática', 'Modelagem Estocástica'],
+    detailGroups: [
+      {
+        title: 'Fundamentação Matemática',
+        items: [
+          'Cálculo diferencial e integral em uma e várias variáveis, com desenvolvimento de raciocínio formal para análise de limites, continuidade, derivadas e integrais em contextos aplicados.',
+          'Álgebra linear avançada com espaços vetoriais, transformações lineares, autovalores, autovetores, decomposição espectral e geometria analítica para representação de sistemas complexos.',
+        ],
+      },
+      {
+        title: 'Métodos Quantitativos e Análise',
+        items: [
+          'Equações diferenciais ordinárias e parciais para modelagem de fenômenos dinâmicos e variação temporal em sistemas físicos e matemáticos.',
+          'Análise real e formulação de modelos matemáticos que quantificam comportamento, estabilidade, crescimento e dependência entre variáveis.',
+        ],
+      },
+      {
+        title: 'Computação Científica',
+        items: [
+          'Cálculo numérico com interpolação, integração numérica, resolução de sistemas lineares e não-lineares e avaliação de convergência e estabilidade de algoritmos.',
+          'Programação matemática e fundamentação da computação científica para implementar soluções numéricas de forma eficiente e segura.',
+        ],
+      },
+      {
+        title: 'Otimização e Probabilidade',
+        items: [
+          'Teoria da otimização linear e não-linear como base para tomada de decisão em cenários econômicos, logísticos e de engenharia.',
+          'Teoria das probabilidades e modelos estocásticos, essencial para lidar com incerteza, risco e comportamento aleatório em processos reais.',
+        ],
+      },
+    ],
   },
   {
     id: 'computacao',
     title: 'Engenharia da Computação',
     pillar: 'Arquitetura de Sistemas, Hardware e Engenharia de Computação',
-    institution: 'Centro Universitário Internacional',
+    institution: 'Centro Universitário Internacional (UNINTER)',
     course: '',
-    role: 'Fundamentação estrutural de computação: organização de circuitos elétricos e digitais, arquitetura de microprocessadores, sistemas operacionais, redes e programação de baixo e alto nível.',
-    highlights: ['Arquitetura de Computadores', 'Sistemas Operacionais', 'Circuitos Elétricos', 'Redes & Hardware', 'Sistemas Embarcados'],
+    role: 'Formação multidisciplinar que integra princípios da engenharia eletrônica à ciência da computação, preparando para o projeto, análise e implementação de hardware, software embarcado e sistemas integrados.',
+    highlights: ['Arquitetura de Microprocessadores', 'Circuitos Elétricos & Digitais', 'Sistemas Embarcados & C/C++', 'Sistemas Operacionais', 'Redes de Computadores', 'Eletrônica Digital'],
+    detailGroups: [
+      {
+        title: 'Camada Física e Hardware',
+        items: [
+          'Circuitos elétricos com análise de malhas e nós, leis de Kirchhoff, sinais contínuos e alternados, além de fundamentos de eletrônica analógica e digital.',
+          'Sistemas digitais, circuitos lógicos combinacionais e sequenciais e aplicação de abstrações de hardware na resolução de problemas práticos de automação e processamento.',
+        ],
+      },
+      {
+        title: 'Arquitetura de Processadores',
+        items: [
+          'Organização e arquitetura de computadores, hierarquia de memória, cache, RAM e virtualização, além de estudo de microprocessadores e microcontroladores.',
+          'Compreensão da relação entre software e hardware, incluindo execução instrucional, pipelines e restrições de desempenho.',
+        ],
+      },
+      {
+        title: 'Software de Baixo e Médio Nível',
+        items: [
+          'Programação em C/C++ para manipulação direta de registradores, desenvolvimento de firmware e entendimento profundo do comportamento do sistema computacional.',
+          'Sistemas operacionais e gerenciamento de concorrência, threads e recursos compartilhados em ambientes computacionais reais.',
+        ],
+      },
+      {
+        title: 'Redes e Infraestrutura',
+        items: [
+          'Arquitetura TCP/IP, modelo OSI, protocolos de comunicação, redes industriais e sistemas distribuídos para conectividade eficiente e segura.',
+          'Fundamentos de infraestrutura tecnológica aplicados a comunicação entre dispositivos, serviços e plataformas embutidas.',
+        ],
+      },
+    ],
   },
   {
     id: 'gestao-ia',
@@ -58,17 +155,77 @@ export const dimensionsData: DimensionItem[] = [
     pillar: 'Governança Tecnológica, Processos e Inteligência Artificial Aplicada',
     institution: 'Centro Universitário ETEP',
     course: '',
-    role: 'Alinhamento entre estratégia de negócios, governança corporativa de TI, engenharia de prompt e viabilidade de implementação prática de ferramentas de inteligência artificial nas organizações.',
-    highlights: ['Governança de TI', 'Engenharia de Prompt', 'Aplicações Práticas de IA', 'Gestão de Processos', 'Estratégia Tecnológica'],
+    role: 'Foco no alinhamento estratégico entre tecnologia, processos organizacionais e negócios, integrando governança contemporânea à aplicação de IA generativa no ambiente corporativo.',
+    highlights: ['Governança de TI (ITIL/COBIT)', 'Engenharia de Prompt & LLMs', 'Gestão Ágil de Projetos', 'Segurança da Informação & LGPD', 'Mapeamento de Processos', 'Estratégia Tecnológica'],
+    detailGroups: [
+      {
+        title: 'Governança e Estratégia de TI',
+        items: [
+          'Frameworks de boas práticas como ITIL e COBIT para estruturar serviços, infraestrutura e gestão de tecnologia alinhadas aos objetivos organizacionais.',
+          'Gerenciamento de projetos digitais, priorização de demandas e uso de metodologias ágeis como Scrum e Kanban para execução eficiente.',
+        ],
+      },
+      {
+        title: 'Gestão de Riscos e Segurança',
+        items: [
+          'Políticas de segurança da informação, auditoria de sistemas, continuidade de negócios e conformidade regulatória, incluindo atuação em cenários com LGPD.',
+          'Avaliação de riscos operacionais, governança de dados e mitigação de impactos em ambientes corporativos.',
+        ],
+      },
+      {
+        title: 'Inteligência Artificial Estratégica',
+        items: [
+          'Engenharia de prompt para automação operacional, otimização de fluxo de trabalho e uso de sistemas de IA generativa em cenários reais de negócio.',
+          'Integração de APIs de LLMs, análise de viabilidade econômica e mensuração de impacto produtivo e operacional de soluções de IA.',
+        ],
+      },
+      {
+        title: 'Processos e Negócios',
+        items: [
+          'Mapeamento de processos com foco em BPMN, análise de eficiência operacional e identificação de gargalos organizacionais.',
+          'Gestão de mudança, liderança técnica e alinhamento entre as áreas de negócio e tecnologia para execução estratégica.',
+        ],
+      },
+    ],
   },
   {
     id: 'tecnico',
     title: 'Técnico em Informática',
     pillar: 'Base Operacional de TI, Infraestrutura e Prática Técnica',
-    institution: 'Centro Universitário Internacional',
+    institution: 'Centro Universitário Internacional (UNINTER)',
     course: '',
-    role: 'Competência prática e direta em configuração e diagnóstico de redes locais, suporte técnico a computadores, instalação e administração de sistemas operacionais (Linux/Windows) e infraestrutura de hardware.',
-    highlights: ['Redes de Computadores', 'Hardware & Manutenção', 'Sistemas Operacionais & Linux', 'Suporte & Infraestrutura'],
+    role: 'Base operacional prática voltada para manutenção, configuração, suporte e sustentação de infraestruturas locais de tecnologia da informação.',
+    highlights: ['Hardware & Diagnóstico', 'Administração Linux/Windows', 'Redes de Computadores & Cabeamento', 'Protocolos TCP/IP', 'Shell Scripting', 'Suporte Técnico'],
+    detailGroups: [
+      {
+        title: 'Hardware e Manutenção',
+        items: [
+          'Montagem, desmontagem e diagnóstico de falhas em componentes físicos, fontes, memórias, periféricos e barramentos de comunicação.',
+          'Testes de integridade de hardware e identificação estruturada de problemas para manutenção preventiva e corretiva.',
+        ],
+      },
+      {
+        title: 'Sistemas Operacionais',
+        items: [
+          'Instalação, particionamento e administração de ambientes Windows e distribuições Linux com foco em operação local e estabilidade do sistema.',
+          'Automação básica e uso de shell (Bash) para tarefas de manutenção, monitoramento e organização de ambiente computacional.',
+        ],
+      },
+      {
+        title: 'Redes Locais e Infraestrutura',
+        items: [
+          'Cabeamento estruturado, crimpagem, configuração de roteadores e switches, atribuição de endereços IPv4/IPv6 e uso de DHCP para suporte a redes locais.',
+          'Diagnóstico de conectividade com ping, traceroute, netstat e análise de falhas em protocolos de rede e comunicação.',
+        ],
+      },
+      {
+        title: 'Suporte ao Usuário e Sustentação',
+        items: [
+          'Resolução estruturada de chamados de TI, configuração de periféricos, suporte ao usuário final e alinhamento com políticas de segurança local.',
+          'Prevenção de incidentes técnicos e manutenção de ambiente produtivo com foco em confiabilidade, desempenho e continuidade de operação.',
+        ],
+      },
+    ],
   },
 ]
 

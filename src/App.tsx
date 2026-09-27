@@ -204,9 +204,24 @@ function App() {
                     <p className="mt-2 text-base leading-7 text-zinc-200">{formation.pillar}</p>
                   </div>
 
-                  <p className="max-w-3xl text-sm leading-7 text-zinc-300/80 sm:text-base">{formation.role}</p>
+                  <div className="max-h-[500px] overflow-y-auto pr-2">
+                    <p className="max-w-3xl text-sm leading-7 text-zinc-300/80 sm:text-base">{formation.role}</p>
 
-                  <div className="flex flex-wrap gap-2">
+                    {formation.detailGroups?.map((group) => (
+                      <div key={`${formation.id}-${group.title}`} className="mt-5">
+                        <h4 className="text-[10px] font-medium uppercase tracking-[0.18em] text-purple-200">{group.title}</h4>
+                        <ul className="mt-2 space-y-2 pl-4 text-sm leading-7 text-zinc-300/80">
+                          {group.items.map((item) => (
+                            <li key={`${formation.id}-${group.title}-${item}`} className="list-disc marker:text-purple-300/70">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
                     {formation.highlights.map((item) => (
                       <span key={`${formation.id}-${item}`} className="rounded-full border border-purple-500/30 bg-purple-900/30 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-purple-200 sm:text-xs">
                         {item}

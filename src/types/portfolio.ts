@@ -12,6 +12,11 @@ export interface ProfileData {
   direction?: string[]
 }
 
+export interface FormationDetailGroup {
+  title: string
+  items: string[]
+}
+
 export interface DimensionItem {
   id: string
   title: string
@@ -20,6 +25,7 @@ export interface DimensionItem {
   role: string
   course: string
   highlights: string[]
+  detailGroups?: FormationDetailGroup[]
   courses?: string
   area?: string
 }
