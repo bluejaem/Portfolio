@@ -421,7 +421,7 @@ function App() {
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS (ROXO VÍVIDO PADRONIZADO)           */}
+        {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS (IMAGEM AMPLA & SEM CARD DUPLICADO) */}
         {/* ================================================================= */}
         <section id="formacoes" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
           <div className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]">
@@ -430,7 +430,7 @@ function App() {
               <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Formações Acadêmicas Interdisciplinares</h2>
             </div>
 
-            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-6 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
+            <div className="w-full h-[580px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={formation.id}
@@ -438,52 +438,51 @@ function App() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-start"
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start my-auto"
                 >
-                  <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-3">
-                    <div className="group relative overflow-hidden rounded-[20px] border border-purple-500/30 bg-purple-950/40 shadow-md">
+                  {/* Coluna Esquerda: Imagem Expandida (Sem o card redundante de Grau/Instituição) */}
+                  <div className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between h-[420px]">
+                    <div className="relative w-full h-[320px] overflow-hidden rounded-2xl border border-purple-500/30 bg-purple-950/40 shadow-md">
                       <img
                         src={imageMap[formation.id] ?? imageMap.dados}
                         alt={formation.title}
-                        className="w-full aspect-[4/3] rounded-[20px] object-cover border border-purple-500/25"
+                        className="w-full h-full object-cover transition duration-500 hover:scale-[1.02]"
                         style={{ objectPosition: formation.id === 'dados' ? '50% 6%' : formation.id === 'matematica' ? '50% 28%' : formation.id === 'computacao' ? '50% 12%' : formation.id === 'tecnico' ? '50% 14%' : '50% 8%' }}
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-purple-950/40 via-transparent to-transparent pointer-events-none" />
                     </div>
 
-                    <div className="rounded-xl border border-purple-500/20 bg-purple-900/20 p-2.5 shadow-sm">
-                      <p className="text-[10px] uppercase tracking-[0.18em] text-purple-300 font-semibold">Grau & Instituição</p>
-                      <p className="mt-1 text-xs sm:text-sm font-medium leading-tight text-zinc-100">{formation.institution}</p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1.5 mt-auto">
                       {formation.highlights.map((item) => (
-                        <span key={`${formation.id}-${item}`} className="rounded-full border border-purple-500/30 bg-purple-900/30 px-2.5 py-0.5 text-[9px] uppercase tracking-[0.1em] text-purple-200">
+                        <span key={`${formation.id}-${item}`} className="rounded-md border border-purple-500/30 bg-purple-900/30 px-2.5 py-1 text-[9.5px] uppercase tracking-[0.1em] text-purple-200">
                           {item}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <div className="lg:col-span-8 xl:col-span-9 flex flex-col justify-between h-full">
-                    {/* Topo Único sem duplicidade */}
-                    <div className="flex items-center justify-between border-b border-purple-500/20 pb-2.5 mb-2.5">
-                      <span className="rounded-full border border-purple-500/30 bg-purple-900/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-purple-200">
-                        {formation.pillar}
-                      </span>
-                      <span className="text-[10px] font-mono tracking-[0.22em] text-purple-300/80">{formacaoCountLabel}</span>
-                    </div>
-
+                  {/* Coluna Direita: Conteúdo Curricular e Eixos */}
+                  <div className="lg:col-span-8 xl:col-span-8 flex flex-col justify-between h-[420px]">
                     <div>
-                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-zinc-100">{formation.title}</h3>
-                      <p className="text-xs sm:text-sm font-semibold text-purple-300 mb-1">{formation.institution}</p>
-                      <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/90 mb-2">{formation.role}</p>
+                      {/* Topo Limpo: Badge e Contador */}
+                      <div className="flex items-center justify-between border-b border-purple-500/20 pb-2.5 mb-2.5">
+                        <span className="rounded-full border border-purple-500/30 bg-purple-900/40 px-3.5 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-purple-200">
+                          {formation.pillar}
+                        </span>
+                        <span className="text-xs font-mono text-purple-300/80">{formacaoCountLabel}</span>
+                      </div>
+
+                      <h3 className="text-2xl sm:text-3xl font-bold text-zinc-100">{formation.title}</h3>
+                      <p className="text-sm font-semibold text-purple-300 mb-1">{formation.institution}</p>
+                      <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80 line-clamp-2 mb-2">{formation.role}</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 my-2">
+                    {/* Eixos Curriculares: 4 Blocos em Grade 2x2 com Altura Padronizada */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-auto">
                       {formation.detailGroups?.map((group) => (
-                        <div key={`${formation.id}-${group.title}`} className="p-3 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300">
-                          <h5 className="text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-0.5">{group.title}</h5>
-                          <p className="text-[11.5px] text-zinc-300/90 leading-relaxed">{group.items.join(' ')}</p>
+                        <div key={`${formation.id}-${group.title}`} className="p-3.5 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[115px]">
+                          <h5 className="text-[10.5px] font-bold uppercase tracking-wider text-purple-300 mb-1 line-clamp-1">{group.title}</h5>
+                          <p className="text-xs text-zinc-300/90 leading-relaxed line-clamp-3">{group.items.join(' ')}</p>
                         </div>
                       ))}
                     </div>
@@ -491,7 +490,8 @@ function App() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between mt-3">
+              {/* Barra de Navegação Inferior Integrada */}
+              <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between mt-auto">
                 <div className="flex items-center gap-2">
                   {dimensionsData.map((item, index) => (
                     <button
