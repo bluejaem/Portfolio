@@ -13,6 +13,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 html,
@@ -40,6 +41,10 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+section {
+  scroll-margin-top: 5rem;
 }
 
 html::-webkit-scrollbar {
