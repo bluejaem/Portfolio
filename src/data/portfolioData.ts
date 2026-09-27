@@ -51,42 +51,31 @@ export const dimensionsData: DimensionItem[] = [
     role: 'Formação técnica e analítica focada no ciclo de vida completo dos dados — desde a ingestão, higienização e modelagem até o desenvolvimento de sistemas preditivos e a comunicação de insights estratégicos.',
     highlights: ['Python & SQL', 'Machine Learning', 'Estatística Inferencial', 'Pipelines ETL/ELT', 'EDA & Visualização', 'Modelagem Preditiva'],
     detailGroups: [
-      {
-        title: 'Fundamentos de Programação e Dados',
-        items: [
-          'Estruturas de dados em Python, manipulação com Pandas e NumPy e escrita de lógica analítica para processamento de dados em escala e complexidade variável.',
-          'Uso de SQL para consulta, agregação, junção e transformação de bancos relacionais, além de introdução a ambientes NoSQL e acesso a grandes volumes de informação.',
-        ],
-      },
-      {
-        title: 'Estatística e Inferência',
-        items: [
-          'Estatística descritiva e inferencial para leitura crítica de distribuições, correlações, variabilidade e padrões amostrais.',
-          'Análise exploratória multivariada, testes de hipóteses, probabilidade, validação estatística e interpretação de resultados para suporte à tomada de decisão.',
-        ],
-      },
-      {
-        title: 'Machine Learning e Modelagem',
-        items: [
-          'Aprendizado supervisionado e não supervisionado com regressão, classificação e clustering em bibliotecas como Scikit-Learn.',
-          'Métricas de validação, cross-validation, seleção de modelos, redução de dimensionalidade e comparação de desempenho para soluções preditivas confiáveis.',
-        ],
-      },
-      {
-        title: 'Engenharia de Dados e BI',
-        items: [
-          'Construção de pipelines ETL/ELT, tratamento de dados faltantes e outliers, organização de fluxo analítico e preparação de bases para uso operacional.',
-          'Visualização de indicadores com dashboards e comunicação analítica para transformar resultados em conhecimento acionável para negócios.',
-        ],
-      },
-      {
-        title: 'Ética e IA Responsável',
-        items: [
-          'Governança de dados, conformidade com LGPD, responsabilidade na análise de dados sensíveis e explicabilidade de modelos preditivos.',
-          'Arquitetura de soluções analíticas com foco em qualidade, rastreabilidade, ética e capacidade de interpretação dos resultados.',
-        ],
-      },
-    ],
+        {
+          title: 'FUNDAMENTOS DE PROGRAMAÇÃO E DADOS',
+          items: [
+            'Estruturas de dados em Python, manipulação com Pandas e NumPy e escrita de lógica analítica para processamento em escala. Uso de SQL para agregação, junção e transformação em bancos relacionais e NoSQL.'
+          ]
+        },
+        {
+          title: 'ESTATÍSTICA E INFERÊNCIA',
+          items: [
+            'Estatística descritiva e inferencial para leitura crítica de distribuições, correlações, variabilidade e padrões amostrais. Análise exploratória multivariada (EDA), testes de hipóteses e modelagem probabilística para tomada de decisão.'
+          ]
+        },
+        {
+          title: 'MACHINE LEARNING & IA RESPONSÁVEL',
+          items: [
+            'Aprendizado supervisionado e não supervisionado (Scikit-Learn), validação cruzada, seleção de modelos e métricas de desempenho. Aplicação de princípios de IA responsável, governança algorítmica e explicabilidade de modelos preditivos.'
+          ]
+        },
+        {
+          title: 'ENGENHARIA DE DADOS, BI & LGPD',
+          items: [
+            'Construção de pipelines ETL/ELT, higienização de dados e conformidade estrita com a LGPD em dados sensíveis. Dashboards analíticos e comunicação de indicadores de inteligência de negócios para decisões estratégicas.'
+          ]
+        }
+      ],
   },
   {
     id: 'matematica',
