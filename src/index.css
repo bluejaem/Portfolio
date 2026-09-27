@@ -22,7 +22,8 @@ body,
   min-height: 100vh;
   min-width: 320px;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: #09090b;
   color: #f5f5f4;
 }
