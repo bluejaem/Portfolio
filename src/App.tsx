@@ -189,7 +189,6 @@ function App() {
 
                   <div className="p-5">
                     <h3 className="text-xl font-semibold text-zinc-100">{dimension.title}</h3>
-                    <p className="mt-2 text-sm text-zinc-300/80">{dimension.course}</p>
                     <p className="mt-3 text-sm leading-7 text-zinc-300/80">{dimension.role}</p>
 
                     <div className="mt-4 flex flex-wrap gap-2">
