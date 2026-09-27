@@ -19,120 +19,269 @@ function App() {
   const [currentFormation, setCurrentFormation] = useState(0)
   const [currentProject, setCurrentProject] = useState(0)
   const [certStage, setCertStage] = useState(0)
-  const [stage5Page, setStage5Page] = useState(0)
 
   const formation = dimensionsData[currentFormation]
   const project = projectsList[currentProject]
   const isLastFormation = currentFormation === dimensionsData.length - 1
   const isFirstFormation = currentFormation === 0
 
-  const certificationStages = [
+  const certificationSlides = [
     {
-      name: 'Formações de alto impacto & grandes cargas horárias',
-      title: 'ESTÁGIO 01 / 05',
-      description: 'Formações de alto impacto & grandes cargas horárias',
-      cards: [
+      badge: 'Formações de Alto Impacto',
+      stage: '01 / 06',
+      items: [
         {
-          badge: 'Harvard / Fundação Estudar',
-          title: 'CS50: Introduction to Computer Science',
+          institution: 'Harvard / Fundação Estudar',
           hours: '70h',
-          year: '2025',
-          description: 'Fundamentos de algoritmos, estruturas de dados, memória, lógica computacional e arquitetura do pensamento de software.',
+          title: 'CS50: Introduction to Computer Science',
+          desc: 'Imersão em algoritmos, complexidade assintótica, estruturas de dados e gerenciamento de memória em C e desenvolvimento de software.',
+          year: '2025'
         },
         {
-          badge: 'Desenvolve Já',
-          title: 'Qualificação Profissional para Call Center',
+          institution: 'Desenvolve Já',
           hours: '112h',
-          year: '2025',
-          description: 'Comunicação assertiva, resolução de problemas, atendimento ao cliente e atuação sob métricas de suporte técnico.',
+          title: 'Qualificação Profissional para Call Center',
+          desc: 'Capacitação intensiva em comunicação assertiva, resolução ágil de incidentes, escuta ativa e relacionamento sob métricas de atendimento.',
+          year: '2025'
         },
         {
-          badge: 'UNICAMP',
-          title: 'Semifinalista da 16ª ONHB',
+          institution: 'UNICAMP',
           hours: '48h',
-          year: '2024',
-          description: 'Pesquisa histórica, análise documental e produção de raciocínio crítico em contextos acadêmicos e culturais.',
+          title: 'Semifinalista da 16ª ONHB',
+          desc: 'Avanço até a Fase 6 (semifinal nacional) com análise crítica e metodológica de fontes históricas primárias e produção textual.',
+          year: '2024'
         },
         {
-          badge: 'UNINTER',
-          title: 'Língua Inglesa NEW UBEST Intermediate',
+          institution: 'UNINTER',
           hours: '42h',
-          year: '2026',
-          description: 'Leitura técnica, comunicação intermediária e consolidação de inglês acadêmico e profissional para contexto digital.',
+          title: 'Língua Inglesa NEW UBEST Intermediate (Nível 2)',
+          desc: 'Consolidação de competências de comunicação oral, leitura técnica avançada e redação em língua inglesa para tecnologia.',
+          year: '2026'
+        }
+      ]
+    },
+    {
+      badge: 'Dados, BI & Inteligência Artificial',
+      stage: '02 / 06',
+      items: [
+        {
+          institution: 'Gran Faculdade',
+          hours: '30h',
+          title: 'Análise de Dados e Inteligência de Negócios',
+          desc: 'Análise exploratória multivariada, estruturação de métricas analíticas e suporte estratégico a decisões orientadas a dados.',
+          year: '2026'
         },
-      ],
+        {
+          institution: 'Gran Faculdade',
+          hours: '30h',
+          title: 'Engenharia de Prompt',
+          desc: 'Arquitetura e refinamento avançado de comandos para LLMs, automação de tarefas e contextualização de modelos de linguagem.',
+          year: '2026'
+        },
+        {
+          institution: 'Gran Faculdade',
+          hours: '30h',
+          title: 'Inteligência Artificial na Prática: Domine as Ferramentas',
+          desc: 'Integração de ferramentas generativas aplicadas à rotina de dados, produtividade e resolução de problemas práticos.',
+          year: '2026'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Transformers em Ação: Agentes com LLMs',
+          desc: 'Mecanismos de auto-atenção, arquiteturas de modelos Transformers e o ecossistema contemporâneo de agentes inteligentes.',
+          year: '2025'
+        },
+        {
+          institution: 'Gran Faculdade',
+          hours: '1h',
+          title: 'Fundamentos de IA para Gestão e Estratégia',
+          desc: 'Alinhamento estratégico entre modelos preditivos, governança tecnológica e ganhos de escala empresarial.',
+          year: '2026'
+        }
+      ]
     },
     {
-      name: 'Dados, business intelligence & inteligência artificial',
-      title: 'ESTÁGIO 02 / 05',
-      description: 'Dados, Business Intelligence & Inteligência Artificial',
-      cards: [
-        { badge: 'Gran Faculdade', title: 'Análise de Dados e Inteligência de Negócios', hours: '30h', year: '2026', description: 'Modelagem analítica, visualização de indicadores e suporte a decisões orientadas por dados e evidências.' },
-        { badge: 'Gran Faculdade', title: 'Engenharia de Prompt', hours: '30h', year: '2026', description: 'Estruturação de instruções, automação de tarefas e aplicação de IA em fluxos de trabalho reais.' },
-        { badge: 'Gran Faculdade', title: 'Inteligência Artificial na Prática', hours: '30h', year: '2026', description: 'Uso prático de ferramentas de IA para produtividade, automação e análise aplicada em contexto profissional.' },
-        { badge: 'UNINTER', title: 'Transformers em Ação: Agentes com LLMs', hours: '1h', year: '2025', description: 'Introdução ao uso de agentes baseados em LLMs e lógica de automação inteligente sobre fluxos de trabalho.' },
-        { badge: 'Gran Faculdade', title: 'Fundamentos de IA para Gestão, Liderança e Estratégia', hours: '1h', year: '2026', description: 'Aplicação estratégica da IA para liderança, processos e tomada de decisão em organizações.' },
-      ],
+      badge: 'Infraestrutura, Redes & Hardware',
+      stage: '03 / 06',
+      items: [
+        {
+          institution: 'Cisco Networking Academy',
+          hours: 'Certificação',
+          title: 'Conceitos Básicos de Redes (Networking Basics)',
+          desc: 'Modelos OSI e TCP/IP, endereçamento IPv4/IPv6, comutação, roteamento e diagnósticos de conectividade local e remota.',
+          year: '2026'
+        },
+        {
+          institution: 'Centro Universitário ETEP',
+          hours: '30h',
+          title: 'Introdução à Tecnologia da Informação',
+          desc: 'Fundamentação estruturada de arquitetura de TI, alinhamento de infraestrutura a processos computacionais e governança.',
+          year: '2026'
+        },
+        {
+          institution: 'Fundação Bradesco',
+          hours: '7h',
+          title: 'Fundamentos de TI: Hardware e Software',
+          desc: 'Arquitetura funcional de computadores, barramentos, memória, dispositivos de E/S e rotinas de manutenção e diagnóstico.',
+          year: '2026'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'O Funcionamento dos Circuitos Elétricos',
+          desc: 'Fundamentos de eletricidade e grandezas físicas (tensão, corrente, resistência) aplicadas ao funcionamento de circuitos.',
+          year: '2025'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Choque de Conhecimento: Eletricidade no Dia a Dia',
+          desc: 'Conceitos fundamentais de circuitos elétricos práticos, potência, segurança operacional e conversão de energia.',
+          year: '2024'
+        }
+      ]
     },
     {
-      name: 'Computação, redes, circuitos & hardware',
-      title: 'ESTÁGIO 03 / 05',
-      description: 'Computação, Redes, Circuitos & Hardware',
-      cards: [
-        { badge: 'Cisco Networking Academy', title: 'Conceitos Básicos de Redes / Networking Basics', hours: 'Certificação', year: '2026', description: 'Fundamentos de TCP/IP, topologias, protocolos, conectividade e infraestrutura de redes locais e globais.' },
-        { badge: 'Fundação Bradesco', title: 'Fundamentos de TI: Hardware e Software', hours: '7h', year: '2026', description: 'Entendimento dos pilares de sistemas computacionais, integração entre hardware, software e operação.' },
-        { badge: 'UNINTER', title: 'O Funcionamento dos Circuitos Elétricos', hours: '1h', year: '2025', description: 'Leis fundamentais de eletricidade, corrente, tensão e funcionamento de circuitos em contexto técnico.' },
-        { badge: 'UNINTER', title: 'Choque de Conhecimento: Eletricidade no Dia a Dia', hours: '1h', year: '2024', description: 'Aplicação prática da eletricidade em cenários corriqueiros e leitura da tecnologia ao redor.' },
-        { badge: 'ETEP', title: 'Disciplina Optativa / Extensão Técnica', hours: '30h', year: '2026', description: 'Aprofundamento técnico em áreas de infraestrutura e tecnologia aplicadas ao ambiente profissional.' },
-      ],
+      badge: 'Desenvolvimento, Lógica & Idiomas',
+      stage: '04 / 06',
+      items: [
+        {
+          institution: 'Fundação Bradesco',
+          hours: '18h',
+          title: 'Linguagem de Programação Python Básico',
+          desc: 'Sintaxe essencial, controle de fluxo, estruturas de dados integradas (listas, tuplas e dicionários) e automação de rotinas.',
+          year: '2025'
+        },
+        {
+          institution: 'Fundação Bradesco',
+          hours: '4h',
+          title: 'Crie um Site Simples usando HTML, CSS e JavaScript',
+          desc: 'Desenvolvimento web com marcação semântica em HTML5, estilização moderna em CSS3 e manipulação de eventos do DOM.',
+          year: '2025'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '10h',
+          title: 'II Semana de Línguas UNINTER',
+          desc: 'Linguística aplicada, comunicação multilíngue e metodologias de internacionalização acadêmica e técnica.',
+          year: '2026'
+        },
+        {
+          institution: 'Instituto Dom Fernando Gomes',
+          hours: '35h',
+          title: 'Espanhol Básico',
+          desc: 'Domínio gramatical fundamental, vocabulário funcional e leitura técnica intermediária na língua espanhola.',
+          year: '2018'
+        },
+        {
+          institution: 'Instituto Dom Fernando Gomes',
+          hours: '2º Lugar',
+          title: 'Mostra Científica: Transformando o Mundo',
+          desc: 'Premiação científica em projeto sobre biotecnologia, impactos socioambientais e metodologia de pesquisa.',
+          year: '2022'
+        }
+      ]
     },
     {
-      name: 'Programação, gestão & produtividade',
-      title: 'ESTÁGIO 04 / 05',
-      description: 'Programação, Gestão & Produtividade',
-      cards: [
-        { badge: 'Fundação Bradesco', title: 'Linguagem de Programação Python Básico', hours: '18h', year: '2025', description: 'Estruturas de controle, funções, lógica, automação e resolução de problemas com Python.' },
-        { badge: 'Fundação Bradesco', title: 'Crie um Site Simples usando HTML, CSS e JavaScript', hours: '4h', year: '2025', description: 'Noções fundamentais de front-end, layout, responsividade e interatividade em páginas web.' },
-        { badge: 'UNINTER', title: 'Gestão do Tempo e Produtividade', hours: '1h', year: '2025', description: 'Organização de rotina, priorização e melhora da execução de tarefas em ambientes acadêmicos e profissionais.' },
-        { badge: 'UNINTER', title: 'Metas Pessoais e Profissionais: Foco e Construção do Futuro', hours: '1h', year: '2026', description: 'Planejamento de objetivos, autoconsciência e trajetória profissional com foco em desenvolvimento contínuo.' },
-        { badge: 'UNINTER', title: 'Respira, Organiza e Segue: Como Lidar com Estresse e Sobrecarga', hours: '1h', year: '2025', description: 'Estratégias emocionais e comportamentais para lidar com pressão, excesso de demandas e bem-estar.' },
-      ],
+      badge: 'Gestão, Processos & Governança',
+      stage: '05 / 06',
+      items: [
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Gestão do Tempo e Produtividade',
+          desc: 'Técnicas de priorização de tarefas, eliminação de gargalos e métodos de planejamento de rotinas de alta eficiência.',
+          year: '2025'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Metas Pessoais e Profissionais',
+          desc: 'Alinhamento de objetivos individuais, métricas de crescimento e construção estruturada de planos de carreira.',
+          year: '2026'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Postura Profissional: O que o Mercado Espera',
+          desc: 'Comportamento corporativo assertivo, ética em ambientes dinâmicos de tecnologia e exigências do mercado.',
+          year: '2026'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Como se Expressar Bem em Entrevistas',
+          desc: 'Domínio de comunicação verbal e não-verbal, estruturação de raciocínio sob pressão e assertividade técnica.',
+          year: '2025'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Diferenciando Relação de Emprego x Trabalho',
+          desc: 'Compreensão de vínculos regulatórios, obrigações contratuais e dinâmica legal do ambiente de trabalho corporativo.',
+          year: '2025'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Desvendando a Folha de Pagamento: Holerite',
+          desc: 'Compreensão de remuneração, encargos trabalhistas, benefícios e estrutura contábil de pagamentos.',
+          year: '2024'
+        }
+      ]
     },
     {
-      name: 'Desenvolvimento humano, comunicação & sociedade',
-      title: 'ESTÁGIO 05 / 05',
-      description: 'Desenvolvimento Humano, Comunicação & Sociedade',
-      cards: [
-        { badge: 'UNINTER', title: 'Comunicação Eficaz: Habilidades Essenciais para o Sucesso', hours: '1h', year: '2024', description: 'Estratégias de expressão clara, persuasão e clareza de mensagem em contextos profissionais.' },
-        { badge: 'UNINTER', title: 'Como se Expressar Bem em Entrevistas: Dicas de Gramática', hours: '1h', year: '2025', description: 'Domínio de linguagem, estrutura de resposta e comunicação oral em processos seletivos.' },
-        { badge: 'UNINTER', title: 'Postura Profissional: O que o Mercado Espera', hours: '1h', year: '2026', description: 'Comportamento profissional, ética e alinhamento à cultura organizacional e às exigências do mercado.' },
-        { badge: 'UNINTER', title: 'Diferenciando Relação de Emprego x Relação de Trabalho', hours: '1h', year: '2025', description: 'Compreensão dos limites legais e organizacionais entre vínculo empregatício e dinâmica de trabalho.' },
-        { badge: 'UNINTER', title: 'Desvendando a Folha de Pagamento: Holerite', hours: '1h', year: '2024', description: 'Leitura de direitos e remuneração, compreensão dos elementos que compõem o salário e a folha.' },
-        { badge: 'UNINTER', title: 'Motivação e Benefícios Corporativos', hours: '1h', year: '2026', description: 'Noções sobre engajamento, reconhecimento e benefícios como parte do ambiente de trabalho.' },
-        { badge: 'UNINTER', title: 'Humanização do Atendimento e Relações Interpessoais', hours: '1h', year: '2025', description: 'Atendimento acolhedor, empatia e construção de relações de confiança em ambientes clientes e equipe.' },
-        { badge: 'UNINTER', title: 'Primeiros Socorros para Leigos', hours: '1h', year: '2024', description: 'Atendimento inicial em emergências, primeiros passos e resposta consciente em situações críticas.' },
-        { badge: 'UNINTER', title: 'Uso Racional de Medicamentos', hours: '1h', year: '2026', description: 'Conscientização sobre dosagem, segurança, prescrição e uso adequado de medicamentos.' },
-        { badge: 'UNINTER', title: 'Envelhecimento, Beleza e Bem-Estar', hours: '1h', year: '2024', description: 'Compreensão do bem-estar corporal, saúde e envelhecimento com perspectiva integral e cuidadosa.' },
-        { badge: 'UNINTER', title: 'O Bem-Estar Animal e a Saúde Única', hours: '1h', year: '2025', description: 'Visão interdisciplinar sobre saúde animal, bem-estar e relação com a saúde humana e ambiental.' },
-        { badge: 'UNINTER', title: 'Midiatização da Cultura', hours: '1h', year: '2025', description: 'Entendimento da cultura como processo mediado, social e comunicativo em distintos contextos.' },
-        { badge: 'UNINTER', title: 'II Semana de Línguas', hours: '10h', year: '2026', description: 'Imersão em língua e cultura, ampliando repertório comunicativo e abertura intercultural.' },
-        { badge: 'Instituto Dom Fernando Gomes', title: 'Espanhol Básico', hours: '35h', year: '2018', description: 'Base de expressão e compreensão em espanhol para comunicação internacional e leitura básica.' },
-        { badge: 'Instituto Dom Fernando Gomes', title: '2º Lugar na Mostra Científica Transformando o Mundo', hours: '—', year: '2022', description: 'Reconhecimento por projeto científico, criatividade, comunicação e impacto social com proposta de inovação.' },
-      ],
-    },
+      badge: 'Comunicação, Saúde & Sociedade',
+      stage: '06 / 06',
+      items: [
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Comunicação Eficaz: Habilidades Essenciais',
+          desc: 'Técnicas de escuta ativa, persuasão ética, transmissão clara de mensagens e mediação de conflitos.',
+          year: '2024'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Humanização do Atendimento e Relações Interpessoais',
+          desc: 'Princípios de empatia, resolução humanizada de incidentes e construção de relações de confiança com usuários.',
+          year: '2025'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Respira, Organiza e Segue: Gestão de Estresse',
+          desc: 'Estratégias de regulação emocional, resiliência psicológica e mitigação de sobrecarga cognitiva em ambientes analíticos.',
+          year: '2025'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'O Bem-Estar Animal e a Saúde Única',
+          desc: 'Abordagem interdisciplinar integrando saúde animal, preservação ambiental e impactos na saúde coletiva humana.',
+          year: '2025'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Uso Racional de Medicamentos',
+          desc: 'Análise de prescrição consciente, prevenção a substâncias desnecessárias e conscientização sobre saúde pública.',
+          year: '2026'
+        },
+        {
+          institution: 'UNINTER',
+          hours: '1h',
+          title: 'Primeiros Socorros para Leigos',
+          desc: 'Protocolos básicos de resposta inicial a emergências e socorro pré-hospitalar para preservação da integridade física.',
+          year: '2024'
+        }
+      ]
+    }
   ]
 
-  const currentCertStage = certificationStages[certStage]
-  const stage5Certs = certificationStages[4]?.cards ?? []
-  const stage5Pages = Math.ceil(stage5Certs.length / 6)
-
-  const showPreviousCertStage = () => {
-    setCertStage((previous) => (previous === 0 ? certificationStages.length - 1 : previous - 1))
-  }
-
-  const showNextCertStage = () => {
-    setCertStage((previous) => (previous === certificationStages.length - 1 ? 0 : previous + 1))
-  }
+  const activeSlide = certificationSlides[certStage] || certificationSlides[0]
 
   const imageMap: Record<string, string> = {
     dados: '/education/data-science.jpeg',
@@ -207,6 +356,9 @@ function App() {
       </header>
 
       <main className="w-full">
+        {/* ================================================================= */}
+        {/* SEÇÃO 1: HERO / APRESENTAÇÃO                                      */}
+        {/* ================================================================= */}
         <section id="inicio" className="relative flex h-screen w-full snap-start snap-always flex-col items-center justify-center px-4 py-8 sm:px-8">
           <div className="grid w-full max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_0.8fr]">
             <div>
@@ -268,6 +420,9 @@ function App() {
           </div>
         </section>
 
+        {/* ================================================================= */}
+        {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS (SEM DUPLICAÇÃO E COM LARGURA AMPLA)*/}
+        {/* ================================================================= */}
         <section id="formacoes" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
           <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto">
             <div className="mb-6 w-full">
@@ -276,13 +431,7 @@ function App() {
             </div>
 
             <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-6 lg:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
-              <div className="mb-5 flex items-center justify-between gap-3">
-                <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.24em] text-purple-200 shadow-[0_0_18px_rgba(168,85,247,0.12)]">
-                  {formation.pillar}
-                </span>
-                <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{formacaoCountLabel}</span>
-              </div>
-
+              
               <AnimatePresence mode="wait">
                 <motion.div
                   key={formation.id}
@@ -292,7 +441,8 @@ function App() {
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start"
                 >
-                  <div className="lg:col-span-4 flex flex-col gap-4">
+                  {/* Coluna Esquerda: Imagem e Metadados (4 Colunas) */}
+                  <div className="lg:col-span-4 flex flex-col gap-3.5">
                     <div className="group relative overflow-hidden rounded-[24px] border border-purple-500/20 bg-slate-950/60 shadow-md">
                       <img
                         src={imageMap[formation.id] ?? imageMap.dados}
@@ -303,16 +453,11 @@ function App() {
                     </div>
 
                     <div className="rounded-2xl border border-purple-500/20 bg-zinc-950/40 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-                      <p className="text-[10px] uppercase tracking-[0.18em] text-purple-200">Foco</p>
-                      <p className="mt-2 text-sm leading-6 text-zinc-200">{formation.pillar}</p>
+                      <p className="text-[10px] uppercase tracking-[0.18em] text-purple-200">Grau & Instituição</p>
+                      <p className="mt-1 text-sm font-medium leading-5 text-zinc-100">{formation.institution}</p>
                     </div>
 
-                    <div className="rounded-2xl border border-purple-500/20 bg-zinc-950/40 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-                      <p className="text-[10px] uppercase tracking-[0.18em] text-purple-200">Grau</p>
-                      <p className="mt-2 text-sm leading-6 text-zinc-200">{formation.institution}</p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1.5 mt-1">
+                    <div className="flex flex-wrap gap-1.5 mt-0.5">
                       {formation.highlights.map((item) => (
                         <span key={`${formation.id}-${item}`} className="rounded-full border border-purple-500/25 bg-purple-900/25 px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] text-purple-200">
                           {item}
@@ -321,21 +466,22 @@ function App() {
                     </div>
                   </div>
 
-                  <div className="lg:col-span-8 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-purple-200">
-                          {formation.pillar}
-                        </span>
-                        <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{formacaoCountLabel}</span>
-                      </div>
-
-                      <h3 className="mt-2 text-2xl sm:text-3xl font-bold text-zinc-100">{formation.title}</h3>
-                      <p className="text-sm sm:text-base font-semibold text-purple-300 mb-2">{formation.institution}</p>
-                      <p className="text-sm leading-7 text-zinc-300/80">{formation.role}</p>
+                  {/* Coluna Direita: Informações Curriculares (8 Colunas) */}
+                  <div className="lg:col-span-8 flex flex-col justify-between h-full">
+                    {/* Topo Limpo Único */}
+                    <div className="flex items-center justify-between border-b border-purple-500/20 pb-3 mb-3">
+                      <span className="rounded-full border border-purple-500/25 bg-purple-900/40 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-purple-200">
+                        {formation.pillar}
+                      </span>
+                      <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{formacaoCountLabel}</span>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-3">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-zinc-100">{formation.title}</h3>
+                    <p className="text-sm font-semibold text-purple-300 mb-2">{formation.institution}</p>
+                    <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80 mb-3">{formation.role}</p>
+
+                    {/* Eixos Curriculares em Grade 2 Colunas */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-2">
                       {formation.detailGroups?.map((group) => (
                         <div key={`${formation.id}-${group.title}`} className="p-3 rounded-xl bg-purple-900/20 border border-purple-500/20">
                           <h5 className="text-[10px] font-bold uppercase tracking-wider text-purple-200 mb-1">{group.title}</h5>
@@ -347,6 +493,7 @@ function App() {
                 </motion.div>
               </AnimatePresence>
 
+              {/* Barra de Navegação Inferior Integrada */}
               <div className="pt-4 border-t border-purple-500/20 flex items-center justify-between mt-4">
                 <div className="flex items-center gap-2">
                   {dimensionsData.map((item, index) => (
@@ -382,10 +529,14 @@ function App() {
                   </button>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
 
+        {/* ================================================================= */}
+        {/* SEÇÃO 3: PROJETOS (LAYOUT LIMPO, SEM TEXTO DUPLICADO)              */}
+        {/* ================================================================= */}
         <section id="projetos" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
           <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto">
             <div className="mb-6 w-full">
@@ -440,16 +591,16 @@ function App() {
                   </div>
 
                   <div className="lg:col-span-7 flex flex-col justify-between h-full">
-                    <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center justify-between gap-3 border-b border-purple-500/20 pb-3 mb-2">
                       <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-purple-200">
                         {project.category}
                       </span>
                       <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{projectCountLabel}</span>
                     </div>
 
-                    <div className="mt-3">
+                    <div className="mt-1">
                       <h3 className="mb-1 text-2xl sm:text-3xl font-bold text-zinc-100">{project.title}</h3>
-                      <p className="text-sm leading-7 text-zinc-300/80">{`${project.overview} ${project.problemSolved}`}</p>
+                      <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80">{project.overview}</p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 my-3">
@@ -501,150 +652,98 @@ function App() {
           </div>
         </section>
 
-        <section id="aprendizado" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
+        {/* ================================================================= */}
+        {/* SEÇÃO 4: CERTIFICAÇÕES E CONQUISTAS (CARROSSEL EM 6 SLIDES)       */}
+        {/* ================================================================= */}
+        <section id="certificacoes" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
           <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto">
             <div className="mb-6 w-full">
               <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Certificações e conquistas</p>
               <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Aprendizado Contínuo em Análise de Tecnologia e Aplicação Prática</h2>
             </div>
 
-            <div className="mx-auto flex w-full min-h-[520px] flex-col justify-between rounded-[2rem] border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 p-6 shadow-[0_12px_45px_rgba(76,29,149,0.22)] backdrop-blur-xl sm:p-8">
-            <div className="mb-5 flex items-center justify-between gap-3">
-              <span className="rounded-full border border-purple-500/25 bg-purple-900/30 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.22em] text-purple-200 shadow-[0_0_18px_rgba(168,85,247,0.12)]">
-                {currentCertStage.name}
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">
-                {String(certStage + 1).padStart(2, '0')} / {String(certificationStages.length).padStart(2, '0')}
-              </span>
-            </div>
+            {/* Container com altura fixa para o card não pular de tamanho */}
+            <div className="w-full h-[580px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-6 lg:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
+              
+              {/* Topo Limpo: Badge e Contador (Fim da repetição do título em fonte grande) */}
+              <div className="flex items-center justify-between border-b border-purple-500/20 pb-3">
+                <span className="bg-purple-900/40 text-purple-300 border border-purple-500/30 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">
+                  {activeSlide.badge}
+                </span>
+                <span className="text-xs font-mono text-purple-300/80">
+                  {activeSlide.stage}
+                </span>
+              </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentCertStage.title}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className="flex-1"
-              >
-                <div className="mb-6 flex items-center justify-between gap-3">
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.2em] text-purple-200">{currentCertStage.title}</p>
-                    <h3 className="mt-2 text-xl font-semibold text-zinc-100 sm:text-2xl">{currentCertStage.description}</h3>
-                  </div>
-                </div>
-
-                {certStage === 4 ? (
-                  <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 flex-1 items-stretch">
-                      {stage5Certs.slice(stage5Page * 6, (stage5Page + 1) * 6).map((item) => (
-                        <div
-                          key={`${currentCertStage.title}-${item.title}`}
-                          className="rounded-[1.5rem] border border-purple-500/20 bg-zinc-950/55 p-4 shadow-[0_10px_25px_rgba(15,23,42,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/30"
-                        >
-                          <div className="flex items-center justify-between gap-3">
-                            <span className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-purple-100">
-                              {item.badge}
-                            </span>
-                            <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">{item.hours}</span>
-                          </div>
-
-                          <h4 className="mt-3 text-sm font-medium text-zinc-100 sm:text-base">{item.title}</h4>
-                          <p className="mt-2 text-[11px] text-zinc-300/80">{item.description}</p>
-
-                          <div className="mt-3 flex items-center justify-between gap-3">
-                            <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-500">{item.year}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center justify-center gap-2 pt-2">
-                      <button
-                        type="button"
-                        onClick={() => setStage5Page((page) => Math.max(0, page - 1))}
-                        disabled={stage5Page === 0}
-                        className="px-2.5 py-1 text-xs rounded bg-purple-950/40 border border-purple-500/20 text-purple-300 disabled:opacity-30"
-                      >
-                        Pág. Anterior
-                      </button>
-                      <span className="text-xs text-zinc-400">
-                        Página {stage5Page + 1} de {stage5Pages}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => setStage5Page((page) => Math.min(stage5Pages - 1, page + 1))}
-                        disabled={stage5Page >= stage5Pages - 1}
-                        className="px-2.5 py-1 text-xs rounded bg-purple-950/40 border border-purple-500/20 text-purple-300 disabled:opacity-30"
-                      >
-                        Próxima Pág.
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <div className={certStage === 0 ? 'grid gap-3 md:grid-cols-2' : 'grid gap-3 md:grid-cols-2 xl:grid-cols-3'}>
-                    {currentCertStage.cards.map((item) => (
-                      <div
-                        key={`${currentCertStage.title}-${item.title}`}
-                        className="rounded-[1.5rem] border border-purple-500/20 bg-zinc-950/55 p-4 shadow-[0_10px_25px_rgba(15,23,42,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/30"
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="rounded-full border border-purple-500/20 bg-purple-950/30 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-purple-100">
-                            {item.badge}
-                          </span>
-                          <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">{item.hours}</span>
-                        </div>
-
-                        <h4 className="mt-3 text-sm font-medium text-zinc-100 sm:text-base">{item.title}</h4>
-                        <p className="mt-2 text-[11px] text-zinc-300/80">{item.description}</p>
-
-                        <div className="mt-3 flex items-center justify-between gap-3">
-                          <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-500">{item.year}</span>
-                        </div>
+              {/* Grade Homogênea: 3 Colunas x 2 Linhas */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 my-auto overflow-hidden">
+                {activeSlide.items.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-4 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[150px]"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-medium text-purple-400 mb-1.5">
+                        <span className="truncate max-w-[75%]">{item.institution}</span>
+                        <span className="bg-purple-950/60 px-2 py-0.5 rounded border border-purple-500/30 text-purple-200">
+                          {item.hours}
+                        </span>
                       </div>
-                    ))}
+                      <h4 className="text-sm font-bold text-zinc-100 line-clamp-1 mb-1">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-zinc-300/80 line-clamp-2 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                    <div className="text-[10px] text-zinc-400 text-right">
+                      {item.year}
+                    </div>
                   </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="mt-6 flex items-center justify-between gap-3">
-              <div className="flex flex-1 items-center justify-center gap-2">
-                {certificationStages.map((item, index) => (
-                  <button
-                    key={item.name}
-                    type="button"
-                    aria-label={`Selecionar estágio ${index + 1}`}
-                    onClick={() => setCertStage(index)}
-                    className={`h-2.5 rounded-full transition-all ${index === certStage ? 'w-8 bg-purple-300' : 'w-2.5 bg-purple-500/40 hover:bg-purple-300/70'}`}
-                  />
                 ))}
               </div>
 
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={showPreviousCertStage}
-                  className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30"
-                >
-                  <ArrowLeft className="h-3.5 w-3.5" />
-                  Anterior
-                </button>
+              {/* Barra de Navegação Inferior (Sem subpáginas) */}
+              <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  {certificationSlides.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setCertStage(idx)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        certStage === idx ? 'w-8 bg-purple-400' : 'w-2 bg-purple-900/50 hover:bg-purple-600'
+                      }`}
+                      aria-label={`Ir para categoria ${idx + 1}`}
+                    />
+                  ))}
+                </div>
 
-                <button
-                  type="button"
-                  onClick={showNextCertStage}
-                  className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30"
-                >
-                  Próxima Categoria
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </button>
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setCertStage((prev) => (prev === 0 ? certificationSlides.length - 1 : prev - 1))}
+                    className="px-4 py-2 text-xs sm:text-sm rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-200 hover:bg-purple-900/50 transition-colors"
+                  >
+                    ← Anterior
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCertStage((prev) => (prev === certificationSlides.length - 1 ? 0 : prev + 1))}
+                    className="px-4 py-2 text-xs sm:text-sm rounded-xl bg-purple-600 text-white font-medium hover:bg-purple-500 transition-colors shadow-lg shadow-purple-950/50"
+                  >
+                    Próxima Categoria →
+                  </button>
+                </div>
               </div>
+
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
+        {/* ================================================================= */}
+        {/* SEÇÃO 5: CONTATO (TOTALMENTE ISOLADA E COM RESPIRO)                */}
+        {/* ================================================================= */}
         <section id="contato" className="relative z-20 min-h-screen w-full flex flex-col justify-center items-center py-20 px-4 sm:px-6 lg:px-8 snap-start">
           <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto rounded-[2rem] border border-purple-500/20 bg-[radial-gradient(circle_at_top_left,_rgba(168,85,247,0.18),_transparent_35%),_rgba(17,24,39,0.8)] p-6 shadow-[0_20px_60px_rgba(76,29,149,0.18)] backdrop-blur-xl md:p-8">
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
