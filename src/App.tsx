@@ -328,7 +328,7 @@ function App() {
       </div>
 
       <header className="sticky top-0 z-50 h-16 border-b border-purple-500/20 bg-zinc-950/60 backdrop-blur-xl">
-        <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-full w-full max-w-[98vw] 2xl:max-w-[1650px] items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <div className="h-9 w-9 overflow-hidden rounded-full border border-purple-500/30 bg-gradient-to-br from-purple-500/30 to-violet-500/10 shadow-[0_0_18px_rgba(168,85,247,0.2)]">
               <img src={profileInfo.photoUrl} alt={profileInfo.name} className="h-full w-full object-cover" />
@@ -359,7 +359,7 @@ function App() {
         {/* ================================================================= */}
         {/* SEÇÃO 1: HERO / APRESENTAÇÃO                                      */}
         {/* ================================================================= */}
-        <section id="inicio" className="relative flex h-screen w-full snap-start snap-always flex-col items-center justify-center px-4 py-8 sm:px-8">
+        <section id="inicio" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center px-4 py-8 sm:px-8 overflow-hidden">
           <div className="grid w-full max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_0.8fr]">
             <div>
               <div className="mb-5 inline-flex items-center rounded-full border border-purple-500/30 bg-purple-950/40 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-purple-200 shadow-[0_0_24px_rgba(168,85,247,0.12)]">
@@ -421,17 +421,16 @@ function App() {
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS (SEM DUPLICAÇÃO E COM LARGURA AMPLA)*/}
+        {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS (CENTRALIZADO & ZERO DUPLICAÇÃO)    */}
         {/* ================================================================= */}
-        <section id="formacoes" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
-          <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto">
-            <div className="mb-6 w-full">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Formações acadêmicas</p>
-              <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Formações Acadêmicas Interdisciplinares</h2>
+        <section id="formacoes" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
+          <div className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]">
+            <div className="mb-3 w-full px-2">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-0.5">Formações acadêmicas</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Formações Acadêmicas Interdisciplinares</h2>
             </div>
 
-            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-6 lg:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
-              
+            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-6 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={formation.id}
@@ -439,53 +438,52 @@ function App() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start"
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-start"
                 >
-                  {/* Coluna Esquerda: Imagem e Metadados (4 Colunas) */}
-                  <div className="lg:col-span-4 flex flex-col gap-3.5">
-                    <div className="group relative overflow-hidden rounded-[24px] border border-purple-500/20 bg-slate-950/60 shadow-md">
+                  <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-3">
+                    <div className="group relative overflow-hidden rounded-[20px] border border-purple-500/20 bg-slate-950/60 shadow-md">
                       <img
                         src={imageMap[formation.id] ?? imageMap.dados}
                         alt={formation.title}
-                        className="w-full aspect-[4/3] rounded-2xl object-cover border border-purple-500/20"
+                        className="w-full aspect-[4/3] rounded-[20px] object-cover border border-purple-500/20"
                         style={{ objectPosition: formation.id === 'dados' ? '50% 6%' : formation.id === 'matematica' ? '50% 28%' : formation.id === 'computacao' ? '50% 12%' : formation.id === 'tecnico' ? '50% 14%' : '50% 8%' }}
                       />
                     </div>
 
-                    <div className="rounded-2xl border border-purple-500/20 bg-zinc-950/40 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                    <div className="rounded-xl border border-purple-500/20 bg-zinc-950/40 p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
                       <p className="text-[10px] uppercase tracking-[0.18em] text-purple-200">Grau & Instituição</p>
-                      <p className="mt-1 text-sm font-medium leading-5 text-zinc-100">{formation.institution}</p>
+                      <p className="mt-1 text-xs sm:text-sm font-medium leading-tight text-zinc-100">{formation.institution}</p>
                     </div>
 
-                    <div className="flex flex-wrap gap-1.5 mt-0.5">
+                    <div className="flex flex-wrap gap-1">
                       {formation.highlights.map((item) => (
-                        <span key={`${formation.id}-${item}`} className="rounded-full border border-purple-500/25 bg-purple-900/25 px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] text-purple-200">
+                        <span key={`${formation.id}-${item}`} className="rounded-full border border-purple-500/25 bg-purple-900/25 px-2 py-0.5 text-[9px] uppercase tracking-[0.1em] text-purple-200">
                           {item}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  {/* Coluna Direita: Informações Curriculares (8 Colunas) */}
-                  <div className="lg:col-span-8 flex flex-col justify-between h-full">
-                    {/* Topo Limpo Único */}
-                    <div className="flex items-center justify-between border-b border-purple-500/20 pb-3 mb-3">
+                  <div className="lg:col-span-8 xl:col-span-9 flex flex-col justify-between h-full">
+                    {/* Topo Único sem duplicações */}
+                    <div className="flex items-center justify-between border-b border-purple-500/20 pb-2.5 mb-2.5">
                       <span className="rounded-full border border-purple-500/25 bg-purple-900/40 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-purple-200">
                         {formation.pillar}
                       </span>
-                      <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{formacaoCountLabel}</span>
+                      <span className="text-[10px] font-mono tracking-[0.22em] text-zinc-400">{formacaoCountLabel}</span>
                     </div>
 
-                    <h3 className="text-2xl sm:text-3xl font-bold text-zinc-100">{formation.title}</h3>
-                    <p className="text-sm font-semibold text-purple-300 mb-2">{formation.institution}</p>
-                    <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80 mb-3">{formation.role}</p>
+                    <div>
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-zinc-100">{formation.title}</h3>
+                      <p className="text-xs sm:text-sm font-semibold text-purple-300 mb-1">{formation.institution}</p>
+                      <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80 mb-2">{formation.role}</p>
+                    </div>
 
-                    {/* Eixos Curriculares em Grade 2 Colunas */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 my-2">
                       {formation.detailGroups?.map((group) => (
-                        <div key={`${formation.id}-${group.title}`} className="p-3 rounded-xl bg-purple-900/20 border border-purple-500/20">
-                          <h5 className="text-[10px] font-bold uppercase tracking-wider text-purple-200 mb-1">{group.title}</h5>
-                          <p className="text-xs text-zinc-300/90 leading-relaxed">{group.items.join(' ')}</p>
+                        <div key={`${formation.id}-${group.title}`} className="p-2.5 rounded-xl bg-purple-900/20 border border-purple-500/20">
+                          <h5 className="text-[10px] font-bold uppercase tracking-wider text-purple-200 mb-0.5">{group.title}</h5>
+                          <p className="text-[11.5px] text-zinc-300/90 leading-relaxed">{group.items.join(' ')}</p>
                         </div>
                       ))}
                     </div>
@@ -493,8 +491,7 @@ function App() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Barra de Navegação Inferior Integrada */}
-              <div className="pt-4 border-t border-purple-500/20 flex items-center justify-between mt-4">
+              <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between mt-3">
                 <div className="flex items-center gap-2">
                   {dimensionsData.map((item, index) => (
                     <button
@@ -502,7 +499,7 @@ function App() {
                       type="button"
                       aria-label={`Selecionar formação ${item.title}`}
                       onClick={() => setCurrentFormation(index)}
-                      className={`h-2.5 rounded-full transition-all ${index === currentFormation ? 'w-8 bg-purple-300' : 'w-2.5 bg-purple-500/40 hover:bg-purple-300/70'}`}
+                      className={`h-2 rounded-full transition-all ${index === currentFormation ? 'w-8 bg-purple-300' : 'w-2 bg-purple-500/40 hover:bg-purple-300/70'}`}
                     />
                   ))}
                 </div>
@@ -512,7 +509,7 @@ function App() {
                     type="button"
                     onClick={showPreviousFormation}
                     disabled={isFirstFormation}
-                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3.5 py-1.5 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     <ArrowLeft className="h-3.5 w-3.5" />
                     Anterior
@@ -522,29 +519,28 @@ function App() {
                     type="button"
                     onClick={showNextFormation}
                     disabled={isLastFormation}
-                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-600 px-3.5 py-1.5 text-xs font-medium text-white transition hover:bg-purple-500 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     Próxima Formação
                     <ArrowRight className="h-3.5 w-3.5" />
                   </button>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 3: PROJETOS (LAYOUT LIMPO, SEM TEXTO DUPLICADO)              */}
+        {/* SEÇÃO 3: PROJETOS (CENTRALIZADO & LARGURA AMPLA)                  */}
         {/* ================================================================= */}
-        <section id="projetos" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
-          <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto">
-            <div className="mb-6 w-full">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Projetos</p>
-              <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Soluções orientadas à clareza de dados e uso real.</h2>
+        <section id="projetos" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
+          <div className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]">
+            <div className="mb-3 w-full px-2">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-0.5">Projetos</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Soluções orientadas à clareza de dados e uso real.</h2>
             </div>
 
-            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-6 lg:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
+            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-6 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={project.id}
@@ -552,17 +548,17 @@ function App() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start"
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-start"
                 >
-                  <div className="lg:col-span-5 flex flex-col justify-between gap-4">
-                    <div className="group relative overflow-hidden rounded-[22px] border border-purple-500/20 bg-[#0b1220] shadow-md">
+                  <div className="lg:col-span-5 flex flex-col justify-between gap-3">
+                    <div className="group relative overflow-hidden rounded-[20px] border border-purple-500/20 bg-[#0b1220] shadow-md">
                       <img
                         src={selectedProjectImage}
                         alt={project.title}
-                        className="w-full aspect-[16/10] rounded-2xl object-cover border border-purple-500/20 shadow-md transition duration-500 group-hover:scale-[1.03]"
+                        className="w-full aspect-[16/10] rounded-[20px] object-cover border border-purple-500/20 shadow-md transition duration-500 group-hover:scale-[1.03]"
                       />
                       {project.badge ? (
-                        <span className="absolute left-4 top-4 rounded-full border border-purple-500/30 bg-purple-950/70 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
+                        <span className="absolute left-3 top-3 rounded-full border border-purple-500/30 bg-purple-950/70 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
                           {project.badge}
                         </span>
                       ) : null}
@@ -576,14 +572,14 @@ function App() {
                       ))}
                     </div>
 
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-3 pt-1">
                       {project.liveUrl ? (
-                        <a href={normalizeLink(project.liveUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-gradient-to-r from-purple-500/20 to-violet-500/10 px-4 py-2 text-sm text-zinc-100 transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/40 hover:text-purple-100">
+                        <a href={normalizeLink(project.liveUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-gradient-to-r from-purple-500/20 to-violet-500/10 px-4 py-1.5 text-xs text-zinc-100 transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/40 hover:text-purple-100">
                           Live Demo ↗
                         </a>
                       ) : null}
                       {project.repoUrl ? (
-                        <a href={normalizeLink(project.repoUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-zinc-950/60 px-4 py-2 text-sm text-zinc-300 transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/40 hover:text-purple-100">
+                        <a href={normalizeLink(project.repoUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-zinc-950/60 px-4 py-1.5 text-xs text-zinc-300 transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/40 hover:text-purple-100">
                           Repositório ↗
                         </a>
                       ) : null}
@@ -591,21 +587,21 @@ function App() {
                   </div>
 
                   <div className="lg:col-span-7 flex flex-col justify-between h-full">
-                    <div className="flex items-center justify-between gap-3 border-b border-purple-500/20 pb-3 mb-2">
+                    <div className="flex items-center justify-between gap-3 border-b border-purple-500/20 pb-2.5 mb-2">
                       <span className="rounded-full border border-purple-500/25 bg-purple-900/20 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-purple-200">
                         {project.category}
                       </span>
-                      <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">{projectCountLabel}</span>
+                      <span className="text-[10px] font-mono tracking-[0.22em] text-zinc-400">{projectCountLabel}</span>
                     </div>
 
-                    <div className="mt-1">
-                      <h3 className="mb-1 text-2xl sm:text-3xl font-bold text-zinc-100">{project.title}</h3>
-                      <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80">{project.overview}</p>
+                    <div>
+                      <h3 className="mb-0.5 text-xl sm:text-2xl font-bold text-zinc-100">{project.title}</h3>
+                      <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80 mb-2">{project.overview}</p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 my-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 my-2">
                       {project.architectureHighlights.map((highlight) => (
-                        <div key={`${project.id}-${highlight.title}`} className="p-3 rounded-xl bg-purple-900/20 border border-purple-500/20">
+                        <div key={`${project.id}-${highlight.title}`} className="p-2.5 rounded-xl bg-purple-900/20 border border-purple-500/20">
                           <h5 className="text-xs font-bold text-purple-300 mb-0.5">{highlight.title}</h5>
                           <p className="text-[11.5px] text-zinc-300/90 leading-relaxed">{highlight.detail}</p>
                         </div>
@@ -615,7 +611,7 @@ function App() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="pt-4 border-t border-purple-500/20 flex items-center justify-between mt-4">
+              <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between mt-3">
                 <div className="flex items-center gap-2">
                   {projectsList.map((item, index) => (
                     <button
@@ -623,7 +619,7 @@ function App() {
                       type="button"
                       aria-label={`Selecionar projeto ${item.title}`}
                       onClick={() => setCurrentProject(index)}
-                      className={`h-2.5 rounded-full transition-all ${index === currentProject ? 'w-8 bg-purple-300' : 'w-2.5 bg-purple-500/40 hover:bg-purple-300/70'}`}
+                      className={`h-2 rounded-full transition-all ${index === currentProject ? 'w-8 bg-purple-300' : 'w-2 bg-purple-500/40 hover:bg-purple-300/70'}`}
                     />
                   ))}
                 </div>
@@ -632,7 +628,7 @@ function App() {
                   <button
                     type="button"
                     onClick={showPreviousProject}
-                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30"
+                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3.5 py-1.5 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30"
                   >
                     <ArrowLeft className="h-3.5 w-3.5" />
                     Anterior
@@ -641,7 +637,7 @@ function App() {
                   <button
                     type="button"
                     onClick={showNextProject}
-                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-900/20 px-3 py-2 text-xs font-medium text-purple-100 transition hover:border-purple-400/60 hover:bg-purple-900/30"
+                    className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-600 px-3.5 py-1.5 text-xs font-medium text-white transition hover:bg-purple-500"
                   >
                     Próximo Projeto
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -653,20 +649,20 @@ function App() {
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 4: CERTIFICAÇÕES E CONQUISTAS (CARROSSEL EM 6 SLIDES)       */}
+        {/* SEÇÃO 4: CERTIFICAÇÕES (CARROSSEL EM 6 SLIDES, ALTURA TRAVADA)    */}
         {/* ================================================================= */}
-        <section id="certificacoes" className="relative min-h-screen w-full flex flex-col justify-center items-center py-16 lg:py-20 px-4 sm:px-6 lg:px-8 snap-start pt-20 sm:pt-24">
-          <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto">
-            <div className="mb-6 w-full">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Certificações e conquistas</p>
-              <h2 className="mt-3 text-3xl font-semibold text-zinc-100 md:text-4xl">Aprendizado Contínuo em Análise de Tecnologia e Aplicação Prática</h2>
+        <section id="certificacoes" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
+          <div className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]">
+            <div className="mb-3 w-full px-2">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-0.5">Certificações e conquistas</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Aprendizado Contínuo em Análise de Tecnologia e Aplicação Prática</h2>
             </div>
 
-            {/* Container com altura fixa para o card não pular de tamanho */}
-            <div className="w-full h-[580px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-6 lg:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
+            {/* Container com altura rígida: elimina pulos e variações de tamanho */}
+            <div className="w-full h-[570px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
               
-              {/* Topo Limpo: Badge e Contador (Fim da repetição do título em fonte grande) */}
-              <div className="flex items-center justify-between border-b border-purple-500/20 pb-3">
+              {/* Topo Limpo: Badge e Contador */}
+              <div className="flex items-center justify-between border-b border-purple-500/20 pb-2.5">
                 <span className="bg-purple-900/40 text-purple-300 border border-purple-500/30 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">
                   {activeSlide.badge}
                 </span>
@@ -675,12 +671,12 @@ function App() {
                 </span>
               </div>
 
-              {/* Grade Homogênea: 3 Colunas x 2 Linhas */}
+              {/* Grade de 3 Colunas x 2 Linhas: sem scroll interno e sem quebras */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 my-auto overflow-hidden">
                 {activeSlide.items.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[150px]"
+                    className="p-3.5 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[155px]"
                   >
                     <div>
                       <div className="flex items-center justify-between text-[11px] font-medium text-purple-400 mb-1.5">
@@ -703,7 +699,7 @@ function App() {
                 ))}
               </div>
 
-              {/* Barra de Navegação Inferior (Sem subpáginas) */}
+              {/* Barra de Navegação Única na Base */}
               <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {certificationSlides.map((_, idx) => (
@@ -723,29 +719,28 @@ function App() {
                   <button
                     type="button"
                     onClick={() => setCertStage((prev) => (prev === 0 ? certificationSlides.length - 1 : prev - 1))}
-                    className="px-4 py-2 text-xs sm:text-sm rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-200 hover:bg-purple-900/50 transition-colors"
+                    className="px-3.5 py-1.5 text-xs font-medium rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-200 hover:bg-purple-900/50 transition-colors"
                   >
                     ← Anterior
                   </button>
                   <button
                     type="button"
                     onClick={() => setCertStage((prev) => (prev === certificationSlides.length - 1 ? 0 : prev + 1))}
-                    className="px-4 py-2 text-xs sm:text-sm rounded-xl bg-purple-600 text-white font-medium hover:bg-purple-500 transition-colors shadow-lg shadow-purple-950/50"
+                    className="px-3.5 py-1.5 text-xs font-medium rounded-xl bg-purple-600 text-white hover:bg-purple-500 transition-colors shadow-lg shadow-purple-950/50"
                   >
                     Próxima Categoria →
                   </button>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 5: CONTATO (TOTALMENTE ISOLADA E COM RESPIRO)                */}
+        {/* SEÇÃO 5: CONTATO (CENTRALIZADO & ISOLADO)                          */}
         {/* ================================================================= */}
-        <section id="contato" className="relative z-20 min-h-screen w-full flex flex-col justify-center items-center py-20 px-4 sm:px-6 lg:px-8 snap-start">
-          <div className="w-full max-w-[95vw] xl:max-w-7xl 2xl:max-w-[1440px] mx-auto rounded-[2rem] border border-purple-500/20 bg-[radial-gradient(circle_at_top_left,_rgba(168,85,247,0.18),_transparent_35%),_rgba(17,24,39,0.8)] p-6 shadow-[0_20px_60px_rgba(76,29,149,0.18)] backdrop-blur-xl md:p-8">
+        <section id="contato" className="relative z-20 h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
+          <div className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto rounded-[2rem] border border-purple-500/20 bg-[radial-gradient(circle_at_top_left,_rgba(168,85,247,0.18),_transparent_35%),_rgba(17,24,39,0.8)] p-6 md:p-8 shadow-[0_20px_60px_rgba(76,29,149,0.18)] backdrop-blur-xl">
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-300/70">Contato</p>
