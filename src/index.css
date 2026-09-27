@@ -3,7 +3,7 @@
 :root {
   font-family: Inter, 'Segoe UI', sans-serif;
   color: #f5f5f4;
-  background: #0c0a09;
+  background: #09090b;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -16,28 +16,27 @@ html {
 }
 
 html,
-body {
-  scroll-behavior: smooth;
-}
-
-body {
+body,
+#root {
   margin: 0;
-  min-width: 320px;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top, rgba(120, 119, 198, 0.18), transparent 30%),
-    linear-gradient(180deg, #0c0a09 0%, #111827 100%);
+  min-width: 320px;
+  height: 100%;
+  overflow: hidden;
+  background: #09090b;
   color: #f5f5f4;
 }
 
-#root {
-  min-height: 100vh;
-}
-
-a {
-  text-decoration: none;
+body {
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.05), transparent 25%),
+    linear-gradient(180deg, #09090b 0%, #0f172a 100%);
 }
 
 * {
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
 }

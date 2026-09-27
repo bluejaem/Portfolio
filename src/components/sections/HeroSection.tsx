@@ -49,7 +49,7 @@ export function HeroSection() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-2">
-            {profileData.direction.map((item) => (
+            {(profileData.direction ?? []).map((item) => (
               <span key={item} className="rounded-full border border-zinc-700 bg-zinc-900/70 px-2.5 py-1 text-xs font-medium uppercase tracking-[0.14em] text-zinc-300">
                 {item}
               </span>

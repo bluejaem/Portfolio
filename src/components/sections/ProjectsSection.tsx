@@ -63,7 +63,7 @@ export function ProjectsSection() {
                   <div>
                     <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Arquitetura</p>
                     <ul className="mt-2 space-y-2 text-sm leading-7 text-zinc-400">
-                      {project.architectureDecisions.map((decision) => (
+                      {(project.architectureDecisions ?? []).map((decision) => (
                         <li key={decision} className="list-disc pl-5">
                           {decision}
                         </li>
@@ -112,7 +112,7 @@ export function ProjectsSection() {
               <div className="mt-8 border-t border-zinc-800 pt-6">
                 <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Aprendizados</p>
                 <ul className="mt-3 space-y-2 text-sm leading-7 text-zinc-400">
-                  {project.learnings.map((learning) => (
+                  {(project.learnings ?? []).map((learning) => (
                     <li key={learning} className="list-disc pl-5">
                       {learning}
                     </li>

@@ -34,7 +34,7 @@ export function EducationSection() {
               <p className="mt-4 text-sm leading-7 text-zinc-400">{item.description}</p>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                {item.focusAreas.map((area) => (
+                {(item.focusAreas ?? []).map((area) => (
                   <Badge key={`${item.id}-${area}`} className="border-zinc-700 bg-zinc-950 text-zinc-200">
                     {area}
                   </Badge>

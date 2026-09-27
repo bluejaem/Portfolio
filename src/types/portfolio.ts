@@ -1,17 +1,22 @@
-export interface Profile {
+export interface ProfileData {
   name: string
   role: string
   headline: string
   bio: string
   location: string
   availability: string
-  direction: string[]
+  direction?: string[]
 }
 
-export interface SocialLinks {
-  github: string
-  email: string
-  linkedin: string
+export interface DimensionItem {
+  id: string
+  title: string
+  pillar: string
+  role: string
+  courses: string
+  highlights: string[]
+  area?: string
+  course?: string
 }
 
 export interface EducationItem {
@@ -19,41 +24,39 @@ export interface EducationItem {
   institution: string
   degree: string
   level: 'Graduação' | 'Técnico'
-  status: string
   expectedGraduation: string
-  focusAreas: string[]
+  status: string
+  dimension: string
   description: string
-}
-
-export interface PillarArticulation {
-  area: string
-  course: string
-  role: string
+  topics: string[]
+  focusAreas?: string[]
 }
 
 export interface ProjectItem {
   id: string
   title: string
-  badge?: string
+  badge: string
   shortDescription: string
   problem: string
   solution: string
-  role: string
   techStack: string[]
-  architectureDecisions: string[]
+  architecture: string[]
   features: string[]
-  learnings: string[]
   liveUrl: string | null
   repoUrl: string | null
+  role?: string
+  architectureDecisions?: string[]
+  learnings?: string[]
 }
 
-export interface TrajectoryHighlight {
-  id: string
+export interface TrajectoryItem {
+  id?: string
   year: string
   title: string
+  institution: string
   category: string
-  organization: string
   description: string
+  organization?: string
 }
 
 export interface SkillCategory {
