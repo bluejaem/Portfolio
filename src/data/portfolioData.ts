@@ -2,6 +2,8 @@ import type {
   CertificationItem,
   DimensionItem,
   EducationItem,
+  GeneralCertificate,
+  HighlightCertificate,
   ProfileData,
   ProjectItem,
   SkillCategory,
@@ -152,21 +154,145 @@ export const projectsList: ProjectItem[] = [
   },
 ]
 
-export const certificationsList: CertificationItem[] = [
-  { id: '1', title: 'Análise de Dados e Inteligência de Negócios', issuer: 'Faculdade Unyleya / Cursos Livres', year: '2026', hours: '30h', category: 'Dados & IA' },
-  { id: '2', title: 'Engenharia de Prompt', issuer: 'Faculdade Unyleya / Cursos Livres', year: '2026', hours: '30h', category: 'Dados & IA' },
-  { id: '3', title: 'Inteligência Artificial na Prática: Domine as Ferramentas', issuer: 'Faculdade Unyleya / Cursos Livres', year: '2026', hours: '30h', category: 'Dados & IA' },
-  { id: '4', title: 'Transformers em Ação - A Nova Era dos Agentes Conversacionais (LLMs)', issuer: 'UNINTER (Extensão)', year: '2026', hours: '1h', category: 'Dados & IA' },
-  { id: '5', title: 'Fundamentos de IA para Gestão, Liderança e Estratégia', issuer: 'Faculdade Unyleya / Cursos Livres', year: '2026', hours: '1h', category: 'Dados & IA' },
-  { id: '6', title: 'Conceitos Básicos de Redes', issuer: 'Cisco Networking Academy', year: '2026', category: 'Computação & Redes' },
-  { id: '7', title: 'O Funcionamento dos Circuitos Elétricos', issuer: 'UNINTER (Extensão)', year: '2026', hours: '1h', category: 'Computação & Redes' },
-  { id: '8', title: 'Fundamentos de TI: Hardware e Software', issuer: 'Fundação Bradesco', year: '2026', hours: '7h', category: 'Computação & Redes' },
-  { id: '9', title: 'Ciência da Computação de Harvard no Brasil (CS50)', issuer: 'Fundação Estudar / Harvard', year: '2025', hours: '70h', category: 'Programação' },
-  { id: '10', title: 'Linguagem de Programação Python - Básico', issuer: 'Fundação Bradesco', year: '2025', hours: '18h', category: 'Programação' },
-  { id: '11', title: 'Crie um Site Simples usando HTML, CSS e JavaScript', issuer: 'Fundação Bradesco', year: '2025', hours: '2h', category: 'Programação' },
-  { id: '12', title: 'Língua Inglesa NEW UBEST - Nível 2 Intermediate', issuer: 'UNINTER (Extensão Universitária)', year: '2026', hours: '42h', category: 'Idiomas & Gestão' },
-  { id: '13', title: 'II Semana de Línguas UNINTER', issuer: 'UNINTER (Extensão)', year: '2026', hours: '10h', category: 'Idiomas & Gestão' },
+export const highlightCertificates: HighlightCertificate[] = [
+  {
+    id: 'cs50-harvard',
+    title: 'Ciência da Computação de Harvard no Brasil (CS50)',
+    issuer: 'Harvard University / Fundação Estudar',
+    year: '2025',
+    hours: '70h',
+    badge: 'Fundação Computacional Rigorosa',
+    description: 'Imersão em algoritmos, complexidade assintótica, alocação de memória em C, estruturas de dados fundamentais e introdução à engenharia de software.',
+  },
+  {
+    id: 'onhb-unicamp',
+    title: 'Semifinalista da 16ª Olimpíada Nacional em História do Brasil (ONHB)',
+    issuer: 'UNICAMP',
+    year: '2024',
+    hours: '48h',
+    badge: 'Destaque Acadêmico Nacional',
+    description: 'Avanço até a Fase 6 (semifinal nacional) com análise crítica e metodológica de fontes históricas primárias, pesquisa documental e produção textual interdisciplinar.',
+  },
+  {
+    id: 'english-ubest',
+    title: 'Língua Inglesa NEW UBEST - Intermediate (Nível 2)',
+    issuer: 'UNINTER (Extensão Universitária)',
+    year: '2026',
+    hours: '42h',
+    badge: 'Proficiência em Idiomas',
+    description: 'Desenvolvimento e consolidação de habilidades de comunicação oral, leitura técnica e redação em língua inglesa em nível intermediário.',
+  },
+  {
+    id: 'qualif-callcenter',
+    title: 'Qualificação Profissional para Call Center e Atendimento Técnico',
+    issuer: 'Desenvolve Já',
+    year: '2025',
+    hours: '112h',
+    badge: 'Comunicação & Resolução Técnica',
+    description: 'Capacitação prática em comunicação assertiva, resolução rápida de incidentes, relacionamento interpessoal e operação sob metas de atendimento.',
+  },
 ]
+
+export const allGeneralCertificates: GeneralCertificate[] = [
+  {
+    id: 'cert-dados-bi',
+    title: 'Análise de Dados e Inteligência de Negócios',
+    issuer: 'Faculdade Unyleya / Cursos Livres',
+    year: '2026',
+    hours: '30h',
+    category: 'Dados & IA',
+  },
+  {
+    id: 'cert-prompt-eng',
+    title: 'Engenharia de Prompt',
+    issuer: 'Faculdade Unyleya / Cursos Livres',
+    year: '2026',
+    hours: '30h',
+    category: 'Dados & IA',
+  },
+  {
+    id: 'cert-ia-pratica',
+    title: 'Inteligência Artificial na Prática: Domine as Ferramentas e Saia na Frente',
+    issuer: 'Faculdade Unyleya / Cursos Livres',
+    year: '2026',
+    hours: '30h',
+    category: 'Dados & IA',
+  },
+  {
+    id: 'cert-transformers-llm',
+    title: 'Transformers em Ação - A Nova Era dos Agentes Conversacionais com LLMs',
+    issuer: 'UNINTER (Extensão Universitária)',
+    year: '2026',
+    hours: '1h',
+    category: 'Dados & IA',
+  },
+  {
+    id: 'cert-ia-gestao',
+    title: 'Fundamentos de IA para Gestão, Liderança e Estratégia',
+    issuer: 'Faculdade Unyleya / Cursos Livres',
+    year: '2026',
+    hours: '1h',
+    category: 'Dados & IA',
+  },
+  {
+    id: 'cert-redes-cisco',
+    title: 'Conceitos Básicos de Redes',
+    issuer: 'Cisco Networking Academy',
+    year: '2026',
+    hours: 'Certificação Oficial',
+    category: 'Computação, Redes & Hardware',
+  },
+  {
+    id: 'cert-ti-bradesco',
+    title: 'Fundamentos de TI: Hardware e Software',
+    issuer: 'Fundação Bradesco',
+    year: '2026',
+    hours: '7h',
+    category: 'Computação, Redes & Hardware',
+  },
+  {
+    id: 'cert-circuitos-eletricos',
+    title: 'O Funcionamento dos Circuitos Elétricos - Entendendo a Eletricidade',
+    issuer: 'UNINTER (Extensão Universitária)',
+    year: '2026',
+    hours: '1h',
+    category: 'Computação, Redes & Hardware',
+  },
+  {
+    id: 'cert-python-bradesco',
+    title: 'Linguagem de Programação Python - Básico',
+    issuer: 'Fundação Bradesco',
+    year: '2025',
+    hours: '18h',
+    category: 'Programação & Web',
+  },
+  {
+    id: 'cert-html-css-js',
+    title: 'Crie um Site Simples usando HTML, CSS e JavaScript',
+    issuer: 'Fundação Bradesco',
+    year: '2025',
+    hours: '4h',
+    category: 'Programação & Web',
+  },
+  {
+    id: 'cert-semana-linguas',
+    title: 'II Semana de Línguas UNINTER',
+    issuer: 'UNINTER (Extensão Universitária)',
+    year: '2026',
+    hours: '10h',
+    category: 'Idiomas & Comunicação',
+  },
+  {
+    id: 'cert-espanhol-basico',
+    title: 'Espanhol Básico',
+    issuer: 'Instituto Dom Fernando Gomes',
+    year: '2018',
+    hours: '35h',
+    category: 'Idiomas & Comunicação',
+  },
+]
+
+export const certificationsList: CertificationItem[] = allGeneralCertificates as unknown as CertificationItem[]
 
 export const trajectoryMilestones: TrajectoryMilestone[] = [
   {
@@ -210,6 +336,8 @@ export const trajectoryList: TrajectoryItem[] = trajectoryMilestones as Trajecto
 export const trajectoryHighlights = trajectoryMilestones
 export const certifications = certificationsList
 export const certificationsData = certificationsList
+export const highlightCertificatesData = highlightCertificates
+export const allGeneralCertificatesData = allGeneralCertificates
 export const skillsData: SkillCategory[] = [
   {
     category: 'Linguagens de Programação',

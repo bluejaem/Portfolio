@@ -58,6 +58,25 @@ export interface CertificationItem {
   category: 'Dados & IA' | 'Computação & Redes' | 'Programação' | 'Idiomas & Gestão'
 }
 
+export interface HighlightCertificate {
+  id: string
+  title: string
+  issuer: string
+  year: string
+  hours: string
+  badge: string
+  description: string
+}
+
+export interface GeneralCertificate {
+  id: string
+  title: string
+  issuer: string
+  year: string
+  hours: string
+  category: 'Dados & IA' | 'Computação, Redes & Hardware' | 'Programação & Web' | 'Idiomas & Comunicação'
+}
+
 export interface TrajectoryMilestone {
   year: string
   title: string

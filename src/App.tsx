@@ -3,13 +3,13 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Briefcase, GraduationCap, Mail, Ma
 import { useEffect, useState } from 'react'
 
 import {
-  certificationsList,
+  allGeneralCertificates,
   contactsData,
   dimensionsData,
   educationList,
+  highlightCertificates,
   profileInfo,
   projectsList,
-  trajectoryMilestones,
 } from './data/portfolioData'
 
 const slideMeta = [
@@ -244,48 +244,63 @@ function App() {
           </div>
         )
 
-      case 'certificacoes':
+      case 'certificacoes': {
         return (
-          <div className="space-y-6">
-            <div className="max-w-3xl">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-400">Certificações & trajetória</p>
-              <h2 className="mt-3 text-3xl font-semibold text-zinc-50 md:text-4xl">Crescimento com foco em dados, IA e fundamentos técnicos.</h2>
-            </div>
+          <div className="max-h-[calc(100vh-140px)] overflow-y-auto pr-2 pb-28">
+            <div className="space-y-5">
+              <div className="max-w-3xl">
+                <p className="text-[11px] uppercase tracking-[0.28em] text-zinc-400">Certificações & trajetória</p>
+                <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-100 md:text-3xl">
+                  Marcas de formação, impacto e evolução técnica.
+                </h2>
+              </div>
 
-            <div className="space-y-4">
-              {trajectoryMilestones.map((item) => (
-                <div key={`${item.year}-${item.title}`} className="rounded-[24px] border border-zinc-800 bg-zinc-900/60 p-4 md:p-5">
-                  <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-400">{item.badge}</p>
-                      <h3 className="mt-2 text-lg font-medium text-zinc-100">{item.title}</h3>
+              <div className="space-y-3">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">Destaques principais</p>
+                <div className="grid gap-3 md:grid-cols-2">
+                  {highlightCertificates.map((item) => (
+                    <div key={item.id} className="rounded-xl border border-zinc-700/80 bg-zinc-900/80 p-4">
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="rounded-full border border-zinc-700 bg-zinc-950 px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-zinc-300">
+                          {item.hours}
+                        </span>
+                        <span className="text-[10px] uppercase tracking-[0.18em] text-zinc-400">{item.year}</span>
+                      </div>
+
+                      <h3 className="mt-3 text-base font-medium text-zinc-100">{item.title}</h3>
+                      <p className="mt-1 text-xs text-zinc-300">{item.issuer}</p>
+                      <p className="mt-2 text-[10px] uppercase tracking-[0.14em] text-zinc-400">{item.badge}</p>
+                      <p className="mt-2 text-xs leading-relaxed text-zinc-400">{item.description}</p>
                     </div>
-                    <span className="rounded-full border border-zinc-700 bg-zinc-950 px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] text-zinc-300">
-                      {item.year}
-                    </span>
-                  </div>
-                  <p className="mt-3 text-sm text-zinc-300">{item.organization}</p>
-                  <p className="mt-2 text-sm leading-7 text-zinc-400">{item.description}</p>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-              {certificationsList.slice(0, 6).map((item) => (
-                <div key={item.id} className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="rounded-full border border-zinc-700 bg-zinc-900 px-2 py-1 text-[9px] uppercase tracking-[0.14em] text-zinc-300">
-                      {item.category}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-[0.18em] text-zinc-400">{item.year}</span>
-                  </div>
-                  <h4 className="mt-3 text-sm font-medium text-zinc-100">{item.title}</h4>
-                  <p className="mt-2 text-xs text-zinc-400">{item.issuer}</p>
+              <div className="space-y-3">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">
+                  Certificações Técnicas & Extensões Complementares (12 formações)
+                </p>
+
+                <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 lg:grid-cols-3">
+                  {allGeneralCertificates.map((item) => (
+                    <div key={item.id} className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-3">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="rounded-full border border-zinc-700 bg-zinc-900 px-2 py-0.5 text-[9px] uppercase tracking-[0.12em] text-zinc-300">
+                          {item.category}
+                        </span>
+                        <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-400">{item.hours}</span>
+                      </div>
+                      <h4 className="mt-2 text-sm font-medium text-zinc-100">{item.title}</h4>
+                      <p className="mt-1 text-[11px] text-zinc-400">{item.issuer}</p>
+                      <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-zinc-500">{item.year}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         )
+      }
 
       case 'contato':
         return (
