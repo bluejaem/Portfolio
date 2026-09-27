@@ -1,25 +1,21 @@
 import type {
+  CertificationItem,
   DimensionItem,
   EducationItem,
   ProfileData,
   ProjectItem,
   SkillCategory,
   TrajectoryItem,
+  TrajectoryMilestone,
 } from '../types/portfolio'
 
 export const profileInfo: ProfileData = {
   name: 'João Guilherme Machado de Melo',
-  role: 'Profissional de Tecnologia em Formação | Foco em Ciência de Dados',
+  role: 'Tecnologia em Formação | Foco em Ciência de Dados',
   headline: 'Dados & Análise Quantitativa apoiados por Matemática, Computação e Tecnologia',
-  bio: 'Trajetória construída com foco em Ciência de Dados e resolução de problemas práticos, fundamentada no pensamento matemático quantitativo e no domínio estrutural de sistemas computacionais.',
+  bio: 'Trajetória construída com foco em Ciência de Dados e resolução de problemas práticos, fundamentada no pensamento analítico quantitativo e na compreensão estrutural de sistemas computacionais.',
   location: 'Sergipe, Brasil',
   availability: 'Disponível para estágios e posições iniciais em Dados e Tecnologia',
-  direction: [
-    'Ciência de Dados & Análise Quantitativa',
-    'Matemática Aplicada & Modelagem',
-    'Computação & Sistemas',
-    'Tecnologia & IA aplicada',
-  ],
 }
 
 export const dimensionsData: DimensionItem[] = [
@@ -27,33 +23,33 @@ export const dimensionsData: DimensionItem[] = [
     id: 'dados',
     title: 'Dados & Ciência de Dados',
     pillar: 'Eixo Central de Atuação',
-    courses: 'Ciência de Dados (Gran Faculdade)',
-    role: 'Principal direção profissional. Aplicação direta em análise quantitativa, métodos probabilísticos, tratamento de pipelines e tomada de decisão orientada a dados.',
-    highlights: ['Análise Exploratória & Estatística', 'Tratamento e Modelagem de Dados', 'Visualização de Métricas', 'Fundamentos de Machine Learning'],
+    course: 'Ciência de Dados (Gran Faculdade)',
+    role: 'Principal direção profissional. Análise exploratória, métodos estatísticos, modelagem preditiva e tomada de decisão orientada a dados.',
+    highlights: ['Análise Quantitativa', 'Estatística Aplicada', 'Visualização de Métricas', 'Fundamentos de Machine Learning'],
   },
   {
     id: 'matematica',
     title: 'Matemática Aplicada & Computacional',
     pillar: 'Base Analítica e Quantitativa',
-    courses: 'Matemática Aplicada e Computacional (UFS)',
-    role: 'Desenvolvimento do raciocínio analítico abstrato, resolução formal de problemas, cálculo diferencial, álgebra linear e pensamento algorítmico rigoroso.',
-    highlights: ['Modelagem Quantitativa', 'Cálculo & Álgebra Linear', 'Métodos Analíticos', 'Pensamento Algorítmico'],
+    course: 'Matemática Aplicada e Computacional (UFS)',
+    role: 'Rigor analítico, formulação matemática de problemas, cálculo diferencial, álgebra linear e pensamento algorítmico estruturado.',
+    highlights: ['Modelagem Matemática', 'Cálculo & Álgebra Linear', 'Métodos Analíticos', 'Pensamento Algorítmico'],
   },
   {
     id: 'computacao',
     title: 'Computação & Sistemas',
     pillar: 'Base Estrutural de Tecnologia',
-    courses: 'Engenharia da Computação & Técnico em Informática (UNINTER)',
-    role: 'Compreensão da camada estrutural: circuitos, hardware, arquitetura de computadores, sistemas operacionais e desenvolvimento em programação de sistemas.',
-    highlights: ['Arquitetura de Computadores', 'Sistemas Operacionais & Linux', 'Lógica e Estruturas de Dados', 'Redes e Infraestrutura'],
+    course: 'Engenharia da Computação & Técnico em Informática (UNINTER)',
+    role: 'Domínio da camada técnica: circuitos lógicos, hardware, arquitetura de computadores, redes e desenvolvimento de software.',
+    highlights: ['Arquitetura de Computadores', 'Sistemas Operacionais & Linux', 'Redes & Infraestrutura', 'Estruturas de Dados'],
   },
   {
     id: 'gestao-ia',
     title: 'Gestão de Tecnologia & IA',
     pillar: 'Visão Organizacional e Futuro',
-    courses: 'Gestão de TI + Extensão em IA (ETEP)',
-    role: 'Perspectiva sobre processos corporativos de tecnologia, governança, viabilidade de projetos e o impacto da inteligência artificial nas organizações.',
-    highlights: ['Processos e Governança de TI', 'Visão Organizacional', 'Aplicações Práticas de IA', 'Alinhamento Estratégico'],
+    course: 'Gestão de TI + Extensão em IA (ETEP)',
+    role: 'Articulação entre viabilidade de processos organizacionais, governança tecnológica e o impacto prático de ferramentas de inteligência artificial.',
+    highlights: ['Processos e Governança de TI', 'Engenharia de Prompt', 'Aplicações Práticas de IA', 'Visão Organizacional'],
   },
 ]
 
@@ -66,9 +62,7 @@ export const educationList: EducationItem[] = [
     expectedGraduation: 'Dezembro de 2028',
     status: 'Em andamento',
     dimension: 'Dados & Ciência de Dados',
-    description: 'Foco no tratamento analítico de dados, inferência estatística e ferramentas de análise para decisão de produto e negócios.',
-    topics: ['Estatística Aplicada', 'Visualização', 'Machine Learning', 'Pipelines de Dados'],
-    focusAreas: ['Estatística Aplicada', 'Visualização', 'Machine Learning', 'Pipelines de Dados'],
+    topics: ['Estatística Aplicada', 'Visualização de Dados', 'Machine Learning', 'Pipelines de Dados'],
   },
   {
     id: 'ufs-matematica',
@@ -78,7 +72,6 @@ export const educationList: EducationItem[] = [
     expectedGraduation: '2030',
     status: 'Em andamento',
     dimension: 'Matemática e Modelagem',
-    description: 'Base teórica e analítica profunda para modelagem de cenários complexos, cálculo e métodos quantitativos.',
     topics: ['Cálculo Numérico', 'Álgebra Linear', 'Otimização', 'Computação Científica'],
   },
   {
@@ -89,8 +82,7 @@ export const educationList: EducationItem[] = [
     expectedGraduation: '2031',
     status: 'Em andamento',
     dimension: 'Computação e Sistemas',
-    description: 'Estudo aprofundado dos fundamentos de computação, sistemas embarcados, redes e engenharia estrutural.',
-    topics: ['Arquitetura de Sistemas', 'Hardware', 'Sistemas Operacionais', 'Engenharia de Sistemas'],
+    topics: ['Arquitetura de Sistemas', 'Circuitos Elétricos', 'Sistemas Operacionais', 'Engenharia de Computação'],
   },
   {
     id: 'etep-gti',
@@ -100,8 +92,7 @@ export const educationList: EducationItem[] = [
     expectedGraduation: 'Dezembro de 2028',
     status: 'Em andamento',
     dimension: 'Gestão e Inteligência Artificial',
-    description: 'Integração de metodologias de gerenciamento de tecnologia com aplicações contemporâneas de inteligência artificial.',
-    topics: ['Governança de TI', 'Estratégia Tecnológica', 'Inteligência Artificial Aplicada'],
+    topics: ['Governança de TI', 'Estratégia de Negócios', 'Inteligência Artificial Aplicada'],
   },
   {
     id: 'uninter-tec',
@@ -110,9 +101,8 @@ export const educationList: EducationItem[] = [
     level: 'Técnico',
     expectedGraduation: 'Dezembro de 2027',
     status: 'Em andamento',
-    dimension: 'Prática de TI e Infraestrutura',
-    description: 'Prática operacional direta em configuração de redes locais, manutenção e suporte de sistemas computacionais.',
-    topics: ['Infraestrutura Local', 'Redes IP', 'Sistemas Operacionais', 'Manutenção'],
+    dimension: 'Infraestrutura e Suporte',
+    topics: ['Redes de Computadores', 'Hardware & Software', 'Sistemas Operacionais', 'Infraestrutura'],
   },
 ]
 
@@ -121,112 +111,84 @@ export const projectsList: ProjectItem[] = [
     id: 'life-os',
     title: 'Meu LIFE OS',
     badge: 'Aplicação Principal',
-    shortDescription: 'Sistema pessoal de produtividade e acompanhamento acadêmico multidisciplinar com métricas de tempo e foco.',
-    problem: 'Controlar o fluxo simultâneo de múltiplas graduações sem fragmentar o acompanhamento de disciplinas, metas e tempo de estudo.',
-    solution: 'SPA local-first de alta responsividade com persistência local de dados, gráficos analíticos em tempo real e atalhos rápidos.',
-    role: 'Concepção e desenvolvimento frontend integral',
+    shortDescription: 'Sistema pessoal de produtividade e gestão acadêmica multidisciplinar com métricas de tempo e acompanhamento analítico.',
+    problem: 'Controlar a rotina de múltiplos cursos simultâneos e horários sem dispersar metas e prazos.',
+    solution: 'SPA local-first de alta responsividade com persistência local de dados e gráficos analíticos em tempo real.',
     techStack: ['React 18', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Recharts', 'Framer Motion'],
     architecture: [
-      'Gerenciamento de estado global com Zustand e middleware persist',
-      'Plotagem visual de tempo e produtividade com Recharts',
-      'Renderização de interface rápida e sem dependência de latência de servidor',
+      'Gestão de estado global com Zustand e middleware persist em localStorage',
+      'Plotagem vetorial de métricas com Recharts',
+      'Desacoplamento e renderização fluida sem latência de rede',
     ],
-    architectureDecisions: [
-      'Gerenciamento de estado global com Zustand e middleware persist',
-      'Plotagem visual de tempo e produtividade com Recharts',
-      'Renderização de interface rápida e sem dependência de latência de servidor',
-    ],
-    features: [
-      'Painel de matérias acadêmicas e prazos',
-      'Cronômetro de foco / Pomodoro integrado',
-      'Gráficos de dispersão e análise temporal de foco',
-    ],
-    learnings: [
-      'Modelagem de estado complexo e síncrono no cliente com Zustand',
-      'Boas práticas de UX para interfaces densas sem sobrecarga visual',
-    ],
-    liveUrl: 'https://meu-life-os.vercel.app/',
-    repoUrl: 'https://github.com/bluejaem/Meu-LIFE-OS',
+    features: ['Painel de controle acadêmico por disciplinas', 'Temporizador Pomodoro integrado ao fluxo diário', 'Gráficos de dispersão e análise temporal de foco'],
+    liveUrl: '[https://meu-life-os.vercel.app/](https://meu-life-os.vercel.app/)',
+    repoUrl: '[https://github.com/bluejaem/Meu-LIFE-OS](https://github.com/bluejaem/Meu-LIFE-OS)',
   },
   {
     id: 'govlocal',
     title: 'GovLocal App',
     badge: 'Extensão Cívica',
-    shortDescription: 'Solução mobile-first desenvolvida para centralizar e agilizar o acesso a serviços públicos e contatos de emergência locais.',
-    problem: 'Dificuldade do cidadão em localizar contatos úteis e órgãos de assistência comunitária de forma imediata.',
-    solution: 'Catálogo cívico indexado e simplificado para consulta pública sem barreiras de autenticação.',
-    role: 'Concepção e desenvolvimento frontend',
+    shortDescription: 'Aplicação web mobile-first voltada à aproximação da cidadania digital e consulta ágil de serviços públicos essenciais.',
+    problem: 'Dificuldade de encontrar contatos rápidos de órgãos essenciais e emergências locais.',
+    solution: 'Interface rápida e indexada para busca categorizada de suporte cívico.',
     techStack: ['React', 'TypeScript', 'Tailwind CSS'],
-    architecture: ['Arquitetura mobile-first otimizada para baixo consumo de dados'],
-    architectureDecisions: ['Arquitetura mobile-first otimizada para baixo consumo de dados'],
-    features: ['Busca categorizada por órgãos e emergências', 'Design acessível para navegação rápida'],
-    learnings: ['Design voltado para acessibilidade e usabilidade essencial'],
+    architecture: ['Mobile-first com foco em carregamento prioritário de texto'],
+    features: ['Catálogo de serviços públicos', 'Interface direta sem necessidade de cadastro'],
     liveUrl: null,
     repoUrl: null,
   },
   {
     id: 'salarios-tech',
     title: 'Consulta de Salários Tech',
-    badge: 'Ferramenta CLI / Python',
-    shortDescription: 'Script em Python para consulta direta em terminal de parâmetros salariais e faixas de remuneração em tecnologia.',
-    problem: 'Necessidade de comparar remunerações por tecnologia e nível de experiência de forma simples no terminal.',
-    solution: 'Interface de linha de comando com filtros dinâmicos e saídas tabulares estruturadas.',
-    role: 'Desenvolvedor backend / script',
+    badge: 'CLI / Dados',
+    shortDescription: 'Ferramenta de linha de comando em Python para filtragem e visualização de parâmetros salariais no mercado técnico brasileiro.',
+    problem: 'Necessidade de comparar remunerações por tecnologia de forma simples no terminal.',
+    solution: 'CLI em Python com filtros dinâmicos e saídas tabulares estruturadas.',
     techStack: ['Python'],
-    architecture: ['Estrutura modular de parsing e agregação tabular'],
-    architectureDecisions: ['Estrutura modular de parsing e agregação tabular'],
-    features: ['Filtragem por senioridade e linguagem', 'Visualização em tabelas ASCII no terminal'],
-    learnings: ['Desenvolvimento de ferramentas CLI práticas e tratamento direto de dados'],
+    architecture: ['Parsing modular de dados e formatação em terminal puro'],
+    features: ['Filtros por tecnologia e senioridade', 'Tabelas comparativas via terminal'],
     liveUrl: null,
     repoUrl: null,
   },
 ]
 
-export const trajectoryList: TrajectoryItem[] = [
+export const certificationsList: CertificationItem[] = [
+  { id: '1', title: 'Análise de Dados e Inteligência de Negócios', issuer: 'Faculdade Unyleya / Cursos Livres', year: '2026', hours: '30h', category: 'Dados & IA' },
+  { id: '2', title: 'Engenharia de Prompt', issuer: 'Faculdade Unyleya / Cursos Livres', year: '2026', hours: '30h', category: 'Dados & IA' },
+  { id: '3', title: 'Inteligência Artificial na Prática: Domine as Ferramentas', issuer: 'Faculdade Unyleya / Cursos Livres', year: '2026', hours: '30h', category: 'Dados & IA' },
+  { id: '4', title: 'Transformers em Ação - A Nova Era dos Agentes Conversacionais (LLMs)', issuer: 'UNINTER (Extensão)', year: '2026', hours: '1h', category: 'Dados & IA' },
+  { id: '5', title: 'Fundamentos de IA para Gestão, Liderança e Estratégia', issuer: 'Faculdade Unyleya / Cursos Livres', year: '2026', hours: '1h', category: 'Dados & IA' },
+  { id: '6', title: 'Conceitos Básicos de Redes', issuer: 'Cisco Networking Academy', year: '2026', category: 'Computação & Redes' },
+  { id: '7', title: 'O Funcionamento dos Circuitos Elétricos', issuer: 'UNINTER (Extensão)', year: '2026', hours: '1h', category: 'Computação & Redes' },
+  { id: '8', title: 'Fundamentos de TI: Hardware e Software', issuer: 'Fundação Bradesco', year: '2026', hours: '7h', category: 'Computação & Redes' },
+  { id: '9', title: 'Ciência da Computação de Harvard no Brasil (CS50)', issuer: 'Fundação Estudar / Harvard', year: '2025', hours: '70h', category: 'Programação' },
+  { id: '10', title: 'Linguagem de Programação Python - Básico', issuer: 'Fundação Bradesco', year: '2025', hours: '18h', category: 'Programação' },
+  { id: '11', title: 'Crie um Site Simples usando HTML, CSS e JavaScript', issuer: 'Fundação Bradesco', year: '2025', hours: '2h', category: 'Programação' },
+  { id: '12', title: 'Língua Inglesa NEW UBEST - Nível 2 Intermediate', issuer: 'UNINTER (Extensão Universitária)', year: '2026', hours: '42h', category: 'Idiomas & Gestão' },
+  { id: '13', title: 'II Semana de Línguas UNINTER', issuer: 'UNINTER (Extensão)', year: '2026', hours: '10h', category: 'Idiomas & Gestão' },
+]
+
+export const trajectoryMilestones: TrajectoryMilestone[] = [
   {
-    id: 'cert-bi',
     year: '2026',
-    title: 'Certificação em Data Analysis and Business Intelligence',
-    institution: 'Gran Faculdade',
-    organization: 'Gran Faculdade',
-    category: 'Certificação',
-    description: 'Modelagem analítica, visualização de dados e elaboração de indicadores de suporte à tomada de decisão.',
+    title: 'Aprofundamento em Dados, IA Aplicada e Redes',
+    organization: 'Gran Faculdade & Cisco & UNINTER',
+    badge: 'Certificações Técnicas',
+    description: 'Conclusão de certificações em Análise de Dados, Engenharia de Prompt, Redes Cisco e arquitetura de LLMs.',
   },
   {
-    id: 'cert-redes',
-    year: '2026',
-    title: 'Certificação em Conceitos Básicos de Redes',
-    institution: 'Cisco Networking Academy',
-    organization: 'Cisco Networking Academy',
-    category: 'Certificação',
-    description: 'Fundamentos de tráfego, endereçamento IP, comutação e protocolos de camada de rede.',
-  },
-  {
-    id: 'cs50',
     year: '2025',
-    title: 'CS50: Introduction to Computer Science',
-    institution: 'Harvard University / Fundação Estudar',
-    organization: 'Harvard University / Fundação Estudar',
-    category: 'Certificação',
-    description: 'Estruturas de dados, algoritmos fundamentais, gerenciamento de memória em C e fundamentos de computação.',
+    title: 'Fundamentação em Computação e Algoritmos',
+    organization: 'Harvard CS50 / Fundação Estudar',
+    badge: 'Computação',
+    description: 'Formação rigorosa de 70h em algoritmos, estruturas de dados fundamentais e linguagens de programação.',
   },
   {
-    id: 'python-basico',
-    year: '2025',
-    title: 'Linguagem Python Básico',
-    institution: 'Fundação Bradesco',
-    organization: 'Fundação Bradesco',
-    category: 'Certificação',
-    description: 'Sintaxe estruturada, coleções de dados e automação de scripts com Python.',
-  },
-  {
-    id: 'onhb',
     year: '2024',
     title: 'Semifinalista da 16ª Olimpíada Nacional em História do Brasil (ONHB)',
-    institution: 'UNICAMP',
     organization: 'UNICAMP',
-    category: 'Conquista Acadêmica',
-    description: 'Avanço até a 5ª fase (semifinal nacional) em olimpíada baseada na análise crítica de fontes históricas primárias e produção textual analítica.',
+    badge: 'Destaque Acadêmico Nacional',
+    description: 'Classificação até a Fase 6 (semifinal da competição nacional), com análise aprofundada de documentos históricos primários e elaboração crítica interdisciplinar.',
   },
 ]
 
@@ -244,7 +206,10 @@ export const educationPillars = dimensionsData
 export const projects = projectsList
 export const projectsData = projectsList
 export const projectData = projectsList
-export const trajectoryHighlights = trajectoryList
+export const trajectoryList: TrajectoryItem[] = trajectoryMilestones as TrajectoryItem[]
+export const trajectoryHighlights = trajectoryMilestones
+export const certifications = certificationsList
+export const certificationsData = certificationsList
 export const skillsData: SkillCategory[] = [
   {
     category: 'Linguagens de Programação',
@@ -267,14 +232,15 @@ export const skillsData: SkillCategory[] = [
     items: ['Linux', 'Git', 'GitHub', 'VS Code', 'Terminal'],
   },
 ]
+
 export const portfolioData = {
   profile: profileInfo,
   socialLinks: contactsData,
   education: educationList,
   pillars: dimensionsData,
   projects: projectsList,
-  trajectory: trajectoryList,
-  certifications: trajectoryList,
+  trajectory: trajectoryMilestones,
+  certifications: certificationsList,
   skills: skillsData,
 }
 

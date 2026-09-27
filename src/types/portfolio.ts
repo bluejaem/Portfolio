@@ -13,10 +13,10 @@ export interface DimensionItem {
   title: string
   pillar: string
   role: string
-  courses: string
+  course: string
   highlights: string[]
+  courses?: string
   area?: string
-  course?: string
 }
 
 export interface EducationItem {
@@ -27,8 +27,8 @@ export interface EducationItem {
   expectedGraduation: string
   status: string
   dimension: string
-  description: string
   topics: string[]
+  description?: string
   focusAreas?: string[]
 }
 
@@ -49,14 +49,31 @@ export interface ProjectItem {
   learnings?: string[]
 }
 
+export interface CertificationItem {
+  id: string
+  title: string
+  issuer: string
+  year: string
+  hours?: string
+  category: 'Dados & IA' | 'Computação & Redes' | 'Programação' | 'Idiomas & Gestão'
+}
+
+export interface TrajectoryMilestone {
+  year: string
+  title: string
+  organization: string
+  badge: string
+  description: string
+}
+
 export interface TrajectoryItem {
   id?: string
   year: string
   title: string
-  institution: string
-  category: string
-  description: string
+  institution?: string
   organization?: string
+  category?: string
+  description: string
 }
 
 export interface SkillCategory {
