@@ -175,6 +175,24 @@ export const projectsList: ProjectItem[] = [
     repoUrl: null,
     imageUrl: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80',
   },
+  {
+    id: 'calculadora-imc',
+    title: 'Calculadora de IMC Interativa',
+    category: 'Aplicação Web',
+    badge: 'Web Interativa',
+    shortDescription: 'Aplicação web interactiva para cálculo instantâneo e classificação de faixas de índice de massa corporal.',
+    problem: 'Permitir avaliação simples e visual de saúde corporal com retorno rápido e fácil de interpretar.',
+    role: 'Interface interativa e lógica de cálculo do índice de massa corporal.',
+    solution: 'Interface rápida com validação dinâmica de entradas, manipulação de DOM e cálculo em tempo real.',
+    techStack: ['HTML5', 'CSS3', 'JavaScript'],
+    architecture: ['Estrutura de formulário e lógica de cálculo em JavaScript puro', 'Feedback visual com classificação por faixa de risco'],
+    architectureDecisions: ['Validação imediata de dados para reduzir erros de entrada.', 'Indicadores visuais para facilitar interpretação do resultado.'],
+    features: ['Input de peso e altura', 'Cálculo em tempo real', 'Classificação visual por faixa de IMC'],
+    learnings: ['A clareza de feedback visual é tão importante quanto o cálculo em si.', 'Interfaces simples e acessíveis ajudam na compreensão de indicadores de saúde.'],
+    liveUrl: '[https://bluejaem.github.io/Calculadora-IMC/](https://bluejaem.github.io/Calculadora-IMC/)',
+    repoUrl: '[https://github.com/bluejaem/Calculadora-IMC](https://github.com/bluejaem/Calculadora-IMC)',
+    imageUrl: '',
+  },
 ]
 
 export const highlightCertificates: HighlightCertificate[] = [

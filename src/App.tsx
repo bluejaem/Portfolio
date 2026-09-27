@@ -16,6 +16,150 @@ function normalizeLink(value: string | null) {
   return match ? match[2] : value
 }
 
+function ProjectPreview({ projectId }: { projectId: string }) {
+  switch (projectId) {
+    case 'life-os':
+      return (
+        <div className="relative h-56 overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.28),_rgba(17,24,39,0)_45%)] p-4">
+          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-zinc-300/80">
+            <span>Foco</span>
+            <span>06:30</span>
+          </div>
+
+          <div className="mt-4 grid grid-cols-[1.4fr_0.6fr] gap-3">
+            <div className="rounded-2xl border border-purple-500/20 bg-purple-950/20 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+              <div className="mb-2 flex items-center justify-between text-[9px] uppercase tracking-[0.16em] text-purple-200">
+                <span>Produtividade</span>
+                <span>82%</span>
+              </div>
+              <div className="flex h-20 items-end gap-2">
+                {[30, 48, 52, 64, 76, 92].map((value, index) => (
+                  <span
+                    key={`${projectId}-bar-${index}`}
+                    className="w-full rounded-t-md bg-gradient-to-t from-violet-500 via-purple-500 to-fuchsia-300"
+                    style={{ height: `${value}%` }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="rounded-2xl border border-purple-500/20 bg-zinc-900/70 p-3 text-center">
+                <div className="text-[9px] uppercase tracking-[0.18em] text-zinc-400">Timer</div>
+                <div className="mt-2 text-xl font-semibold text-purple-100">25:00</div>
+              </div>
+              <div className="rounded-2xl border border-purple-500/20 bg-zinc-900/70 p-3">
+                <div className="text-[9px] uppercase tracking-[0.18em] text-zinc-400">Meta</div>
+                <div className="mt-2 h-2 rounded-full bg-zinc-800">
+                  <div className="h-2 w-3/5 rounded-full bg-gradient-to-r from-violet-500 to-purple-300" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+
+    case 'govlocal':
+      return (
+        <div className="relative flex h-56 items-center justify-center overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.24),_rgba(17,24,39,0)_45%)] p-4">
+          <div className="w-40 rounded-[30px] border border-purple-500/20 bg-zinc-950/80 p-3 shadow-[0_0_30px_rgba(168,85,247,0.12)]">
+            <div className="mb-3 flex items-center justify-center">
+              <div className="h-1.5 w-16 rounded-full bg-zinc-700" />
+            </div>
+
+            <div className="space-y-2">
+              <div className="rounded-xl border border-purple-500/20 bg-purple-500/10 p-2 text-center">
+                <div className="text-[9px] uppercase tracking-[0.18em] text-purple-200">Urgência</div>
+                <div className="mt-1 text-sm font-semibold text-zinc-100">SAMU</div>
+              </div>
+              <div className="rounded-xl border border-purple-500/20 bg-zinc-900/70 p-2">
+                <div className="text-[9px] uppercase tracking-[0.16em] text-zinc-400">Serviços</div>
+                <div className="mt-2 space-y-1.5">
+                  <div className="h-2 rounded-full bg-zinc-700" />
+                  <div className="h-2 w-4/5 rounded-full bg-zinc-700" />
+                  <div className="h-2 w-2/3 rounded-full bg-zinc-700" />
+                </div>
+              </div>
+              <button className="w-full rounded-xl bg-gradient-to-r from-violet-500 to-purple-500 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.16em] text-white">
+                Emergência
+              </button>
+            </div>
+          </div>
+        </div>
+      )
+
+    case 'salarios-tech':
+      return (
+        <div className="relative h-56 overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[#0b1020] p-4 font-mono text-[10px] text-zinc-200">
+          <div className="flex items-center gap-2 border-b border-zinc-800 pb-2 text-zinc-400">
+            <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+          </div>
+
+          <div className="mt-3 space-y-2">
+            <div className="text-violet-300">$ python salary_analysis.py --tech "Python"</div>
+            <div className="text-zinc-300">media: R$ 9.400</div>
+            <div className="text-zinc-300">junior: R$ 4.900</div>
+            <div className="text-zinc-300">pleno: R$ 8.300</div>
+            <div className="mt-3 rounded-lg border border-violet-500/20 bg-violet-500/10 px-2 py-1 text-violet-100">
+              <span className="text-zinc-300">status:</span> dataset atualizado
+            </div>
+          </div>
+        </div>
+      )
+
+    case 'calculadora-imc':
+      return (
+        <div className="relative h-56 overflow-hidden rounded-t-[28px] border-b border-purple-500/20 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.22),_rgba(17,24,39,0)_50%)] p-4">
+          <div className="rounded-2xl border border-purple-500/20 bg-zinc-950/70 p-3">
+            <div className="mb-3 flex items-center justify-between text-[9px] uppercase tracking-[0.16em] text-zinc-400">
+              <span>IMC</span>
+              <span>Classificação</span>
+            </div>
+
+            <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-2 text-[10px] text-zinc-300">
+                <div className="rounded-xl border border-purple-500/20 bg-zinc-900/80 p-2">
+                  <div className="text-[9px] uppercase tracking-[0.16em] text-zinc-400">Peso</div>
+                  <div className="mt-1 text-base font-semibold text-zinc-100">68 kg</div>
+                </div>
+                <div className="rounded-xl border border-purple-500/20 bg-zinc-900/80 p-2">
+                  <div className="text-[9px] uppercase tracking-[0.16em] text-zinc-400">Altura</div>
+                  <div className="mt-1 text-base font-semibold text-zinc-100">1,75 m</div>
+                </div>
+              </div>
+
+              <div className="mt-3 overflow-hidden rounded-full bg-zinc-800">
+                <div className="h-2.5 w-2/3 rounded-full bg-gradient-to-r from-emerald-400 via-yellow-400 to-rose-400" />
+              </div>
+
+              <div className="mt-3 flex justify-between text-[8px] uppercase tracking-[0.14em] text-zinc-400">
+                <span>Baixo</span>
+                <span>Normal</span>
+                <span>Sobrepeso</span>
+              </div>
+
+              <div className="mt-3 rounded-xl border border-purple-500/20 bg-purple-500/10 p-2 text-center">
+                <div className="text-[9px] uppercase tracking-[0.18em] text-purple-200">Resultado</div>
+                <div className="mt-1 text-lg font-semibold text-purple-100">22,2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+
+    default:
+      return (
+        <div className="flex h-56 items-center justify-center rounded-t-[28px] border-b border-purple-500/20 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.25),_rgba(17,24,39,0)_45%)] p-4 text-zinc-200">
+          <div className="rounded-2xl border border-purple-500/20 bg-zinc-900/70 px-4 py-3 text-sm uppercase tracking-[0.2em] text-purple-200">
+            Preview
+          </div>
+        </div>
+      )
+  }
+}
+
 function App() {
   return (
     <div className="min-h-screen bg-[#090611] text-zinc-100">
@@ -156,12 +300,14 @@ function App() {
             </span>
           </div>
 
-          <div className="grid gap-6 xl:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {projectsList.map((project) => (
-              <article key={project.id} className="group overflow-hidden rounded-[28px] border border-purple-500/20 bg-zinc-900/40 shadow-[0_8px_32px_0_rgba(76,29,149,0.15)] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/40 hover:shadow-[0_12px_40px_0_rgba(147,51,234,0.2)]">
-                <div className="relative overflow-hidden border-b border-purple-500/20">
-                  <img src={project.imageUrl} alt={project.title} className="h-56 w-full object-cover transition duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090611] via-transparent to-transparent" />
+              <article
+                key={project.id}
+                className="group overflow-hidden rounded-[28px] border border-purple-500/20 bg-purple-950/20 shadow-[0_0_30px_rgba(168,85,247,0.12)] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]"
+              >
+                <div className="relative overflow-hidden">
+                  <ProjectPreview projectId={project.id} />
                   {project.badge ? (
                     <span className="absolute left-4 top-4 rounded-full border border-purple-500/30 bg-purple-950/50 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-100">
                       {project.badge}
@@ -190,7 +336,7 @@ function App() {
 
                   <div className="mt-5 flex flex-wrap gap-3">
                     {project.liveUrl ? (
-                      <a href={normalizeLink(project.liveUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-zinc-900/50 px-4 py-2 text-sm text-zinc-100 transition hover:border-purple-400/40 hover:text-purple-100">
+                      <a href={normalizeLink(project.liveUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-gradient-to-r from-purple-500/20 to-violet-500/10 px-4 py-2 text-sm text-zinc-100 transition hover:border-purple-400/40 hover:text-purple-100">
                         Live Demo
                         <ArrowUpRight className="h-4 w-4" />
                       </a>
