@@ -22,10 +22,15 @@ export interface DetailedProjectItem {
   badge: string
   overview: string
   problemSolved: string
-  architectureHighlights: ProjectFeature[]
+  image?: string
+  images?: string[]
+  architectureHighlights: Array<{
+    title: string
+    detail: string
+  }>
   techStack: string[]
-  liveUrl: string | null
-  repoUrl: string
+  liveUrl?: string | null
+  repoUrl?: string | null
 }
 
 export const profileInfo: ProfileData = {
@@ -373,6 +378,8 @@ export const projectsList: DetailedProjectItem[] = [
     techStack: ['JavaScript (ES Modules)', 'HTML5 Semântico', 'CSS3 Moderno', 'Nominatim API', 'OpenStreetMap', 'LocalStorage', 'Vite'],
     liveUrl: null,
     repoUrl: '[https://github.com/bluejaem/GovLocalApp](https://github.com/bluejaem/GovLocalApp)',
+    image: '/projects/govlocal-app.png',
+    images: ['/projects/govlocal-app.png'],
   },
   {
     id: 'consulta-salarios',
@@ -408,6 +415,12 @@ export const projectsList: DetailedProjectItem[] = [
     techStack: ['Python 3', 'Data Structures (Nested Dicts)', 'JSON Parsing', 'JavaScript ES6+', 'HTML5/CSS3', 'CLI Architecture'],
     liveUrl: null,
     repoUrl: '[https://github.com/bluejaem/Projeto-Salarios-Tech-Brasil](https://github.com/bluejaem/Projeto-Salarios-Tech-Brasil)',
+    image: '/projects/salarios-tech-1.png',
+    images: [
+      '/projects/salarios-tech-1.png',
+      '/projects/salarios-tech-2.png',
+      '/projects/salarios-tech-3.png'
+    ],
   },
   {
     id: 'calculadora-imc',
@@ -443,6 +456,12 @@ export const projectsList: DetailedProjectItem[] = [
     techStack: ['HTML5 Semântico', 'CSS3 (Flexbox & Transparência)', 'JavaScript ES6+', 'DOM Manipulation'],
     liveUrl: '[https://bluejaem.github.io/Calculadora-IMC/](https://bluejaem.github.io/Calculadora-IMC/)',
     repoUrl: '[https://github.com/bluejaem/Calculadora-IMC](https://github.com/bluejaem/Calculadora-IMC)',
+    image: '/projects/calculadora-imc.png',
+    images: [
+      '/projects/calculadora-imc.png',
+      '/projects/calculadora-imc-2.png',
+      '/projects/calculadora-imc-3.png'
+    ],
   },
 ]
 
