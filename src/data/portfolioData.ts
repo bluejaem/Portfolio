@@ -321,9 +321,24 @@ export const projectsList: DetailedProjectItem[] = [
       },
     ],
     techStack: ['React 18', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Recharts', 'Framer Motion', 'Radix UI', 'Vite'],
-    liveUrl: '[https://meu-life-os.vercel.app/](https://meu-life-os.vercel.app/)',
-    repoUrl: '[https://github.com/bluejaem/Meu-LIFE-OS](https://github.com/bluejaem/Meu-LIFE-OS)',
-  },
+    liveUrl: 'https://meu-life-os.vercel.app/',
+    repoUrl: 'https://github.com/bluejaem/Meu-LIFE-OS',
+    image: '/projects/meu-life-os-1.png',
+    images: [
+      '/projects/meu-life-os-1.png',
+      '/projects/meu-life-os-2.png',
+      '/projects/meu-life-os-3.png',
+      '/projects/meu-life-os-4.png',
+      '/projects/meu-life-os-5.png',
+      '/projects/meu-life-os-6.png',
+      '/projects/meu-life-os-7.png',
+      '/projects/meu-life-os-8.png',
+      '/projects/meu-life-os-9.png',
+      '/projects/meu-life-os-10.png',
+      '/projects/meu-life-os-11.png',
+      '/projects/meu-life-os-12.png'
+    ]
+  }, 
   {
     id: 'govlocal-app',
     title: 'GovLocal App',
