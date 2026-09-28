@@ -381,45 +381,53 @@ export const projectsList: DetailedProjectItem[] = [
     image: '/projects/govlocal-app.png',
     images: ['/projects/govlocal-app.png'],
   },
-  {
+
+    {
     id: 'consulta-salarios',
-    title: 'Consulta de Salários Tech Brasil',
-    category: 'Engenharia de Dados & CLI',
-    badge: 'Ferramenta CLI & SPA Web Estática',
+    title: 'Painel de Remuneração & Stacks Tech Brasil',
+    category: 'Engenharia de Dados & Frontend Analítico',
+    badge: 'Arquitetura Analítica & Simulação Fiscal',
     overview:
-      'Solução dupla (utilitário de linha de comando em terminal e Single Page Application web desacoplada) que atua como consultoria automatizada de parâmetros e estimativas salariais no mercado tecnológico brasileiro.',
+      'Plataforma analítica client-side de inteligência salarial no mercado de software brasileiro. Disponibiliza comparação dinâmica entre stacks lado a lado, simulador de equivalência tributária (CLT vs. PJ com deduções detalhadas) e emissão de relatórios consolidados em PDF.',
     problemSolved:
-      'Fornece transparência salarial precisa ao cruzar remunerações não apenas por linguagem, mas por senioridade e macrorregião geográfica, destacando as particularidades econômicas de cada polo do Brasil.',
+      'Resolve a falta de transparência sobre médias remuneratórias por região no Brasil e mitiga incertezas fiscais ao discriminar deduções de INSS, IRRF progressivo e Simples Nacional para decisões de carreira.',
     architectureHighlights: [
       {
-        title: 'Estruturação de Dados com Dicionários Aninhados (Nested Dictionaries)',
+        title: 'Comparador Multivariado de Stacks',
         detail:
-          'Mapeamento multidimensional em Python que cruza 11 tecnologias de mercado com as 5 macrorregiões do país e 3 níveis de senioridade (Júnior, Pleno e Sênior).',
+          'Mecanismo de análise cruzada em tempo real que avalia médias, diferenciais brutos, piso, teto e perfis de ecossistema técnico entre linguagens distintas.',
       },
       {
-        title: 'Contextualização Econômica Regional Automatizada',
+        title: 'Motor de Equivalência Fiscal CLT vs PJ',
         detail:
-          'Emissão de insights econômicos customizados, diferenciando mercados como o agrotech/governamental no Centro-Oeste do polo industrial e de semicondutores do Norte.',
+          'Simulador matemático com cálculo dinâmico de retenções (INSS e faixas do IRRF) em paralelo a alíquotas do Simples Nacional (Anexo III) com projeção de despesas operacionais.',
       },
       {
-        title: 'Tratamento de Exceções e Higienização de Input',
+        title: 'Contextualização Tecnológica & Frameworks',
         detail:
-          'Rotinas defensivas no CLI que tratam variações de maiúsculas/minúsculas e bloqueiam entradas espúrias para prevenir interrupções de execução no terminal.',
+          'Mapeamento objetivo de casos de uso corporativo, pontos fortes de arquitetura, limitações operacionais e ferramentas essenciais para cada ecossistema.',
       },
       {
-        title: 'Distribuição Híbrida (CLI + SPA Web Serverless)',
+        title: 'Exportação Analítica em PDF (Zero-Server)',
         detail:
-          'Além do script Python puro (`programa.py`), conta com interface web estática (`web/`) que consome dados serializados em JSON sem dependência de servidores de backend.',
+          'Geração client-side de dossiês comparativos parametrizados para impressão e partilha sem dependência de processamento em backend externo.',
       },
     ],
-    techStack: ['Python 3', 'Data Structures (Nested Dicts)', 'JSON Parsing', 'JavaScript ES6+', 'HTML5/CSS3', 'CLI Architecture'],
-    liveUrl: null,
-    repoUrl: '[https://github.com/bluejaem/Projeto-Salarios-Tech-Brasil](https://github.com/bluejaem/Projeto-Salarios-Tech-Brasil)',
+    techStack: [
+      'JavaScript ES6+',
+      'Modelagem Fiscal & Estatística',
+      'HTML5 Semântico',
+      'CSS3 Moderno',
+      'Python 3 (CLI)',
+      'Exportação PDF',
+    ],
+    liveUrl: 'https://bluejaem.github.io/Projeto-Salarios-Tech-Brasil/',
+    repoUrl: 'https://github.com/bluejaem/Projeto-Salarios-Tech-Brasil',
     image: '/projects/salarios-tech-1.png',
     images: [
       '/projects/salarios-tech-1.png',
       '/projects/salarios-tech-2.png',
-      '/projects/salarios-tech-3.png'
+      '/projects/salarios-tech-3.png',
     ],
   },
   {
