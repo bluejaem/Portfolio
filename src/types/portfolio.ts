@@ -60,6 +60,7 @@ export interface ProjectItem {
   liveUrl: string | null
   repoUrl: string | null
   imageUrl: string
+  images?: string[];
 }
 
 export interface CertificationItem {
