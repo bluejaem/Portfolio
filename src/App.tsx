@@ -4,12 +4,14 @@ import {
   ArrowRight,
   ArrowUpRight,
   BriefcaseBusiness,
+  ChevronLeft,
+  ChevronRight,
   GitBranch,
   GraduationCap,
   Mail,
   MapPin,
 } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import {
   contactsData,
@@ -24,7 +26,6 @@ function normalizeLink(value: string | null) {
   return match ? match[2] : value
 }
 
-// Tipagem estrita de Variants para eliminar 100% dos erros do TypeScript
 const slideVariants: Variants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 40 : -40,
@@ -60,6 +61,7 @@ function App() {
 
   const [currentProject, setCurrentProject] = useState(0)
   const [projectDir, setProjectDir] = useState(1)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const [certStage, setCertStage] = useState(0)
   const [certDir, setCertDir] = useState(1)
@@ -68,6 +70,31 @@ function App() {
   const project = projectsList[currentProject]
   const isLastFormation = currentFormation === dimensionsData.length - 1
   const isFirstFormation = currentFormation === 0
+
+  // Reseta para o primeiro slide de foto sempre que trocar de projeto
+  useEffect(() => {
+    setCurrentImageIndex(0)
+  }, [currentProject])
+
+  // Resolve a lista de imagens dinamicamente a partir do objeto cadastrado
+  const projectImages: string[] =
+    project.images && project.images.length > 0
+      ? project.images
+      : [project.image || '']
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setCurrentImageIndex((prev) =>
+      prev === 0 ? projectImages.length - 1 : prev - 1
+    )
+  }
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setCurrentImageIndex((prev) =>
+      prev === projectImages.length - 1 ? 0 : prev + 1
+    )
+  }
 
   const certificationSlides = [
     {
@@ -335,15 +362,6 @@ function App() {
     tecnico: '/education/ti.jpg',
   }
 
-  const projectImageMap: Record<string, string> = {
-    'meu-life-os': '/projects/meu-life-os.png',
-    'govlocal-app': '/projects/govlocal-app.png',
-    'consulta-salarios': '/projects/consulta-salarios.png',
-    'calculadora-imc': '/projects/calculadora-imc.png',
-  }
-
-  const selectedProjectImage = projectImageMap[project.id] ?? '/projects/meu-life-os.png'
-
   const formacaoCountLabel = `${String(currentFormation + 1).padStart(2, '0')} / ${String(dimensionsData.length).padStart(2, '0')}`
   const projectCountLabel = `${String(currentProject + 1).padStart(2, '0')} / ${String(projectsList.length).padStart(2, '0')}`
 
@@ -485,7 +503,7 @@ function App() {
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS (TRANSIÇÃO SUAVE & 4 CARDS)          */}
+        {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS                                     */}
         {/* ================================================================= */}
         <section id="formacoes" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
           <motion.div
@@ -611,7 +629,7 @@ function App() {
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 3: PROJETOS (TRANSIÇÃO DIRECIONAL E CARDS FLUIDOS)           */}
+        {/* SEÇÃO 3: PROJETOS (COM CARROSSEL DE IMAGENS INTERNO)              */}
         {/* ================================================================= */}
         <section id="projetos" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
           <motion.div
@@ -638,17 +656,64 @@ function App() {
                   className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-start w-full"
                 >
                   <div className="lg:col-span-5 flex flex-col justify-between gap-3">
-                    <div className="group relative overflow-hidden rounded-[20px] border border-purple-500/30 bg-purple-950/40 shadow-md">
+                    {/* Bloco da Imagem com Slider Integrado */}
+                    <div className="group relative overflow-hidden rounded-[20px] border border-purple-500/30 bg-purple-950/40 shadow-md aspect-[16/10] flex items-center justify-center">
                       <img
-                        src={selectedProjectImage}
-                        alt={project.title}
-                        className="w-full aspect-[16/10] rounded-[20px] object-cover border border-purple-500/20 shadow-md transition duration-500 group-hover:scale-[1.03]"
+                        key={projectImages[currentImageIndex]}
+                        src={projectImages[currentImageIndex]}
+                        alt={`${project.title} - ${currentImageIndex + 1}`}
+                        className="w-full h-full object-contain p-1 transition-all duration-300"
+                        onError={(e) => {
+                          const target = e.currentTarget
+                          target.style.opacity = '0.3'
+                        }}
                       />
+
                       {project.badge ? (
-                        <span className="absolute left-3 top-3 rounded-full border border-purple-500/40 bg-purple-950/80 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-200 backdrop-blur-md">
+                        <span className="absolute left-3 top-3 rounded-full border border-purple-500/40 bg-purple-950/80 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-200 backdrop-blur-md pointer-events-none">
                           {project.badge}
                         </span>
                       ) : null}
+
+                      {/* Setas de navegação de imagem (só aparecem se houver mais de 1 foto) */}
+                      {projectImages.length > 1 && (
+                        <>
+                          <button
+                            type="button"
+                            onClick={prevImage}
+                            aria-label="Imagem anterior"
+                            className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-purple-950/80 border border-purple-500/40 text-white flex items-center justify-center hover:bg-purple-600 hover:border-purple-400 transition-all duration-200 shadow-lg cursor-pointer z-10"
+                          >
+                            <ChevronLeft className="w-4 h-4" />
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={nextImage}
+                            aria-label="Próxima imagem"
+                            className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-purple-950/80 border border-purple-500/40 text-white flex items-center justify-center hover:bg-purple-600 hover:border-purple-400 transition-all duration-200 shadow-lg cursor-pointer z-10"
+                          >
+                            <ChevronRight className="w-4 h-4" />
+                          </button>
+
+                          {/* Indicadores de bolinhas */}
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-950/80 border border-purple-500/30 backdrop-blur-md z-10">
+                            {projectImages.map((_, idx) => (
+                              <button
+                                key={idx}
+                                type="button"
+                                onClick={() => setCurrentImageIndex(idx)}
+                                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                                  currentImageIndex === idx
+                                    ? 'w-4 bg-purple-400'
+                                    : 'w-1.5 bg-purple-900/60 hover:bg-purple-500'
+                                }`}
+                                aria-label={`Ir para a foto ${idx + 1}`}
+                              />
+                            ))}
+                          </div>
+                        </>
+                      )}
                     </div>
 
                     <div className="flex flex-wrap gap-1.5">
@@ -739,7 +804,7 @@ function App() {
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 4: CERTIFICAÇÕES (CARROSSEL COM TRANSIÇÃO DIRECIONAL)       */}
+        {/* SEÇÃO 4: CERTIFICAÇÕES                                            */}
         {/* ================================================================= */}
         <section id="certificacoes" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
           <motion.div
@@ -841,7 +906,7 @@ function App() {
         </section>
 
         {/* ================================================================= */}
-        {/* SEÇÃO 5: CONTATO (REVELAÇÃO SUAVE COM COPYRIGHT INTEGRADO)        */}
+        {/* SEÇÃO 5: CONTATO                                                  */}
         {/* ================================================================= */}
         <section id="contato" className="relative z-20 h-screen w-full snap-center scroll-mt-16 flex flex-col justify-between items-center py-8 px-2 sm:px-4 lg:px-6 overflow-hidden">
           <motion.div
