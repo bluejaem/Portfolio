@@ -432,43 +432,49 @@ export const projectsList: DetailedProjectItem[] = [
   },
   {
     id: 'calculadora-imc',
-    title: 'Calculadora de IMC Interativa',
-    category: 'Aplicação Web Interativa',
-    badge: 'Manipulação de DOM & Validação de Entrada',
+    title: 'Calculadora Biométrica & Analisador de IMC',
+    category: 'Engenharia de Software & Frontend',
+    badge: 'Manipulação de DOM & Validação Reativa',
     overview:
-      'Aplicação web interativa para cálculo e classificação instantânea de índice de massa corporal com base nas diretrizes oficiais da Organização Mundial da Saúde (OMS).',
+      'Aplicação web focada em avaliação antropométrica e triagem biométrica em tempo real com base nos parâmetros oficiais da Organização Mundial da Saúde (OMS). Realiza classificação de estado nutricional, cálculo de diferencial de massa para a faixa eutrófica e estimativas de peso ideal.',
     problemSolved:
-      'Oferece triagem biométrica rápida e confiável sem fricção de recarregamento de página, garantindo validação matemática estrita contra valores inválidos ou negativos.',
+      'Elimina recarregamentos desnecessários e fricção na interface ao computar métricas instantaneamente no cliente, oferecendo feedback visual contextualizado e barreira contra entradas espúrias ou biologicamente incoerentes.',
     architectureHighlights: [
       {
-        title: 'Manipulação Reativa de DOM e Prevenção de Reload',
+        title: 'Mecanismo Reativo de DOM & Zero-Reload',
         detail:
-          'Interceptação do evento de submit via `event.preventDefault()`, viabilizando uma experiência de Single Page Application sem reconstrução de árvore de renderização.',
+          'Interceptação de submissão via preventDefault com manipulação atómica de nós, assegurando recálculo e renderização de indicadores sem repintura completa do documento.',
       },
       {
-        title: 'Lógica Condicional e Mapeamento de Faixas da OMS',
+        title: 'Motor de Decisão & Classificação Parametrizada da OMS',
         detail:
-          'Cadeia de decisão lógica para classificação precisa em faixas: abaixo do peso, peso normal, sobrepeso e os três graus de obesidade com retorno visual instantâneo.',
+          'Estrutura condicional determinística que mapeia classes nutricionais (de magreza severa a obesidade de grau III) com alertas visuais semânticos e cálculo de desvio ponderal.',
       },
       {
-        title: 'Validação Defensiva de Entradas Numéricas',
+        title: 'Tratamento Defensivo de Dados & Sanitização',
         detail:
-          'Barreira contra entradas nulas, caracteres não numéricos ou valores menores que zero, sinalizando alertas dinâmicos de erro sem quebrar o estado da tela.',
+          'Rotinas de normalização e validação que barram valores nulos, caracteres alfanuméricos inadequados ou intervalos fora dos limites antropométricos humanos válidos.',
       },
       {
-        title: 'Estruturação Semântica e Layout Sticky Footer',
+        title: 'Arquitetura CSS Moderna & Responsividade Fluida',
         detail:
-          'Construção em HTML5 semântico com Flexbox vertical (`min-height: 100vh`), mantendo o container de vidro centralizado e o rodapé ancorado na base em qualquer resolução.',
+          'Layout sustentado por Flexbox e variáveis CSS com composição visual em Glassmorphism, mantendo conformidade semântica em HTML5 e sticky footer resiliente em múltiplos viewports.',
       },
     ],
-    techStack: ['HTML5 Semântico', 'CSS3 (Flexbox & Transparência)', 'JavaScript ES6+', 'DOM Manipulation'],
-    liveUrl: '[https://bluejaem.github.io/Calculadora-IMC/](https://bluejaem.github.io/Calculadora-IMC/)',
-    repoUrl: '[https://github.com/bluejaem/Calculadora-IMC](https://github.com/bluejaem/Calculadora-IMC)',
+    techStack: [
+      'JavaScript ES6+',
+      'Manipulação de DOM',
+      'HTML5 Semântico',
+      'CSS3 Moderno (Glassmorphism)',
+      'Design Responsivo',
+    ],
+    liveUrl: 'https://bluejaem.github.io/Calculadora-IMC/',
+    repoUrl: 'https://github.com/bluejaem/Calculadora-IMC',
     image: '/projects/calculadora-imc.png',
     images: [
       '/projects/calculadora-imc.png',
       '/projects/calculadora-imc-2.png',
-      '/projects/calculadora-imc-3.png'
+      '/projects/calculadora-imc-3.png',
     ],
   },
 ]
