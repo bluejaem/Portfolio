@@ -6,7 +6,7 @@ Portfólio pessoal e profissional desenvolvido com uma arquitetura moderna, resp
 
 ## Demonstração Online
 
-- **Deploy de Produção:** [https://portfolio-two-red-85.vercel.app](https://portfolio-two-red-85.vercel.app)
+- **Deploy de Produção:** [https://joaoguilherme-data.vercel.app](https://joaoguilherme-data.vercel.app)
 - **Repositório:** [https://github.com/bluejaem/Portfolio](https://github.com/bluejaem/Portfolio)
 
 ---
