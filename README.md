@@ -14,7 +14,7 @@ Portfólio pessoal e profissional de João Guilherme Machado de Melo, com foco e
 
 Link previsto da publicação:
 
-- https://bluejaem.github.io/portfolio/
+- https://portfolio-two-red-85.vercel.app/
 
 ## Como rodar localmente
 
