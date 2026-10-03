@@ -293,7 +293,7 @@ export default function App() {
               João Guilherme Machado de Melo<span className="text-purple-400">.</span>
             </h1>
 
-            <p className="mt-6 text-sm sm:text-base text-zinc-300 leading-relaxed font-normal max-w-xl">
+            <p className="mt-6 text-sm sm:text-base text-zinc-300 leading-relaxed font-normal max-w-xl text-justify">
               Estudante de Ciência de Dados, Engenharia da Computação e Matemática Aplicada. Formado em Analista de Dados pela Educadados e certificado Microsoft PL-300, com foco em unir rigor analítico à tomada de decisão estratégica em negócios.
             </p>
 
@@ -400,7 +400,7 @@ export default function App() {
                   <h3 className="text-lg font-bold text-zinc-100 mt-5 group-hover:text-purple-200 transition-colors">
                     {spec.title}
                   </h3>
-                  <p className="text-xs text-zinc-400 mt-3 leading-relaxed font-normal">
+                  <p className="text-xs text-zinc-400 mt-3 leading-relaxed font-normal text-justify">
                     {spec.description}
                   </p>
                 </div>
@@ -456,13 +456,13 @@ export default function App() {
                 </div>
 
                 <div className="mt-6 space-y-4 text-sm text-zinc-300 leading-relaxed font-normal">
-                  <p>
+                    <p className="text-justify">
                     Minha formação em Análise de Dados pela Educadados e a certificação Microsoft PL-300 (Power BI Data Analyst) reforçam minha capacidade de transformar informação em conhecimento claro, conectando análise, modelagem e estratégia.
                   </p>
-                  <p>
+                  <p className="text-justify">
                     Minha trajetória integra cinco frentes: Ciência de Dados (Gran Faculdade), Engenharia da Computação (UNINTER), Matemática Aplicada e Computacional (UFS), Gestão da TI com extensão em IA (ETEP) e formação técnica em Informática (UNINTER). Essa base conecta perspectivas técnicas, computacionais, quantitativas e organizacionais.
                   </p>
-                  <p>
+                  <p className="text-justify">
                     Busco contribuir em diferentes desafios de Tecnologia, Computação e Dados, aplicando essa formação multidisciplinar para desenvolver soluções, interpretar informações e apoiar decisões em contextos variados.
                   </p>
                 </div>
@@ -508,7 +508,7 @@ export default function App() {
                       {edu.institution}
                     </p>
 
-                    <p className="text-xs text-zinc-400 mt-4 leading-relaxed font-normal">
+                    <p className="text-xs text-zinc-400 mt-4 leading-relaxed font-normal text-justify">
                       {edu.description}
                     </p>
                   </div>
@@ -612,7 +612,7 @@ export default function App() {
                       <h3 className="text-lg font-bold text-zinc-100 mt-2">
                         {proj.title}
                       </h3>
-                      <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
+                      <p className="text-xs text-zinc-400 mt-2 leading-relaxed text-justify">
                         {proj.problemSolved}
                       </p>
 
@@ -627,7 +627,7 @@ export default function App() {
                               <span className="text-[10px] font-semibold text-purple-300 leading-tight">
                                 {arch.title}
                               </span>
-                              <span className="text-[10px] text-zinc-400 mt-0.5 leading-tight">
+                              <span className="text-[10px] text-zinc-400 mt-0.5 leading-tight text-justify">
                                 {arch.detail}
                               </span>
                             </div>
@@ -733,7 +733,7 @@ export default function App() {
                       </div>
                     </div>
 
-                    <p className="text-xs text-zinc-400 mt-4 leading-relaxed font-normal">
+                    <p className="text-xs text-zinc-400 mt-4 leading-relaxed font-normal text-justify">
                       {cert.description}
                     </p>
                   </div>
