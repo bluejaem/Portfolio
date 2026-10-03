@@ -17,7 +17,6 @@ import {
   Menu,
   X,
   Award,
-  Sparkles,
   Terminal as TerminalIcon,
   CheckCircle2,
   Calendar,
@@ -287,7 +286,6 @@ export default function App() {
           {/* Lado Esquerdo: Textos & CTAs */}
           <div className="w-full md:w-1/2 flex flex-col items-start">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-950/40 border border-purple-500/30 text-purple-300 text-xs font-medium tracking-wide mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
               <span>CIÊNCIA DE DADOS & TECNOLOGIA</span>
             </div>
 
