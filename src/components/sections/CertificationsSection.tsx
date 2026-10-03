@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Award } from 'lucide-react'
 
 interface CertItem {
   institution: string
@@ -285,100 +285,44 @@ const certificationSlides: CertSlide[] = [
 ]
 
 export function CertificationsSection() {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
-  const currentSlide = certificationSlides[currentSlideIndex]
+  const certificationItems = certificationSlides.flatMap((slide) =>
+    slide.items.map((item) => ({ ...item, category: slide.categoryBadge })),
+  )
 
   return (
-    <section id="certificacoes" className="min-h-fit w-full flex flex-col justify-center items-center py-20 px-4 sm:px-6 lg:px-8 relative">
-      {/* Cabeçalho da Seção com Respiro Superior Calibrado */}
-      <div className="w-full max-w-[95vw] 2xl:max-w-[1400px] mb-6">
-        <p className="text-xs uppercase tracking-widest text-purple-400 font-semibold mb-1">
-          CERTIFICAÇÕES E CONQUISTAS
-        </p>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-zinc-100">
-          Aprendizado Contínuo em Análise de Tecnologia e Aplicação Prática
-        </h2>
-      </div>
+    <section id="certificacoes" className="relative w-full px-4 py-24 sm:px-6 md:py-28 lg:px-8">
+      <div className="mx-auto max-w-6xl">
+        <header className="text-center">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-purple-400">APRENDIZADO CONTÍNUO</p>
+          <h2 className="text-3xl font-bold text-zinc-100 md:text-4xl">
+            CERTIFICAÇÕES &amp; CONQUISTAS<span className="text-purple-400">.</span>
+          </h2>
+        </header>
 
-      {/* Card Principal com Altura Rigorosamente Travada (Fim do Card que Encolhe e Estica) */}
-      <div className="w-full max-w-[95vw] 2xl:max-w-[1400px] h-[600px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-6 lg:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between">
-        
-        {/* Topo do Slide */}
-        <div className="flex flex-col gap-1.5 border-b border-purple-500/20 pb-4">
-          <div className="flex items-center justify-between">
-            <span className="bg-purple-900/40 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">
-              {currentSlide.categoryBadge}
-            </span>
-            <span className="text-xs font-mono text-purple-300/80">
-              {currentSlide.stageNumber}
-            </span>
-          </div>
-          <h3 className="text-xl sm:text-2xl font-bold text-zinc-100 mt-1">
-            {currentSlide.title}
-          </h3>
-        </div>
-
-        {/* Área dos Cards: Grade Homogênea Balanceada */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-auto overflow-hidden">
-          {currentSlide.items.map((item, idx) => (
-            <div
-              key={idx}
-              className="p-4 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300 flex flex-col justify-between h-[135px]"
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {certificationItems.map((item) => (
+            <article
+              key={`${item.institution}-${item.title}`}
+              className="group flex h-full flex-col rounded-3xl border border-purple-500/20 bg-zinc-900/60 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-purple-400/50 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)]"
             >
-              <div>
-                <div className="flex items-center justify-between text-[11px] font-medium text-purple-400 mb-1.5">
-                  <span className="truncate max-w-[70%]">{item.institution}</span>
-                  <span className="bg-purple-950/60 px-2 py-0.5 rounded border border-purple-500/30 text-purple-200">
-                    {item.hours}
-                  </span>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-purple-500/30 bg-purple-500/10 text-purple-200">
+                  <Award className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <h4 className="text-sm font-bold text-zinc-100 line-clamp-1 mb-1">
-                  {item.title}
-                </h4>
-                <p className="text-xs text-zinc-300/80 line-clamp-2 leading-relaxed">
-                  {item.description}
-                </p>
+                <div className="flex flex-wrap justify-end gap-2">
+                  <span className="rounded-full border border-purple-500/25 bg-purple-950/40 px-3 py-1 text-xs text-purple-200">{item.year}</span>
+                  <span className="rounded-full border border-zinc-700 bg-zinc-950/60 px-3 py-1 text-xs text-zinc-300">{item.hours}</span>
+                </div>
               </div>
-              <div className="text-[10px] text-zinc-400 text-right mt-1">
-                {item.year}
-              </div>
-            </div>
+              <p className="mt-5 text-xs font-semibold uppercase tracking-[0.15em] text-purple-300">{item.institution}</p>
+              <h3 className="mt-2 text-lg font-semibold leading-snug text-zinc-100">{item.title}</h3>
+              <p className="mt-3 flex-1 text-sm leading-7 text-zinc-300">{item.description}</p>
+              <span className="mt-5 self-start rounded-full border border-zinc-700 bg-zinc-950/60 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-zinc-300">
+                {item.category}
+              </span>
+            </article>
           ))}
         </div>
-
-        {/* Barra de Navegação Inferior Integrada (Fixa e Permanente) */}
-        <div className="pt-4 border-t border-purple-500/20 flex items-center justify-between">
-          {/* Dots Indicadores dos 6 Slides */}
-          <div className="flex items-center gap-2">
-            {certificationSlides.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentSlideIndex(idx)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentSlideIndex === idx ? 'w-8 bg-purple-400' : 'w-2 bg-purple-900/50 hover:bg-purple-600'
-                }`}
-                aria-label={`Ir para categoria ${idx + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Botões Laterais */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setCurrentSlideIndex(prev => (prev === 0 ? certificationSlides.length - 1 : prev - 1))}
-              className="px-4 py-2 text-xs sm:text-sm rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-200 hover:bg-purple-900/50 transition-colors"
-            >
-              ← Anterior
-            </button>
-            <button
-              onClick={() => setCurrentSlideIndex(prev => (prev === certificationSlides.length - 1 ? 0 : prev + 1))}
-              className="px-4 py-2 text-xs sm:text-sm rounded-xl bg-purple-600 text-white font-medium hover:bg-purple-500 transition-colors shadow-lg shadow-purple-950/50"
-            >
-              Próxima Categoria →
-            </button>
-          </div>
-        </div>
-
       </div>
     </section>
   )
