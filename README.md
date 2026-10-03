@@ -1,4 +1,4 @@
-# João Guilherme | Portfólio & Engenharia de Software
+# João Guilherme | Portfólio
 
 Portfólio pessoal e profissional de João Guilherme Machado de Melo, com foco em matemática aplicada, engenharia da computação, ciência de dados e desenvolvimento de software.
 
