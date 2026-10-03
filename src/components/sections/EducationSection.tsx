@@ -165,7 +165,7 @@ export function EducationSection() {
   const currentFormationData = formationsList[currentFormation]
 
   return (
-    <section id="formacao" className="min-h-screen w-full flex flex-col justify-center items-center py-16 px-4 sm:px-6 lg:px-8 relative snap-start">
+    <section id="formacao" className="min-h-fit w-full flex flex-col justify-center items-center py-16 px-4 sm:px-6 lg:px-8 relative">
       {/* Cabeçalho da Secção */}
       <div className="w-full max-w-[95vw] 2xl:max-w-[1400px] mb-6">
         <p className="text-xs uppercase tracking-widest text-purple-400 font-semibold mb-1">

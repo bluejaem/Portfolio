@@ -458,7 +458,7 @@ function App() {
   }
 
   return (
-    <div className={`h-screen ${isMobileMenuOpen ? 'overflow-hidden' : 'overflow-y-auto'} overflow-x-hidden snap-y snap-mandatory scroll-smooth bg-[#090611] text-zinc-100`}>
+    <div className="min-h-screen overflow-x-hidden bg-[#090611] text-zinc-100">
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-[-7rem] h-80 w-80 -translate-x-1/2 rounded-full bg-purple-600/15 blur-[120px]" />
         <div className="absolute left-[-8rem] top-1/3 h-96 w-96 rounded-full bg-indigo-500/15 blur-[120px]" />
@@ -630,7 +630,7 @@ function App() {
         {/* ================================================================= */}
         {/* SEÇÃO 1: HERO / APRESENTAÇÃO                                      */}
         {/* ================================================================= */}
-        <section id="inicio" className="relative flex min-h-screen w-full items-center overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
+        <section id="inicio" className="relative flex min-h-fit w-full items-center overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
           <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
             <motion.div
               initial={{ opacity: 0, x: -28, y: 20 }}
@@ -799,20 +799,20 @@ function App() {
         {/* ================================================================= */}
         {/* SEÇÃO 2: FORMAÇÕES ACADÊMICAS                                     */}
         {/* ================================================================= */}
-        <section id="formacoes" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
+        <section id="formacoes" className="relative min-h-fit w-full scroll-mt-16 flex flex-col justify-center items-center py-16 px-2 sm:px-4 lg:px-6">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]"
+            className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center"
           >
             <div className="mb-3 w-full px-2">
               <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-0.5">Formações acadêmicas</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Formações Acadêmicas Interdisciplinares</h2>
             </div>
 
-            <div className="w-full h-[580px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between overflow-hidden">
+            <div className="w-full min-h-[580px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between overflow-hidden">
               <AnimatePresence mode="wait" custom={formationDir}>
                 <motion.div
                   key={formation.id}
@@ -925,7 +925,7 @@ function App() {
         {/* ================================================================= */}
         {/* SEÇÃO 3: ESPECIALIDADES / HABILIDADES                            */}
         {/* ================================================================= */}
-        <section id="especialidades" className="relative w-full snap-center scroll-mt-16 py-20 px-4 sm:px-6 lg:px-8">
+        <section id="especialidades" className="relative w-full scroll-mt-16 py-20 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-6xl">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-300">Competências &amp; Domínios</p>
@@ -1117,20 +1117,20 @@ function App() {
         {/* ================================================================= */}
         {/* SEÇÃO 4: CERTIFICAÇÕES                                            */}
         {/* ================================================================= */}
-        <section id="certificacoes" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
+        <section id="certificacoes" className="relative min-h-fit w-full scroll-mt-16 flex flex-col justify-center items-center py-16 px-2 sm:px-4 lg:px-6">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]"
+            className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center"
           >
             <div className="mb-3 w-full px-2">
               <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-0.5">Certificações e conquistas</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Aprendizado Contínuo em Análise de Tecnologia e Aplicação Prática</h2>
             </div>
 
-            <div className="w-full h-[570px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between overflow-hidden">
+            <div className="w-full min-h-[570px] bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-7 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between overflow-hidden">
               <div className="flex items-center justify-between border-b border-purple-500/20 pb-2.5">
                 <span className="bg-purple-900/40 text-purple-300 border border-purple-500/30 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">
                   {activeSlide.badge}

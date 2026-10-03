@@ -289,7 +289,7 @@ export function CertificationsSection() {
   const currentSlide = certificationSlides[currentSlideIndex]
 
   return (
-    <section id="certificacoes" className="min-h-screen w-full flex flex-col justify-center items-center py-20 px-4 sm:px-6 lg:px-8 relative snap-start">
+    <section id="certificacoes" className="min-h-fit w-full flex flex-col justify-center items-center py-20 px-4 sm:px-6 lg:px-8 relative">
       {/* Cabeçalho da Seção com Respiro Superior Calibrado */}
       <div className="w-full max-w-[95vw] 2xl:max-w-[1400px] mb-6">
         <p className="text-xs uppercase tracking-widest text-purple-400 font-semibold mb-1">
