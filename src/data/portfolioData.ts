@@ -246,7 +246,7 @@ export const educationList: EducationItem[] = [
     institution: 'Gran Faculdade',
     degree: 'Tecnólogo em Ciência de Dados',
     level: 'Graduação',
-    expectedGraduation: 'Dezembro de 2028',
+    expectedGraduation: '2028',
     status: 'Em andamento',
     dimension: 'Dados & Ciência de Dados',
     topics: ['Estatística Aplicada', 'Visualização de Dados', 'Machine Learning', 'Pipelines de Dados'],
@@ -274,9 +274,9 @@ export const educationList: EducationItem[] = [
   {
     id: 'etep-gti',
     institution: 'ETEP',
-    degree: 'Gestão da Tecnologia da Informação + Extensão em IA',
+    degree: 'Gestão da TI + Extensão em IA',
     level: 'Graduação',
-    expectedGraduation: 'Dezembro de 2028',
+    expectedGraduation: '2028',
     status: 'Em andamento',
     dimension: 'Gestão e Inteligência Artificial',
     topics: ['Governança de TI', 'Estratégia de Negócios', 'Inteligência Artificial Aplicada'],
@@ -284,9 +284,9 @@ export const educationList: EducationItem[] = [
   {
     id: 'uninter-tec',
     institution: 'UNINTER',
-    degree: 'Técnico em Informática',
+    degree: 'Informática',
     level: 'Técnico',
-    expectedGraduation: 'Dezembro de 2027',
+    expectedGraduation: '2027',
     status: 'Em andamento',
     dimension: 'Infraestrutura e Suporte',
     topics: ['Redes de Computadores', 'Hardware & Software', 'Sistemas Operacionais', 'Infraestrutura'],
@@ -307,22 +307,22 @@ export const projectsList: DetailedProjectItem[] = [
       {
         title: 'Estado Distribuído e Reatividade com Zustand',
         detail:
-          'Acesso atômico a fatias de estado sem os re-renders custosos da Context API, sincronizando em tempo real o cronômetro Pomodoro, o Kanban de tarefas e as métricas do dashboard.',
+          'Acesso atômico ao estado com Zustand, sem re-renderizações redundantes.',
       },
       {
         title: 'Arquitetura Local-First Autônoma',
         detail:
-          'Persistência assíncrona imediata via middleware do Zustand conectado ao localStorage do navegador, assegurando integridade e privacidade de dados com funcionamento 100% offline.',
+          'Persistência local assíncrona com Zustand e LocalStorage.',
       },
       {
         title: 'Dashboard Analítico com Gráficos SVG (Recharts)',
         detail:
-          'Visualização quantitativa através de gráficos de área interativos que correlacionam o volume de tarefas concluídas com as horas líquidas de estudo acumuladas na semana.',
+          'Gráficos relacionam tarefas concluídas e horas de estudo semanais.',
       },
       {
         title: 'Parser Inteligente de Rotinas & Gestão Acadêmica',
         detail:
-          'Analisador de texto nativo que converte blocos de texto colados em cronogramas categorizados, além de módulo dedicado para rastreio de múltiplos cursos, notas e semestres.',
+          'Parser converte texto em cronogramas e prazos gerenciáveis.',
       },
     ],
     techStack: ['React 18', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Recharts', 'Framer Motion', 'Radix UI', 'Vite'],
@@ -357,22 +357,22 @@ export const projectsList: DetailedProjectItem[] = [
       {
         title: 'Geolocalização Automática via Nominatim API',
         detail:
-          'Reverse Geocoding em tempo real utilizando OpenStreetMap para detectar e filtrar dinamicamente estado e município sem requerer preenchimento manual de formulários.',
+          'Reverse Geocoding detecta localização e município em tempo real.',
       },
       {
         title: 'Central de Emergência com Disca-Fácil e Cópia de Coordenadas',
         detail:
-          'Painel com discagem telefônica direta para órgãos de socorro (190, 192, 193, 180, 199) com funcionalidade de cópia instantânea das coordenadas de GPS para envio ao atendente.',
+          'Atalhos acionam serviços de emergência e copiam coordenadas.',
       },
       {
         title: 'Arquitetura Modular em Vanilla JS (ES Modules)',
         detail:
-          'Frontend leve estruturado em ES Modules, CSS Variables para design system desacoplado e build ultrarrápido otimizado via Vite.',
+          'Módulos JavaScript mantêm a interface leve e desacoplada.',
       },
       {
         title: 'Persistência de Sessão e Favoritos',
         detail:
-          'Armazenamento local via Web Storage API para salvar portais cívicos frequentes (.gov.br, Detran, SUS, Receita) com modo simulador de moldura mobile para testes no desktop.',
+          'Favoritos cívicos ficam salvos localmente no navegador.',
       },
     ],
     techStack: ['JavaScript (ES Modules)', 'HTML5 Semântico', 'CSS3 Moderno', 'Nominatim API', 'OpenStreetMap', 'LocalStorage', 'Vite'],
@@ -395,22 +395,22 @@ export const projectsList: DetailedProjectItem[] = [
       {
         title: 'Comparador Multivariado de Stacks',
         detail:
-          'Mecanismo de análise cruzada em tempo real que avalia médias, diferenciais brutos, piso, teto e perfis de ecossistema técnico entre linguagens distintas.',
+          'Compara médias, pisos e tetos salariais entre stacks.',
       },
       {
         title: 'Motor de Equivalência Fiscal CLT vs PJ',
         detail:
-          'Simulador matemático com cálculo dinâmico de retenções (INSS e faixas do IRRF) em paralelo a alíquotas do Simples Nacional (Anexo III) com projeção de despesas operacionais.',
+          'Simula remuneração CLT e PJ com impostos e deduções.',
       },
       {
         title: 'Contextualização Tecnológica & Frameworks',
         detail:
-          'Mapeamento objetivo de casos de uso corporativo, pontos fortes de arquitetura, limitações operacionais e ferramentas essenciais para cada ecossistema.',
+          'Compara perfis técnicos, casos de uso e ferramentas.',
       },
       {
         title: 'Exportação Analítica em PDF (Zero-Server)',
         detail:
-          'Geração client-side de dossiês comparativos parametrizados para impressão e partilha sem dependência de processamento em backend externo.',
+          'Gera relatórios PDF no navegador, sem depender de backend.',
       },
     ],
     techStack: [
@@ -443,22 +443,22 @@ export const projectsList: DetailedProjectItem[] = [
       {
         title: 'Mecanismo Reativo de DOM & Zero-Reload',
         detail:
-          'Interceptação de submissão via preventDefault com manipulação atómica de nós, assegurando recálculo e renderização de indicadores sem repintura completa do documento.',
+          'Eventos recalculam indicadores no navegador sem recarregar a página.',
       },
       {
         title: 'Motor de Decisão & Classificação Parametrizada da OMS',
         detail:
-          'Estrutura condicional determinística que mapeia classes nutricionais (de magreza severa a obesidade de grau III) com alertas visuais semânticos e cálculo de desvio ponderal.',
+          'Regras da OMS classificam resultados com alertas visuais semânticos.',
       },
       {
         title: 'Tratamento Defensivo de Dados & Sanitização',
         detail:
-          'Rotinas de normalização e validação que barram valores nulos, caracteres alfanuméricos inadequados ou intervalos fora dos limites antropométricos humanos válidos.',
+          'Valida entradas e rejeita valores nulos ou fora da faixa.',
       },
       {
         title: 'Arquitetura CSS Moderna & Responsividade Fluida',
         detail:
-          'Layout sustentado por Flexbox e variáveis CSS com composição visual em Glassmorphism, mantendo conformidade semântica em HTML5 e sticky footer resiliente em múltiplos viewports.',
+          'Layout glassmorphism adapta-se a diferentes resoluções.',
       },
     ],
     techStack: [

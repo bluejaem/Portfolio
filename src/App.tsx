@@ -417,14 +417,18 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
               {/* Lado Esquerdo: Fotografia de Estúdio Exclusiva */}
               <div className="md:col-span-5 flex justify-center">
-                <div className="relative group w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden border border-purple-500/30 shadow-[0_0_35px_rgba(168,85,247,0.2)] bg-zinc-900">
+                <motion.div
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                  className="relative group w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden border border-purple-500/30 shadow-[0_0_35px_rgba(168,85,247,0.2)] bg-zinc-900"
+                >
                   <img
                     src={profileInfo.photoUrl}
                     alt={profileInfo.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#07020d] via-transparent to-transparent opacity-40 pointer-events-none" />
-                </div>
+                </motion.div>
               </div>
 
               {/* Lado Direito: Narrativa & Trajetória */}
@@ -455,43 +459,14 @@ export default function App() {
 
                 <div className="mt-6 space-y-4 text-sm text-zinc-300 leading-relaxed font-normal">
                   <p>
-                    Sou apaixonado por Dados e Tecnologia, com formação em Analista de Dados pela Educadados e certificação Microsoft PL-300 (Power BI Data Analyst). Minha trajetória é construída para transformar informação bruta em conhecimento claro, conectando análise quantitativa, modelagem e tomada de decisão estratégica em negócios.
+                    Minha formação em Análise de Dados pela Educadados e a certificação Microsoft PL-300 (Power BI Data Analyst) reforçam minha capacidade de transformar informação em conhecimento claro, conectando análise, modelagem e estratégia.
                   </p>
                   <p>
-                    Minha base analítica é multidisciplinar: curso Ciência de Dados (Gran Faculdade), Engenharia da Computação (UNINTER), Matemática Aplicada e Computacional (UFS), Gestão da Tecnologia da Informação (ETEP) e Técnico em Informática (UNINTER). Essa combinação me permite olhar para os problemas sob a ótica técnica, algorítmica e corporativa.
+                    Minha trajetória integra cinco frentes: Ciência de Dados (Gran Faculdade), Engenharia da Computação (UNINTER), Matemática Aplicada e Computacional (UFS), Gestão da TI com extensão em IA (ETEP) e formação técnica em Informática (UNINTER). Essa base conecta perspectivas técnicas, computacionais, quantitativas e organizacionais.
                   </p>
                   <p>
-                    Meu foco atual é evoluir em posições iniciais e de estágio em Dados/BI, desenvolvendo competências com constância para atuar como Analista de Dados Júnior, gerando valor real por meio de relatórios executivos e exploração crítica de dados.
+                    Busco contribuir em diferentes desafios de Tecnologia, Computação e Dados, aplicando essa formação multidisciplinar para desenvolver soluções, interpretar informações e apoiar decisões em contextos variados.
                   </p>
-                </div>
-
-                {/* Links Sociais */}
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <a
-                    href={normalizeLink(profileInfo.contacts.linkedin)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-4 py-2 rounded-full bg-purple-950/40 border border-purple-500/25 text-xs text-zinc-200 hover:text-white hover:border-purple-400/50 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all flex items-center gap-2"
-                  >
-                    <BriefcaseBusiness className="w-3.5 h-3.5 text-purple-400" />
-                    <span>LinkedIn</span>
-                  </a>
-                  <a
-                    href={normalizeLink(profileInfo.contacts.github)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-4 py-2 rounded-full bg-purple-950/40 border border-purple-500/25 text-xs text-zinc-200 hover:text-white hover:border-purple-400/50 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all flex items-center gap-2"
-                  >
-                    <GitBranch className="w-3.5 h-3.5 text-purple-400" />
-                    <span>GitHub</span>
-                  </a>
-                  <button
-                    onClick={copyEmail}
-                    className="px-4 py-2 rounded-full bg-purple-950/40 border border-purple-500/25 text-xs text-zinc-200 hover:text-white hover:border-purple-400/50 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all flex items-center gap-2"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-purple-400" />
-                    <span>{copiedEmail ? 'E-mail Copiado!' : 'Copiar E-mail'}</span>
-                  </button>
                 </div>
               </div>
             </div>
@@ -511,11 +486,11 @@ export default function App() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+            <div className="grid grid-cols-1 gap-6 mt-14 md:grid-cols-6">
               {educationList.map((edu, idx) => (
                 <div
                   key={idx}
-                  className="bg-zinc-900/60 border border-purple-500/15 rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1.5 hover:border-purple-400/50 hover:shadow-[0_0_25px_rgba(168,85,247,0.2)] transition-all duration-300"
+                  className={`bg-zinc-900/60 border border-purple-500/15 rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1.5 hover:border-purple-400/50 hover:shadow-[0_0_25px_rgba(168,85,247,0.2)] transition-all duration-300 md:col-span-2 ${idx === 3 ? 'md:col-start-2' : idx === 4 ? 'md:col-start-4' : ''}`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
@@ -654,7 +629,7 @@ export default function App() {
                               <span className="text-[10px] font-semibold text-purple-300 leading-tight">
                                 {arch.title}
                               </span>
-                              <span className="text-[10px] text-zinc-400 mt-0.5 leading-tight line-clamp-2">
+                              <span className="text-[10px] text-zinc-400 mt-0.5 leading-tight">
                                 {arch.detail}
                               </span>
                             </div>
@@ -783,9 +758,9 @@ export default function App() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-14 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-14 items-stretch">
               {/* Formulário */}
-              <div className="lg:col-span-7 bg-zinc-900/60 border border-purple-500/20 rounded-3xl p-8">
+              <div className="lg:col-span-7 h-full bg-zinc-900/60 border border-purple-500/20 rounded-3xl p-8">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -833,7 +808,7 @@ export default function App() {
               </div>
 
               {/* Informações Diretas */}
-              <div className="lg:col-span-5 bg-zinc-900/60 border border-purple-500/20 rounded-3xl p-8 space-y-6">
+              <div className="lg:col-span-5 h-full bg-zinc-900/60 border border-purple-500/20 rounded-3xl p-8 space-y-6 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-purple-400 mb-2">
                     <Mail className="w-4 h-4" />
