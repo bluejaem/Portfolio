@@ -244,7 +244,7 @@ export const educationList: EducationItem[] = [
   {
     id: 'gran-dados',
     institution: 'Gran Faculdade',
-    degree: 'Tecnólogo em Ciência de Dados',
+    degree: 'Ciência de Dados',
     level: 'Graduação',
     expectedGraduation: '2028',
     status: 'Em andamento',
@@ -254,7 +254,7 @@ export const educationList: EducationItem[] = [
   {
     id: 'ufs-matematica',
     institution: 'Universidade Federal de Sergipe (UFS)',
-    degree: 'Bacharelado em Matemática Aplicada e Computacional',
+    degree: 'Matemática Aplicada e Computacional',
     level: 'Graduação',
     expectedGraduation: '2030',
     status: 'Em andamento',
@@ -264,7 +264,7 @@ export const educationList: EducationItem[] = [
   {
     id: 'uninter-eng',
     institution: 'UNINTER',
-    degree: 'Bacharelado em Engenharia da Computação',
+    degree: 'Engenharia de Computação',
     level: 'Graduação',
     expectedGraduation: '2031',
     status: 'Em andamento',
