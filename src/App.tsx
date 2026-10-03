@@ -2,16 +2,22 @@ import { AnimatePresence, motion, type Variants } from 'framer-motion'
 import {
   ArrowLeft,
   ArrowRight,
-  ArrowUpRight,
+  BarChart3,
+  Binary,
   BriefcaseBusiness,
   ChevronLeft,
   ChevronRight,
+  Code2,
+  Cpu,
+  Database,
   GitBranch,
-  GraduationCap,
+  LineChart,
   Mail,
+  Menu,
   MapPin,
+  X,
 } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   contactsData,
@@ -56,44 +62,54 @@ const slideVariants: Variants = {
 }
 
 function App() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [currentFormation, setCurrentFormation] = useState(0)
   const [formationDir, setFormationDir] = useState(1)
 
-  const [currentProject, setCurrentProject] = useState(0)
-  const [projectDir, setProjectDir] = useState(1)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [projectImageIndexes, setProjectImageIndexes] = useState<Record<string, number>>({})
 
   const [certStage, setCertStage] = useState(0)
   const [certDir, setCertDir] = useState(1)
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    mensagem: '',
+  })
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success'>('idle')
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = 'auto'
+      return
+    }
+
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [isMobileMenuOpen])
 
   const formation = dimensionsData[currentFormation]
-  const project = projectsList[currentProject]
   const isLastFormation = currentFormation === dimensionsData.length - 1
   const isFirstFormation = currentFormation === 0
 
-  // Reseta para o primeiro slide de foto sempre que trocar de projeto
-  useEffect(() => {
-    setCurrentImageIndex(0)
-  }, [currentProject])
-
-  // Resolve a lista de imagens dinamicamente a partir do objeto cadastrado
-  const projectImages: string[] =
-    project.images && project.images.length > 0
-      ? project.images
-      : [project.image || '']
-
-  const prevImage = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? projectImages.length - 1 : prev - 1
-    )
+  const updateProjectImageIndex = (projectId: string, nextIndex: number) => {
+    setProjectImageIndexes((previous) => ({
+      ...previous,
+      [projectId]: nextIndex,
+    }))
   }
 
-  const nextImage = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    setCurrentImageIndex((prev) =>
-      prev === projectImages.length - 1 ? 0 : prev + 1
-    )
+  const showPreviousProjectImage = (projectId: string, projectImages: string[]) => {
+    const currentIndex = projectImageIndexes[projectId] ?? 0
+    const nextIndex = currentIndex === 0 ? projectImages.length - 1 : currentIndex - 1
+    updateProjectImageIndex(projectId, nextIndex)
+  }
+
+  const showNextProjectImage = (projectId: string, projectImages: string[]) => {
+    const currentIndex = projectImageIndexes[projectId] ?? 0
+    const nextIndex = currentIndex === projectImages.length - 1 ? 0 : currentIndex + 1
+    updateProjectImageIndex(projectId, nextIndex)
   }
 
   const certificationSlides = [
@@ -354,6 +370,45 @@ function App() {
 
   const activeSlide = certificationSlides[certStage] || certificationSlides[0]
 
+  const specialtyCards = [
+    {
+      title: 'Business Intelligence & Power BI',
+      description:
+        'Desenvolvimento de dashboards interativos, modelagem de dados, cálculos em DAX, ETL no Power Query e visualização estratégica orientada à tomada de decisão com foco em decisões factuais e escaláveis.',
+      icon: BarChart3,
+    },
+    {
+      title: 'Análise Exploratória & Estatística',
+      description:
+        'Limpeza e tratamento de dados, análise descritiva e inferencial, definição de KPIs, identificação de padrões, correlação e resolução de problemas de negócio com rigor quantitativo.',
+      icon: LineChart,
+    },
+    {
+      title: 'Manipulação de Dados com SQL & Python',
+      description:
+        'Consultas relacionais com agregação, filtros e JOINs para extração analítica; manipulação, automação e análise exploratória com bibliotecas Python para ciência de dados.',
+      icon: Database,
+    },
+    {
+      title: 'Fundamentos Matemáticos & Computação Científica',
+      description:
+        'Rigor quantitativo apoiado por cálculo, estatística, álgebra linear computacional e pensamento lógico-algorítmico estruturado para modelagem, inferência e otimização.',
+      icon: Binary,
+    },
+    {
+      title: 'Engenharia de Software & Frontend Reativo',
+      description:
+        'Construção de aplicações e interfaces modulares com JavaScript ES6+, TypeScript, React, Tailwind CSS e consumo de APIs para entregar soluções claras e produtivas.',
+      icon: Code2,
+    },
+    {
+      title: 'Infraestrutura, Sistemas & Redes',
+      description:
+        'Compreensão de arquitetura computacional, sistemas operativos Linux/Windows, redes locais, protocolos e suporte técnico para manter ecossistemas digitais estáveis.',
+      icon: Cpu,
+    },
+  ]
+
   const imageMap: Record<string, string> = {
     dados: '/education/data-science.jpeg',
     'gestao-ia': '/education/tecnologia-da-informacao-800x533.jpeg',
@@ -363,7 +418,6 @@ function App() {
   }
 
   const formacaoCountLabel = `${String(currentFormation + 1).padStart(2, '0')} / ${String(dimensionsData.length).padStart(2, '0')}`
-  const projectCountLabel = `${String(currentProject + 1).padStart(2, '0')} / ${String(projectsList.length).padStart(2, '0')}`
 
   const showPreviousFormation = () => {
     setFormationDir(-1)
@@ -373,16 +427,6 @@ function App() {
   const showNextFormation = () => {
     setFormationDir(1)
     setCurrentFormation((prev) => (prev === dimensionsData.length - 1 ? 0 : prev + 1))
-  }
-
-  const showPreviousProject = () => {
-    setProjectDir(-1)
-    setCurrentProject((prev) => (prev === 0 ? projectsList.length - 1 : prev - 1))
-  }
-
-  const showNextProject = () => {
-    setProjectDir(1)
-    setCurrentProject((prev) => (prev === projectsList.length - 1 ? 0 : prev + 1))
   }
 
   const showPreviousCertStage = () => {
@@ -395,111 +439,361 @@ function App() {
     setCertStage((prev) => (prev === certificationSlides.length - 1 ? 0 : prev + 1))
   }
 
+  const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target
+    setFormData((previous) => ({
+      ...previous,
+      [name]: value,
+    }))
+
+    if (submitStatus === 'success') {
+      setSubmitStatus('idle')
+    }
+  }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setSubmitStatus('success')
+    setFormData({ nome: '', email: '', mensagem: '' })
+  }
+
   return (
-    <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#090611] text-zinc-100">
+    <div className={`h-screen ${isMobileMenuOpen ? 'overflow-hidden' : 'overflow-y-auto'} overflow-x-hidden snap-y snap-mandatory scroll-smooth bg-[#090611] text-zinc-100`}>
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-[-7rem] h-80 w-80 -translate-x-1/2 rounded-full bg-purple-600/15 blur-[120px]" />
         <div className="absolute left-[-8rem] top-1/3 h-96 w-96 rounded-full bg-indigo-500/15 blur-[120px]" />
         <div className="absolute right-[-8rem] top-1/4 h-[28rem] w-[28rem] rounded-full bg-violet-700/20 blur-[150px]" />
       </div>
 
-      <header className="sticky top-0 z-50 h-16 border-b border-purple-500/25 bg-zinc-950/70 backdrop-blur-2xl">
-        <div className="mx-auto flex h-full w-full max-w-[98vw] 2xl:max-w-[1650px] items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="h-9 w-9 overflow-hidden rounded-full border border-purple-500/40 bg-gradient-to-br from-purple-500/40 to-violet-500/20 shadow-[0_0_18px_rgba(168,85,247,0.3)]">
-              <img src={profileInfo.photoUrl} alt={profileInfo.name} className="h-full w-full object-cover" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-zinc-100">João Guilherme</p>
-            </div>
+      <header className="sticky top-0 z-30 border-b border-white/10 bg-[#090611]/75 backdrop-blur-xl">
+        <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-1 items-center justify-start">
+            <a href="#inicio" className="group inline-flex items-center gap-3 text-zinc-100 transition-all duration-300 hover:text-white">
+              <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-violet-400/40 bg-gradient-to-br from-violet-500/30 to-fuchsia-500/10 shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+                <img src={profileInfo.photoUrl} alt={profileInfo.name} className="h-full w-full object-cover" />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="text-sm font-semibold tracking-[0.12em] text-zinc-100">JOÃO</span>
+                <span className="text-[10px] uppercase tracking-[0.28em] text-zinc-400 transition-colors duration-300 group-hover:text-violet-200">
+                  Guilherme
+                </span>
+              </div>
+            </a>
           </div>
 
-          <div className="hidden items-center gap-3 md:flex">
-            <span className="rounded-full border border-purple-500/35 bg-purple-950/60 px-3.5 py-1 text-[10px] uppercase tracking-[0.18em] text-purple-200 shadow-[0_0_16px_rgba(168,85,247,0.2)]">
-              Ciência de Dados & Tecnologia
-            </span>
-            <a href={normalizeLink(contactsData.github)} target="_blank" rel="noreferrer" aria-label="GitHub" className="rounded-full border border-purple-500/25 bg-purple-950/30 p-2 text-zinc-300 transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/50 hover:bg-purple-900/40 hover:text-purple-100">
-              <GitBranch className="h-4 w-4" />
+          <nav aria-label="Navegação principal" className="hidden flex-1 items-center justify-center gap-2 md:flex">
+            {[
+              { label: 'Sobre', href: '#sobre' },
+              { label: 'Início', href: '#inicio' },
+              { label: 'Formações', href: '#formacoes' },
+              { label: 'Especialidades', href: '#especialidades' },
+              { label: 'Projetos', href: '#projetos' },
+              { label: 'Certificações', href: '#certificacoes' },
+              { label: 'Contato', href: '#contato' },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="rounded-full px-3 py-2 text-sm text-zinc-300 transition-all duration-300 hover:scale-105 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex flex-1 items-center justify-end gap-3">
+            <a
+              href="#contato"
+              className="hidden items-center justify-center rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-2.5 text-sm font-medium text-white shadow-[0_0_20px_rgba(168,85,247,0.35)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] md:inline-flex"
+            >
+              Contato
             </a>
-            <a href={normalizeLink(contactsData.linkedin)} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="rounded-full border border-purple-500/25 bg-purple-950/30 p-2 text-zinc-300 transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/50 hover:bg-purple-900/40 hover:text-purple-100">
-              <BriefcaseBusiness className="h-4 w-4" />
-            </a>
-            <a href={`mailto:${contactsData.email}`} aria-label="E-mail" className="rounded-full border border-purple-500/25 bg-purple-950/30 p-2 text-zinc-300 transition duration-200 hover:-translate-y-0.5 hover:border-purple-400/50 hover:bg-purple-900/40 hover:text-purple-100">
-              <Mail className="h-4 w-4" />
-            </a>
+            <button
+              type="button"
+              aria-label={isMobileMenuOpen ? 'Fechar menu móvel' : 'Abrir menu móvel'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
+              className="inline-flex items-center justify-center rounded-xl border border-purple-500/25 bg-purple-950/40 p-2 text-zinc-100 transition-colors hover:border-purple-400/50 hover:bg-purple-900/40 md:hidden"
+              onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+            >
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
       </header>
+
+      <AnimatePresence>
+        {isMobileMenuOpen ? (
+          <>
+            <motion.button
+              type="button"
+              aria-label="Fechar menu móvel"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-md md:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <motion.aside
+              id="mobile-navigation"
+              aria-label="Menu móvel"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed right-0 top-0 z-50 flex h-full w-[75vw] max-w-sm flex-col justify-between border-l border-purple-500/25 bg-[#0d071b] p-6 md:hidden"
+            >
+              <div>
+                <div className="flex items-center justify-between border-b border-purple-500/20 pb-5">
+                  <a
+                    href="#inicio"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-lg font-semibold text-zinc-100"
+                  >
+                    João Guilherme<span className="text-purple-400">.</span>
+                  </a>
+                  <button
+                    type="button"
+                    aria-label="Fechar menu móvel"
+                    className="rounded-xl border border-purple-500/25 bg-purple-950/40 p-2 text-zinc-100 transition-colors hover:border-purple-400/50 hover:bg-purple-900/40"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+
+                <nav aria-label="Navegação móvel" className="mt-8 flex flex-col gap-2">
+                  {[
+                    { label: 'Início', href: '#inicio' },
+                    { label: 'Especialidades', href: '#especialidades' },
+                    { label: 'Sobre', href: '#sobre' },
+                    { label: 'Projetos', href: '#projetos' },
+                    { label: 'Certificações', href: '#certificacoes' },
+                    { label: 'Contato', href: '#contato' },
+                  ].map((item, index) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="group flex items-center gap-4 rounded-xl px-3 py-3 text-lg font-medium text-zinc-300 transition-all duration-300 hover:bg-purple-950/40 hover:text-purple-100"
+                    >
+                      <span className="text-xs font-semibold text-purple-400/70">0{index + 1}</span>
+                      {item.label}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+
+              <div className="space-y-5 border-t border-purple-500/20 pt-5">
+                <a
+                  href="#contato"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(168,85,247,0.5)]"
+                >
+                  Vamos conversar
+                </a>
+                <div className="flex items-center justify-center gap-3">
+                  <a
+                    href={normalizeLink(contactsData.github)}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="GitHub"
+                    className="rounded-full border border-purple-500/25 bg-purple-950/40 p-2.5 text-zinc-300 transition-all duration-300 hover:border-purple-400/50 hover:text-purple-100 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                  >
+                    <GitBranch className="h-4 w-4" />
+                  </a>
+                  <a
+                    href={normalizeLink(contactsData.linkedin)}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="LinkedIn"
+                    className="rounded-full border border-purple-500/25 bg-purple-950/40 p-2.5 text-zinc-300 transition-all duration-300 hover:border-purple-400/50 hover:text-purple-100 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                  >
+                    <BriefcaseBusiness className="h-4 w-4" />
+                  </a>
+                  <a
+                    href={`mailto:${contactsData.email}`}
+                    aria-label="Enviar e-mail"
+                    className="rounded-full border border-purple-500/25 bg-purple-950/40 p-2.5 text-zinc-300 transition-all duration-300 hover:border-purple-400/50 hover:text-purple-100 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                  >
+                    <Mail className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+            </motion.aside>
+          </>
+        ) : null}
+      </AnimatePresence>
 
       <main className="w-full">
         {/* ================================================================= */}
         {/* SEÇÃO 1: HERO / APRESENTAÇÃO                                      */}
         {/* ================================================================= */}
-        <section id="inicio" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center px-4 py-8 sm:px-8 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="grid w-full max-w-6xl items-center gap-8 md:grid-cols-[1.2fr_0.8fr]"
-          >
-            <div>
-              <div className="mb-5 inline-flex items-center rounded-full border border-purple-500/35 bg-purple-900/30 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.22em] text-purple-200 shadow-[0_0_24px_rgba(168,85,247,0.2)]">
-                Ciência de Dados
+        <section id="inicio" className="relative flex min-h-screen w-full items-center overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
+            <motion.div
+              initial={{ opacity: 0, x: -28, y: 20 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="relative z-10"
+            >
+              <div className="mb-6 inline-flex items-center rounded-full border border-violet-400/30 bg-violet-500/10 px-3.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.22em] text-violet-200 shadow-[0_0_18px_rgba(168,85,247,0.15)]">
+                Ciência de Dados & Tecnologia
               </div>
 
-              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-purple-300/90">{profileInfo.role}</p>
-              <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-zinc-100 md:text-6xl">{profileInfo.name}</h1>
-              <p className="mt-5 max-w-xl text-lg leading-8 text-zinc-300/90 md:text-xl">{profileInfo.headline}</p>
+              <h1 className="max-w-xl text-4xl font-black leading-none tracking-[-0.06em] text-zinc-50 sm:text-5xl lg:text-7xl">
+                {profileInfo.name}
+                <span className="ml-1 text-violet-400">.</span>
+              </h1>
 
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-purple-500/25 bg-purple-950/40 px-3.5 py-1.5 text-sm text-zinc-200 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,0.15)]">
-                <MapPin className="h-4 w-4 text-purple-300" />
-                {profileInfo.location}
-              </div>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-zinc-300 sm:text-lg">
+                {profileInfo.headline}
+              </p>
 
-              <p className="mt-6 max-w-2xl text-base leading-8 text-zinc-300/80">{profileInfo.bio}</p>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#formacoes" className="inline-flex items-center gap-2 rounded-full border border-purple-400/50 bg-gradient-to-r from-purple-600/30 to-violet-600/20 px-5 py-2.5 text-sm font-medium text-purple-100 shadow-[0_12px_30px_rgba(168,85,247,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-purple-300 hover:shadow-[0_18px_35px_rgba(168,85,247,0.35)]">
-                  Ver Formações
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <a
+                  href="#contato"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_28px_rgba(168,85,247,0.55)]"
+                >
+                  Fale comigo
                   <ArrowRight className="h-4 w-4" />
                 </a>
-                <a href="#contato" className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-950/40 px-5 py-2.5 text-sm font-medium text-zinc-100 transition duration-200 hover:-translate-y-0.5 hover:border-purple-400 hover:bg-purple-900/40 hover:text-purple-100">
-                  Entrar em Contato
-                  <ArrowUpRight className="h-4 w-4" />
+
+                <a
+                  href="#formacoes"
+                  className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900/60 px-5 py-3 text-sm font-medium text-zinc-200 transition-all duration-300 hover:scale-105 hover:border-violet-400/50 hover:text-white"
+                >
+                  Ver formações
                 </a>
               </div>
-            </div>
 
-            <div className="flex justify-center md:justify-end">
-              <div className="relative rounded-[2rem] border border-purple-500/40 bg-gradient-to-tr from-purple-600/30 via-purple-950/60 to-violet-600/20 p-2 shadow-[0_0_50px_rgba(168,85,247,0.35)]">
-                <div className="absolute inset-4 rounded-[1.6rem] border border-purple-500/25" />
-                <div className="relative h-72 w-72 overflow-hidden rounded-[1.7rem] border border-purple-500/30 bg-zinc-950/80 md:h-80 md:w-80">
+              <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-zinc-900/50 px-3.5 py-2 text-sm text-zinc-300 backdrop-blur-sm">
+                <MapPin className="h-4 w-4 text-violet-300" />
+                {profileInfo.location}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 28, y: 20 }}
+              animate={{ opacity: 1, x: 0, y: [0, -15, 0] }}
+              transition={{
+                opacity: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+                y: { duration: 4, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' },
+                x: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+              }}
+              className="relative mx-auto w-full max-w-md"
+            >
+              <div className="absolute inset-5 rounded-[2rem] bg-violet-500/15 blur-3xl" />
+              <div className="relative overflow-hidden rounded-[2rem] border border-violet-400/30 bg-zinc-950/70 p-3 shadow-[0_0_40px_rgba(168,85,247,0.18)] backdrop-blur-xl">
+                <div className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-zinc-900">
                   <img
                     src={profileInfo.photoUrl}
                     alt={profileInfo.name}
-                    className="h-full w-full object-cover"
+                    className="h-[420px] w-full object-cover sm:h-[480px]"
                     onError={(event) => {
                       const target = event.currentTarget
                       target.style.display = 'none'
-                      const fallback = target.parentElement?.querySelector('[data-fallback]') as HTMLElement | null
+                      const fallback = target.parentElement?.parentElement?.querySelector('[data-fallback]') as HTMLElement | null
                       if (fallback) fallback.style.display = 'flex'
                     }}
                   />
                   <div
                     data-fallback
-                    className="hidden h-full w-full items-center justify-center bg-gradient-to-br from-purple-600/40 via-violet-700/30 to-zinc-950 text-5xl font-bold tracking-[0.28em] text-purple-100"
+                    className="hidden h-[420px] w-full items-center justify-center bg-gradient-to-br from-violet-600/50 via-fuchsia-500/30 to-zinc-950 text-5xl font-bold tracking-[0.22em] text-violet-100 sm:h-[480px]"
                   >
-                    JM
+                    JG
                   </div>
                 </div>
-                <div className="absolute -bottom-5 left-6 right-6 flex items-center justify-between gap-3 rounded-full border border-purple-500/30 bg-zinc-950/90 px-4 py-2.5 shadow-[0_10px_30px_rgba(168,85,247,0.2)] backdrop-blur-xl">
-                  <span className="text-[10px] uppercase tracking-[0.18em] text-zinc-400">Perfil</span>
-                  <span className="text-sm font-semibold text-purple-200">Dados + IA</span>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* SEÇÃO 2: SOBRE MIM                                                 */}
+        {/* ================================================================= */}
+        <section id="sobre" className="relative w-full scroll-mt-16 px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <div className="relative mx-auto max-w-md overflow-hidden rounded-[2rem] border border-purple-500/30 bg-zinc-950/60 p-3 shadow-[0_0_35px_rgba(168,85,247,0.15)] backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-fuchsia-500/10" />
+                <div className="relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-zinc-900/80">
+                  <img
+                    src={profileInfo.photoUrl}
+                    alt={profileInfo.name}
+                    className="h-[420px] w-full object-cover transition duration-500 hover:scale-[1.02] sm:h-[500px]"
+                    onError={(event) => {
+                      const target = event.currentTarget
+                      target.style.display = 'none'
+                      const fallback = target.parentElement?.parentElement?.querySelector('[data-about-fallback]') as HTMLElement | null
+                      if (fallback) fallback.style.display = 'flex'
+                    }}
+                  />
+                  <div
+                    data-about-fallback
+                    className="hidden h-[420px] w-full items-center justify-center bg-gradient-to-br from-violet-600/60 via-fuchsia-500/20 to-zinc-950 text-5xl font-bold tracking-[0.2em] text-violet-100 sm:h-[500px]"
+                  >
+                    JG
+                  </div>
                 </div>
               </div>
             </div>
-          </motion.div>
+
+            <div className="md:col-span-7">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-purple-400">Sobre Mim</p>
+              <h2 className="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl lg:text-5xl">
+                MUITO PRAZER,
+                <span className="mt-2 block text-zinc-100">
+                  SOU O JOÃO GUILHERME<span className="text-violet-400">.</span>
+                </span>
+              </h2>
+
+              <div className="mt-6 space-y-5 text-base leading-8 text-zinc-300">
+                <p>
+                  Sou uma pessoa apaixonada por Dados e Tecnologia, com formação em Analista de Dados pela Educadados e certificação Microsoft PL-300 (Power BI Data Analyst). A minha trajetória foi construída para transformar informação em conhecimento útil, conectando análise, visualização e estratégia de negócio.
+                </p>
+
+                <p>
+                  A minha base analítica é multidisciplinar: estudo ciência de dados, engenharia da computação, matemática aplicada e computacional e gestão de TI. Essa combinação me permite olhar para problemas de negócio com visão técnica, lógica e operacional, conectando dados, sistemas e decisões.
+                </p>
+
+                <p>
+                  Hoje, meu foco é evoluir em posições iniciais de Dados/BI e construir experiência prática para crescer como Analista de Dados Júnior, com foco em dashboards, modelagem, análise exploratória e soluções orientadas à tomada de decisão.
+                </p>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href={normalizeLink(contactsData.linkedin)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-2 text-sm font-medium text-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]"
+                >
+                  <BriefcaseBusiness className="h-4 w-4 text-violet-300" />
+                  LinkedIn
+                </a>
+
+                <a
+                  href={normalizeLink(contactsData.github)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-2 text-sm font-medium text-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]"
+                >
+                  <GitBranch className="h-4 w-4 text-violet-300" />
+                  GitHub
+                </a>
+
+                <a
+                  href={`mailto:${contactsData.email}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-2 text-sm font-medium text-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]"
+                >
+                  <Mail className="h-4 w-4 text-violet-300" />
+                  E-mail
+                </a>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ================================================================= */}
@@ -629,178 +923,195 @@ function App() {
         </section>
 
         {/* ================================================================= */}
+        {/* SEÇÃO 3: ESPECIALIDADES / HABILIDADES                            */}
+        {/* ================================================================= */}
+        <section id="especialidades" className="relative w-full snap-center scroll-mt-16 py-20 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-300">Competências &amp; Domínios</p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
+                Minhas Especialidades<span className="text-violet-400">.</span>
+              </h2>
+            </div>
+
+            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {specialtyCards.map(({ title, description, icon: Icon }, index) => (
+                <motion.article
+                  key={title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                  className="group rounded-3xl border border-zinc-800 bg-zinc-900/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] transition-all duration-300 ease-out hover:-translate-y-2 hover:border-violet-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.25)]"
+                >
+                  <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-violet-500/30 bg-violet-500/10 text-violet-200 transition-all duration-300 group-hover:scale-110 group-hover:border-violet-400/60 group-hover:text-violet-100">
+                    <Icon className="h-5 w-5" />
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-zinc-100">{title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-zinc-300">{description}</p>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
         {/* SEÇÃO 3: PROJETOS (COM CARROSSEL DE IMAGENS INTERNO)              */}
         {/* ================================================================= */}
-        <section id="projetos" className="relative h-screen w-full snap-center scroll-mt-16 flex flex-col justify-center items-center py-6 px-2 sm:px-4 lg:px-6 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto flex flex-col justify-center h-full max-h-[calc(100vh-80px)]"
-          >
-            <div className="mb-3 w-full px-2">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-0.5">Projetos</p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">Soluções orientadas à clareza de dados e uso real.</h2>
+        <section id="projetos" className="relative w-full scroll-mt-16 overflow-x-hidden px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-purple-400">Portfólio</p>
+              <h2 className="text-3xl font-bold text-zinc-100 md:text-4xl">
+                MEUS PROJETOS<span className="text-purple-400">.</span>
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-zinc-300 md:text-base">
+                Soluções construídas com foco em dados, análise, automação e experiência de produto digital.
+              </p>
             </div>
 
-            <div className="w-full bg-purple-950/20 backdrop-blur-2xl border border-purple-500/25 border-t-purple-400/50 rounded-3xl p-5 lg:p-6 shadow-[0_12px_45px_rgba(76,29,149,0.25)] flex flex-col justify-between overflow-hidden">
-              <AnimatePresence mode="wait" custom={projectDir}>
-                <motion.div
-                  key={project.id}
-                  custom={projectDir}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-start w-full"
-                >
-                  <div className="lg:col-span-5 flex flex-col justify-between gap-3">
-                    {/* Bloco da Imagem com Slider Integrado */}
-                    <div className="group relative overflow-hidden rounded-[20px] border border-purple-500/30 bg-purple-950/40 shadow-md aspect-[16/10] flex items-center justify-center">
-                      <img
-                        key={projectImages[currentImageIndex]}
-                        src={projectImages[currentImageIndex]}
-                        alt={`${project.title} - ${currentImageIndex + 1}`}
-                        className="w-full h-full object-contain p-1 transition-all duration-300"
-                        onError={(e) => {
-                          const target = e.currentTarget
-                          target.style.opacity = '0.3'
-                        }}
-                      />
+            <div className="mt-12 grid gap-6 xl:grid-cols-2">
+              {projectsList.map((project, index) => {
+                const projectImages = project.images && project.images.length > 0 ? project.images : [project.image || '']
+                const currentImageIndex = projectImageIndexes[project.id] ?? 0
+                const currentImage = projectImages[currentImageIndex] || project.image || ''
 
-                      {project.badge ? (
-                        <span className="absolute left-3 top-3 rounded-full border border-purple-500/40 bg-purple-950/80 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-purple-200 backdrop-blur-md pointer-events-none">
-                          {project.badge}
+                return (
+                  <motion.article
+                    key={project.id}
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    className="group overflow-hidden rounded-3xl border border-purple-500/20 bg-zinc-900/60 shadow-[0_0_0_1px_rgba(168,85,247,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/40 hover:shadow-[0_0_35px_rgba(168,85,247,0.18)]"
+                  >
+                    <div className="relative overflow-hidden bg-zinc-950/70">
+                      <div className="relative aspect-[16/10] overflow-hidden">
+                        <img
+                          src={currentImage}
+                          alt={project.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          onError={(event) => {
+                            const target = event.currentTarget
+                            target.style.opacity = '0.35'
+                          }}
+                        />
+
+                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
+
+                        {project.badge ? (
+                          <span className="absolute left-4 top-4 rounded-full border border-purple-500/30 bg-purple-950/75 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-purple-200 backdrop-blur-md">
+                            {project.badge}
+                          </span>
+                        ) : null}
+
+                        {projectImages.length > 1 ? (
+                          <>
+                            <button
+                              type="button"
+                              aria-label="Imagem anterior"
+                              onClick={() => showPreviousProjectImage(project.id, projectImages)}
+                              className="absolute left-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-purple-500/30 bg-zinc-950/70 text-zinc-100 transition-all duration-200 hover:border-purple-400/60 hover:bg-purple-600/80"
+                            >
+                              <ChevronLeft className="h-4 w-4" />
+                            </button>
+
+                            <button
+                              type="button"
+                              aria-label="Próxima imagem"
+                              onClick={() => showNextProjectImage(project.id, projectImages)}
+                              className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-purple-500/30 bg-zinc-950/70 text-zinc-100 transition-all duration-200 hover:border-purple-400/60 hover:bg-purple-600/80"
+                            >
+                              <ChevronRight className="h-4 w-4" />
+                            </button>
+
+                            <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-purple-500/20 bg-zinc-950/70 px-2 py-1 backdrop-blur-sm">
+                              {projectImages.map((_, imageIndex) => (
+                                <button
+                                  key={`${project.id}-dot-${imageIndex}`}
+                                  type="button"
+                                  onClick={() => updateProjectImageIndex(project.id, imageIndex)}
+                                  aria-label={`Ir para a imagem ${imageIndex + 1}`}
+                                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                                    currentImageIndex === imageIndex ? 'w-4 bg-purple-400' : 'w-1.5 bg-purple-900/60 hover:bg-purple-500'
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          </>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    <div className="space-y-5 p-6">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="rounded-full border border-purple-500/30 bg-purple-900/30 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-purple-200">
+                          {project.category}
                         </span>
-                      ) : null}
+                      </div>
 
-                      {/* Setas de navegação de imagem (só aparecem se houver mais de 1 foto) */}
-                      {projectImages.length > 1 && (
-                        <>
-                          <button
-                            type="button"
-                            onClick={prevImage}
-                            aria-label="Imagem anterior"
-                            className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-purple-950/80 border border-purple-500/40 text-white flex items-center justify-center hover:bg-purple-600 hover:border-purple-400 transition-all duration-200 shadow-lg cursor-pointer z-10"
+                      <div>
+                        <h3 className="text-2xl font-bold text-zinc-100">{project.title}</h3>
+                        <p className="mt-3 text-sm leading-7 text-zinc-300">{project.overview}</p>
+                      </div>
+
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        {project.architectureHighlights.slice(0, 2).map((highlight) => (
+                          <div
+                            key={`${project.id}-${highlight.title}`}
+                            className="rounded-2xl border border-purple-500/15 bg-purple-900/20 p-3"
                           >
-                            <ChevronLeft className="w-4 h-4" />
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={nextImage}
-                            aria-label="Próxima imagem"
-                            className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-purple-950/80 border border-purple-500/40 text-white flex items-center justify-center hover:bg-purple-600 hover:border-purple-400 transition-all duration-200 shadow-lg cursor-pointer z-10"
-                          >
-                            <ChevronRight className="w-4 h-4" />
-                          </button>
-
-                          {/* Indicadores de bolinhas */}
-                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-950/80 border border-purple-500/30 backdrop-blur-md z-10">
-                            {projectImages.map((_, idx) => (
-                              <button
-                                key={idx}
-                                type="button"
-                                onClick={() => setCurrentImageIndex(idx)}
-                                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                                  currentImageIndex === idx
-                                    ? 'w-4 bg-purple-400'
-                                    : 'w-1.5 bg-purple-900/60 hover:bg-purple-500'
-                                }`}
-                                aria-label={`Ir para a foto ${idx + 1}`}
-                              />
-                            ))}
+                            <h4 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-purple-300">
+                              {highlight.title}
+                            </h4>
+                            <p className="mt-2 text-xs leading-6 text-zinc-300">{highlight.detail}</p>
                           </div>
-                        </>
-                      )}
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        {project.techStack.map((tech) => (
+                          <span
+                            key={`${project.id}-${tech}`}
+                            className="rounded-md border border-purple-500/25 bg-purple-900/30 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-purple-200"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap gap-3 pt-2">
+                        {project.liveUrl ? (
+                          <a
+                            href={normalizeLink(project.liveUrl)}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-600 px-4 py-2 text-sm font-medium text-white shadow-[0_0_18px_rgba(168,85,247,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(168,85,247,0.4)]"
+                          >
+                            Live Demo
+                            <ArrowRight className="h-4 w-4" />
+                          </a>
+                        ) : null}
+
+                        {project.repoUrl ? (
+                          <a
+                            href={normalizeLink(project.repoUrl)}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full border border-purple-500/25 bg-zinc-950/60 px-4 py-2 text-sm font-medium text-zinc-200 transition-all duration-300 hover:scale-105 hover:border-purple-400/40 hover:text-white"
+                          >
+                            Repositório
+                            <ArrowRight className="h-4 w-4" />
+                          </a>
+                        ) : null}
+                      </div>
                     </div>
-
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.techStack.map((item) => (
-                        <span key={`${project.id}-${item}`} className="rounded-md border border-purple-500/30 bg-purple-900/30 px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] text-purple-200">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex flex-wrap gap-3 pt-1">
-                      {project.liveUrl ? (
-                        <a href={normalizeLink(project.liveUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-600 px-4 py-1.5 text-xs font-medium text-white transition duration-200 hover:-translate-y-0.5 hover:bg-purple-500 shadow-md shadow-purple-950/50">
-                          Live Demo ↗
-                        </a>
-                      ) : null}
-                      {project.repoUrl ? (
-                        <a href={normalizeLink(project.repoUrl)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-950/40 px-4 py-1.5 text-xs font-medium text-purple-200 transition duration-200 hover:-translate-y-0.5 hover:bg-purple-900/50">
-                          Repositório ↗
-                        </a>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="lg:col-span-7 flex flex-col justify-between h-full">
-                    <div className="flex items-center justify-between gap-3 border-b border-purple-500/20 pb-2.5 mb-2">
-                      <span className="rounded-full border border-purple-500/30 bg-purple-900/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-purple-200">
-                        {project.category}
-                      </span>
-                      <span className="text-[10px] font-mono tracking-[0.22em] text-purple-300/80">{projectCountLabel}</span>
-                    </div>
-
-                    <div>
-                      <h3 className="mb-0.5 text-xl sm:text-2xl font-bold text-zinc-100">{project.title}</h3>
-                      <p className="text-xs sm:text-sm leading-relaxed text-zinc-300/80 mb-2">{project.overview}</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 my-2">
-                      {project.architectureHighlights.map((highlight) => (
-                        <div key={`${project.id}-${highlight.title}`} className="p-3 rounded-2xl bg-purple-900/20 border border-purple-500/20 hover:border-purple-400/40 hover:bg-purple-900/30 transition-all duration-300">
-                          <h5 className="text-xs font-bold text-purple-300 mb-0.5">{highlight.title}</h5>
-                          <p className="text-[11.5px] text-zinc-300/90 leading-relaxed">{highlight.detail}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between mt-3">
-                <div className="flex items-center gap-2">
-                  {projectsList.map((item, index) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      aria-label={`Selecionar projeto ${item.title}`}
-                      onClick={() => {
-                        setProjectDir(index > currentProject ? 1 : -1)
-                        setCurrentProject(index)
-                      }}
-                      className={`h-2 rounded-full transition-all duration-300 ${index === currentProject ? 'w-8 bg-purple-400' : 'w-2 bg-purple-900/50 hover:bg-purple-600'}`}
-                    />
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={showPreviousProject}
-                    className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-950/40 px-3.5 py-1.5 text-xs font-medium text-purple-200 transition hover:bg-purple-900/50"
-                  >
-                    <ArrowLeft className="h-3.5 w-3.5" />
-                    Anterior
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={showNextProject}
-                    className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-600 px-3.5 py-1.5 text-xs font-medium text-white transition hover:bg-purple-500 shadow-lg shadow-purple-950/50"
-                  >
-                    Próximo Projeto
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-              </div>
+                  </motion.article>
+                )
+              })}
             </div>
-          </motion.div>
+          </div>
         </section>
 
         {/* ================================================================= */}
@@ -908,67 +1219,208 @@ function App() {
         {/* ================================================================= */}
         {/* SEÇÃO 5: CONTATO                                                  */}
         {/* ================================================================= */}
-        <section id="contato" className="relative z-20 h-screen w-full snap-center scroll-mt-16 flex flex-col justify-between items-center py-8 px-2 sm:px-4 lg:px-6 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="my-auto w-full max-w-[98vw] 2xl:max-w-[1650px] mx-auto rounded-3xl border border-purple-500/25 border-t-purple-400/50 bg-purple-950/20 backdrop-blur-2xl p-6 md:p-8 shadow-[0_12px_45px_rgba(76,29,149,0.25)]"
-          >
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-semibold mb-1">Contato</p>
-                <h2 className="mt-2 max-w-xl text-3xl font-bold text-zinc-100 md:text-5xl">Conecte-se para projetos em Dados e Tecnologia.</h2>
-                <p className="mt-4 max-w-xl text-sm sm:text-base leading-relaxed text-zinc-300/80">
-                  Posso contribuir com raciocínio analítico, desenvolvimento prático, organização de dados e base técnica para projetos reais.
-                </p>
+        <section id="contato" className="relative w-full scroll-mt-16 px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-purple-400">Fale Comigo</p>
+              <h2 className="text-3xl font-bold text-zinc-100 md:text-4xl">
+                ENTRE EM CONTATO<span className="text-purple-400">.</span>
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-zinc-300 md:text-base">
+                Estou aberto a oportunidades em Dados, BI, tecnologia e projetos que conectem visão analítica com impacto real.
+              </p>
+            </div>
 
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a href={`mailto:${contactsData.email}`} className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-600 px-4 py-2 text-xs font-medium text-white transition duration-200 hover:-translate-y-0.5 hover:bg-purple-500 shadow-md shadow-purple-950/50">
-                    <Mail className="h-4 w-4" />
-                    E-mail
-                  </a>
-                  <a href={normalizeLink(contactsData.linkedin)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-950/40 px-4 py-2 text-xs font-medium text-purple-200 transition duration-200 hover:-translate-y-0.5 hover:bg-purple-900/50">
-                    <BriefcaseBusiness className="h-4 w-4" />
-                    LinkedIn
-                  </a>
-                  <a href={normalizeLink(contactsData.github)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-950/40 px-4 py-2 text-xs font-medium text-purple-200 transition duration-200 hover:-translate-y-0.5 hover:bg-purple-900/50">
-                    <GitBranch className="h-4 w-4" />
-                    GitHub
-                  </a>
-                </div>
+            <div className="mt-12 grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
+              <div className="lg:col-span-7">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="rounded-3xl border border-purple-500/25 bg-zinc-900/60 p-6 shadow-[0_0_30px_rgba(168,85,247,0.08)] backdrop-blur-sm md:p-8"
+                >
+                  <form className="space-y-5" onSubmit={handleSubmit}>
+                    <div>
+                      <label htmlFor="nome" className="mb-2 block text-sm font-medium text-zinc-200">
+                        Nome Completo
+                      </label>
+                      <input
+                        id="nome"
+                        name="nome"
+                        type="text"
+                        value={formData.nome}
+                        onChange={handleFieldChange}
+                        placeholder="Seu nome"
+                        className="w-full rounded-2xl border border-zinc-800 bg-zinc-950/60 px-4 py-3 text-zinc-100 placeholder-zinc-500 transition-all duration-300 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400/50 focus:shadow-[0_0_18px_rgba(168,85,247,0.25)]"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className="mb-2 block text-sm font-medium text-zinc-200">
+                        E-mail para retorno
+                      </label>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleFieldChange}
+                        placeholder="seu@email.com"
+                        className="w-full rounded-2xl border border-zinc-800 bg-zinc-950/60 px-4 py-3 text-zinc-100 placeholder-zinc-500 transition-all duration-300 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400/50 focus:shadow-[0_0_18px_rgba(168,85,247,0.25)]"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="mensagem" className="mb-2 block text-sm font-medium text-zinc-200">
+                        Mensagem
+                      </label>
+                      <textarea
+                        id="mensagem"
+                        name="mensagem"
+                        rows={5}
+                        value={formData.mensagem}
+                        onChange={handleFieldChange}
+                        placeholder="Fale um pouco sobre a oportunidade, projeto ou conversa que você deseja iniciar..."
+                        className="w-full rounded-2xl border border-zinc-800 bg-zinc-950/60 px-4 py-3 text-zinc-100 placeholder-zinc-500 transition-all duration-300 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400/50 focus:shadow-[0_0_18px_rgba(168,85,247,0.25)]"
+                        required
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <button
+                        type="submit"
+                        className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_25px_rgba(168,85,247,0.4)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]"
+                      >
+                        Enviar Mensagem
+                      </button>
+
+                      {submitStatus === 'success' ? (
+                        <span className="text-sm text-emerald-300">Mensagem enviada com sucesso.</span>
+                      ) : null}
+                    </div>
+                  </form>
+                </motion.div>
               </div>
 
-              <div className="rounded-2xl border border-purple-500/20 bg-purple-900/20 p-5 shadow-inner">
-                <div className="flex items-center gap-2 text-purple-300">
-                  <GraduationCap className="h-4 w-4" />
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-purple-300 font-semibold">Disponibilidade</span>
-                </div>
+              <div className="lg:col-span-5">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="rounded-3xl border border-purple-500/25 bg-purple-950/20 p-6 shadow-[0_0_25px_rgba(168,85,247,0.08)] backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3 text-purple-300">
+                    <div className="rounded-full border border-purple-500/30 bg-violet-500/10 p-2">
+                      <Mail className="h-4 w-4" />
+                    </div>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-purple-300">Contato direto</span>
+                  </div>
 
-                <p className="mt-4 text-lg font-bold text-zinc-100">Disponível para estágios e posições iniciais em Dados e Tecnologia</p>
-                <div className="mt-5 space-y-2.5">
-                  <div className="rounded-xl border border-purple-500/20 bg-purple-950/40 p-3">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-purple-300/80">E-mail</p>
-                    <p className="mt-1 text-xs sm:text-sm text-zinc-200">{contactsData.email}</p>
+                  <div className="mt-6 space-y-4">
+                    <a
+                      href={`mailto:${contactsData.email}`}
+                      className="block rounded-2xl border border-zinc-800 bg-zinc-950/50 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/50 hover:shadow-[0_0_18px_rgba(168,85,247,0.2)]"
+                    >
+                      <p className="text-[10px] uppercase tracking-[0.18em] text-zinc-400">E-mail</p>
+                      <p className="mt-2 text-sm text-zinc-100">{contactsData.email}</p>
+                    </a>
+
+                    <div className="space-y-3">
+                      <a
+                        href={normalizeLink(contactsData.linkedin)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center justify-between rounded-2xl border border-zinc-800 bg-zinc-950/50 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/50 hover:shadow-[0_0_18px_rgba(168,85,247,0.2)]"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="rounded-full border border-purple-500/30 bg-violet-500/10 p-2">
+                            <BriefcaseBusiness className="h-4 w-4 text-violet-200" />
+                          </div>
+                          <span className="text-sm font-medium text-zinc-100">LinkedIn</span>
+                        </div>
+                        <span className="text-xs uppercase tracking-[0.18em] text-purple-300">Abrir</span>
+                      </a>
+
+                      <a
+                        href={normalizeLink(contactsData.github)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center justify-between rounded-2xl border border-zinc-800 bg-zinc-950/50 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/50 hover:shadow-[0_0_18px_rgba(168,85,247,0.2)]"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="rounded-full border border-purple-500/30 bg-violet-500/10 p-2">
+                            <GitBranch className="h-4 w-4 text-violet-200" />
+                          </div>
+                          <span className="text-sm font-medium text-zinc-100">GitHub</span>
+                        </div>
+                        <span className="text-xs uppercase tracking-[0.18em] text-purple-300">Abrir</span>
+                      </a>
+                    </div>
                   </div>
-                  <div className="rounded-xl border border-purple-500/20 bg-purple-950/40 p-3">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-purple-300/80">LinkedIn</p>
-                    <p className="mt-1 text-xs sm:text-sm text-zinc-200">Perfil profissional</p>
+
+                  <div className="mt-6 rounded-2xl border border-purple-500/20 bg-zinc-950/60 p-4">
+                    <div className="flex items-center gap-3 text-purple-300">
+                      <div className="rounded-full border border-purple-500/30 bg-violet-500/10 p-2">
+                        <MapPin className="h-4 w-4" />
+                      </div>
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-purple-300">Disponibilidade</span>
+                    </div>
+
+                    <p className="mt-4 text-lg font-semibold text-zinc-100">
+                      Disponível para estágios e oportunidades iniciais em Dados e Tecnologia.
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-zinc-300">{profileInfo.location}</p>
                   </div>
-                  <div className="rounded-xl border border-purple-500/20 bg-purple-950/40 p-3">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-purple-300/80">GitHub</p>
-                    <p className="mt-1 text-xs sm:text-sm text-zinc-200">@bluejaem</p>
-                  </div>
-                </div>
+                </motion.div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <footer className="w-full text-center py-2">
-            <p className="text-xs text-zinc-400 font-medium tracking-wide">
-              © {new Date().getFullYear()} <span className="text-purple-300 font-semibold">João Guilherme Machado de Melo</span>. Todos os direitos reservados.
-            </p>
+          <footer className="-mx-4 mt-20 border-t border-purple-500/20 bg-zinc-950/80 px-4 py-10 backdrop-blur-xl sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+            <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
+              <div>
+                <p className="text-lg font-semibold text-zinc-100">
+                  João Guilherme<span className="text-purple-400">.</span>
+                </p>
+                <p className="mt-1 text-xs text-zinc-400">Ciência de Dados &amp; Tecnologia</p>
+              </div>
+
+              <nav aria-label="Redes sociais" className="flex items-center gap-3">
+                <a
+                  href={normalizeLink(contactsData.github)}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                  className="rounded-full border border-purple-500/25 bg-purple-950/40 p-2.5 text-zinc-300 transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/50 hover:text-purple-100 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                >
+                  <GitBranch className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <a
+                  href={normalizeLink(contactsData.linkedin)}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn"
+                  className="rounded-full border border-purple-500/25 bg-purple-950/40 p-2.5 text-zinc-300 transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/50 hover:text-purple-100 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                >
+                  <BriefcaseBusiness className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <a
+                  href={`mailto:${contactsData.email}`}
+                  aria-label="Enviar e-mail"
+                  className="rounded-full border border-purple-500/25 bg-purple-950/40 p-2.5 text-zinc-300 transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/50 hover:text-purple-100 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                >
+                  <Mail className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </nav>
+
+              <p className="text-xs font-medium tracking-wide text-zinc-400">
+                © {new Date().getFullYear()} João Guilherme Machado de Melo. Todos os direitos reservados.
+              </p>
+            </div>
           </footer>
         </section>
       </main>

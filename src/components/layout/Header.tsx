@@ -5,9 +5,10 @@ import { Container } from './Container'
 
 const navigation = [
   { label: 'Sobre', href: '#sobre' },
-  { label: 'Formação', href: '#formacao' },
+  { label: 'Formação', href: '#formacoes' },
+  { label: 'Especialidades', href: '#especialidades' },
   { label: 'Projetos', href: '#projetos' },
-  { label: 'Habilidades', href: '#habilidades' },
+  { label: 'Certificações', href: '#certificacoes' },
   { label: 'Contato', href: '#contato' },
 ]
 
