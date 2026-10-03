@@ -1,6 +1,6 @@
 # Portfólio Profissional — João Guilherme Machado de Melo
 
-Portfólio pessoal e profissional desenvolvido com uma arquitetura moderna, responsiva e fluida baseada no ecossistema **React 18**, **TypeScript**, **Tailwind CSS** e **Framer Motion**. O projeto adota a estética visual *Dark Modern* com toques minimalistas e iluminação neon/glow, concebido para destacar competências práticas em **Ciência de Dados**, **Business Intelligence**, **Engenharia de Software** e **Matemática Computacional**.
+Portfólio pessoal e profissional desenvolvido com uma arquitetura moderna, responsiva e fluida baseada no ecossistema **React 18**, **TypeScript**, **Tailwind CSS** e **Framer Motion**. O projeto adota a estética visual *Dark Modern* com toques minimalistas e iluminação neon/glow, concebido para destacar competências práticas em **Ciência de Dados**, **Business Intelligence**, **Tecnologia** e **Matemática Computacional**.
 
 ---
 
